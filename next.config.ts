@@ -1,10 +1,7 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: "export",
-  images: {
-    unoptimized: true, // برای اینکه تصاویر در گیت‌هاب پیجز بدون خطا لود شوند
-  },
+  output: 'standalone', // این خط بسیار مهم است
 };
 
 export default nextConfig;
