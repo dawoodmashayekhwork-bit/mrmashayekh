@@ -15,17 +15,7 @@ export default function ContactSection() {
         >
           ارتباط با من
         </motion.span>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl md:text-6xl font-light tracking-tight mb-8 text-foreground"
-        >
-         
-        </motion.h2>
-
+        
         <motion.a
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
