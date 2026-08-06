@@ -23,7 +23,7 @@ export default function ContactSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-3xl md:text-6xl font-light tracking-tight mb-8 text-foreground"
         >
-          بیایید چیزی استثنایی خلق کنیم.
+         
         </motion.h2>
 
         <motion.a
