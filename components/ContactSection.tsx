@@ -15,7 +15,7 @@ export default function ContactSection() {
         >
           ارتباط با من
         </motion.span>
-        
+
         <motion.a
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,6 +26,18 @@ export default function ContactSection() {
         >
           contact@mrmashayekh.ir
         </motion.a>
+
+        <motion.a
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          href="mailto:dawoodmashayekh.work@gmail.com"
+          className="text-lg md:text-xl text-accent border-b border-accent pb-1 hover:text-foreground hover:border-foreground transition-all duration-300 tracking-wider mb-20 inline-block"
+        >
+          dawoodmashayekh.work@gmail.com
+        </motion.a>
+
 
         <div className="w-full flex flex-col md:flex-row justify-between items-center text-xs tracking-widest text-foreground/40 pt-12 border-t border-white/10">
           <p>© ۱۴۰۵ داود مشایخ. تمامی حقوق محفوظ است.</p>

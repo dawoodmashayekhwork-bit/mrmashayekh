@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
+import ClientWrapper from "@/components/ClientWrapper"; // <-- این خط حتما باید باشد
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" className={vazirmatn.variable}>
       <body className="font-sans antialiased bg-background text-foreground">
-        {children}
+        <ClientWrapper>
+          {children}
+        </ClientWrapper>
       </body>
     </html>
   );

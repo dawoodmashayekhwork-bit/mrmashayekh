@@ -37,7 +37,7 @@ export default function AboutSection() {
             <p>خلق محیط‌های تخصصی که بهبودی، آرامش و کارایی بالینی را تقویت می‌کنند.</p>
           </div>
           <div>
-            <h3 className="text-foreground uppercase tracking-widest text-xs mb-3 font-medium">موشن و سه‌بعدی</h3>
+            <h3 className="text-foreground uppercase tracking-widest text-xs mb-3 font-medium">موشن گرافی</h3>
             <p>تبدیل فرم‌های ایستاتیک معماری به روایت‌های بصری پویا و غوطه‌ورکننده.</p>
           </div>
         </div>

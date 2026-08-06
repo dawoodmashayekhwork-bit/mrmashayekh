@@ -26,7 +26,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 2 }}
           className="text-accent text-xs md:text-sm tracking-[0.4em] uppercase mb-4 font-medium"
         >
-           معماری و طراحی
+          وبسایت معرفی آثار موشن گرافی 
         </motion.span>
 
         <motion.h1

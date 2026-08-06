@@ -2,7 +2,12 @@
 
 import { motion } from "framer-motion";
 
-export default function Navbar() {
+interface NavbarProps {
+  lang: 'fa' | 'en';
+  onToggleLang: () => void;
+}
+
+export default function Navbar({ lang, onToggleLang }: NavbarProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -20,15 +25,23 @@ export default function Navbar() {
       <span className="text-xs tracking-[0.3em] uppercase font-light text-foreground cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
         Dawood Mashayekh
       </span>
-      <nav className="flex gap-8 text-xs tracking-[0.2em] uppercase text-foreground/70">
+      <nav className="flex items-center gap-6 md:gap-8 text-xs tracking-[0.2em] uppercase text-foreground/70">
         <button onClick={() => scrollToSection("portfolio")} className="hover:text-accent transition-colors">
-          پروژه‌ها
+          {lang === 'fa' ? 'پروژه‌ها' : 'Projects'}
         </button>
         <button onClick={() => scrollToSection("about")} className="hover:text-accent transition-colors">
-          درباره من
+          {lang === 'fa' ? 'درباره من' : 'About'}
         </button>
         <button onClick={() => scrollToSection("contact")} className="hover:text-accent transition-colors">
-          تماس
+          {lang === 'fa' ? 'تماس' : 'Contact'}
+        </button>
+
+        {/* دکمه تغییر زبان */}
+        <button
+          onClick={onToggleLang}
+          className="px-2 py-0.5 text-[10px] font-mono tracking-wider text-foreground/80 border border-foreground/20 hover:border-accent hover:text-accent transition-all rounded-sm cursor-pointer"
+        >
+          {lang === 'fa' ? 'EN' : 'فا'}
         </button>
       </nav>
     </motion.header>
