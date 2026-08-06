@@ -44,7 +44,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 2.4 }}
           className="text-sm md:text-lg text-foreground/70 tracking-[0.2em] uppercase font-light"
         >
-          معماری <span className="text-accent mx-2">/</span> گرافیک <span className="text-accent mx-2">/</span> موشن
+          معماری <span className="text-accent mx-2">/</span> گرافیک <span className="text-accent mx-2">/</span> موشن گرافی 
         </motion.p>
       </div>
 
