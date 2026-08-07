@@ -11,12 +11,12 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     id: "hospital-facade",
-    title: "مرکز درمانی اورا",
+    title: "مرکز درمانی رامسر",
     category: "معماری و طراحی درمانی",
     year: "۱۴۰۵",
     videoUrl: "/videos/project-1.mp4",
     posterUrl: "/images/project-1-poster.jpg",
-    description: "طراحی پیشرفته نمای پارامتریک با تمرکز بر بهبود روانی بیماران و بهینه‌سازی نور طبیعی.",
+    description: "در این موشن گرافی به معرفی طرج اولیه از بیمارستانی واقع در رامسر میپردازیم ",
   },
   {
     id: "motion-arch",
