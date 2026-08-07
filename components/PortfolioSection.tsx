@@ -60,13 +60,13 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                 <div className="bg-neutral-900/50 p-6 md:p-10 rounded-sm border border-neutral-800">
                   <div className={`mb-8 ${isFa ? 'text-right' : 'text-left'}`} dir={isFa ? 'rtl' : 'ltr'}>
                     <span className="text-accent text-xs tracking-[0.2em] uppercase mb-2 block">
-                      {project.category} — {project.year}
+                      {project.category[lang]} — {project.year}
                     </span>
                     <h3 className="text-2xl md:text-4xl font-light text-foreground tracking-wide mb-2">
-                      {project.title}
+                      {project.title[lang]}
                     </h3>
                     <p className="text-sm text-foreground/70 font-light leading-relaxed">
-                      {project.description}
+                      {project.description[lang]}
                     </p>
                   </div>
 
@@ -88,17 +88,17 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                           </video>
                         </div>
                         <h4 className="font-medium text-foreground text-base mb-1" dir={isFa ? 'rtl' : 'ltr'}>
-                          {sub.title}
+                          {sub.title[lang]}
                         </h4>
                         <p className="text-xs text-foreground/70 font-light leading-relaxed" dir={isFa ? 'rtl' : 'ltr'}>
-                          {sub.description}
+                          {sub.description[lang]}
                         </p>
                       </div>
                     ))}
                   </div>
                 </div>
               ) : (
-                // --- کارت‌های معمولی پروژه (مثل قبل) ---
+                // --- کارت‌های معمولی پروژه ---
                 <div className="relative w-full aspect-[16/9] overflow-hidden bg-neutral-900 rounded-sm cursor-pointer">
                   <video
                     autoPlay
@@ -121,15 +121,15 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                   >
                     <div>
                       <span className="text-accent text-xs tracking-[0.2em] uppercase mb-2 block">
-                        {project.category} — {project.year}
+                        {project.category[lang]} — {project.year}
                       </span>
                       <h3 className="text-2xl md:text-4xl font-light text-foreground tracking-wide">
-                        {project.title}
+                        {project.title[lang]}
                       </h3>
                     </div>
                     <div className="max-w-md">
                       <p className="text-sm text-foreground/70 font-light leading-relaxed hidden md:block">
-                        {project.description}
+                        {project.description[lang]}
                       </p>
                     </div>
                   </div>

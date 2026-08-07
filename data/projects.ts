@@ -42,6 +42,24 @@ export const PROJECTS: Project[] = [
       en: "In this motion graphic, we introduce the preliminary design of a hospital located in Ramsar."
     },
   },
+    {
+    id: "clinical-space",
+    title: {
+      fa: "بیمارستان شریعتی نوین",
+      en: "Novin Shariati Hospital"
+    },
+    category: {
+      fa: "بیمارستان شریعتی نوین",
+      en: "Novin Shariati Hospital"
+    },
+    year: "1403",
+    videoUrl: "/videos/L1.mp4",
+    posterUrl: "/images/project-3-poster.jpg",
+    description: {
+      fa: "ویدئو معرفی بیمارستان شریعتی نوین",
+      en: "Video introducing Shariati Novin Hospital"
+    },
+  },
   {
     id: "motion-arch-group",
     title: {

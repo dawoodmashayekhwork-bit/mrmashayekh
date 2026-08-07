@@ -37,43 +37,7 @@ export default function AboutSection({ lang }: AboutSectionProps) {
             : 'To respect professional obligations and project confidentiality, some motion graphics and videos are not available on this platform, as permission for public release has not been granted by the client(s).'}
         </motion.h2>
 
-        <div 
-          className={`grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-white/10 text-sm text-foreground/70 font-light ${
-            isFa ? 'text-right' : 'text-left'
-          }`} 
-          dir={isFa ? 'rtl' : 'ltr'}
-        >
-          <div>
-            <h3 className="text-foreground uppercase tracking-widest text-xs mb-3 font-medium">
-              {isFa ? 'معماری' : 'Architecture'}
-            </h3>
-            <p>
-              {isFa 
-                ? 'طراحی فضاهایی که روان‌شناسی انسانی، سلامت روان و یکپارچگی سازه را در اولویت قرار می‌دهند.' 
-                : 'Designing spaces that prioritize human psychology, mental wellness, and structural integrity.'}
-            </p>
-          </div>
-          <div>
-            <h3 className="text-foreground uppercase tracking-widest text-xs mb-3 font-medium">
-              {isFa ? 'طراحی درمانی' : 'Healing Design'}
-            </h3>
-            <p>
-              {isFa 
-                ? 'خلق محیط‌های تخصصی که بهبودی، آرامش و کارایی بالینی را تقویت می‌کنند.' 
-                : 'Creating specialized environments that enhance healing, tranquility, and clinical efficiency.'}
-            </p>
-          </div>
-          <div>
-            <h3 className="text-foreground uppercase tracking-widest text-xs mb-3 font-medium">
-              {isFa ? 'موشن گرافی' : 'Motion Graphics'}
-            </h3>
-            <p>
-              {isFa 
-                ? 'تبدیل فرم‌های ایستاتیک معماری به روایت‌های بصری پویا و غوطه‌ورکننده.' 
-                : 'Transforming static architectural forms into dynamic, immersive visual narratives.'}
-            </p>
-          </div>
-        </div>
+        
       </div>
     </section>
   );
