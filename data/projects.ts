@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     year: "۱۴۰۴",
     videoUrl: "/videos/project-2.mp4",
     posterUrl: "/images/project-2-poster.jpg",
-    description: "یک سفر بصری سینمایی در کاوش سیالیت سازه‌ای و دگرگونی فضایی.",
+    description: "ویدیو برج شهیاد ، cv 1403  و اندازه گذاری",
   },
   {
     id: "clinical-space",
