@@ -118,7 +118,7 @@ export const PROJECTS: Project[] = [
       {
         id: "cv-motion",
         title: {
-          fa: "رزومه ویدئویی (CV)",
+          fa: "رزومه ویدئویی (CV) 1403",
           en: "Video Resume (CV)"
         },
         videoUrl: "/videos/project-2-cv.mp4",
