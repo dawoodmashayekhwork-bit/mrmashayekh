@@ -10,8 +10,8 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-  title: "Dawood Mashayekh | Studio Portfolio",
-  description: "Architecture, Healthcare Design & Motion Studio",
+  title: "Dawood Mashayekh | Motion Portfolio",
+  description: "This is a platform for showcasing the Motion Graphics work of Mr. Dawood Mashayekh.",
 };
 
 export default function RootLayout({
