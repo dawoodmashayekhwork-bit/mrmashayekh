@@ -16,7 +16,6 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isFa = lang === 'fa';
 
-  // نگهداری وضعیت پخش ویدیوها (کدام ویدیو در حال پخش است)
   const [playingVideos, setPlayingVideos] = useState<{ [key: string]: boolean }>({});
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
@@ -44,7 +43,6 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
     });
   }, []);
 
-  // تابع مدیریت پلی کردن ویدیو با لود و پرفورمنس بالا
   const handlePlay = (id: string) => {
     setPlayingVideos((prev) => ({ ...prev, [id]: true }));
     const videoEl = videoRefs.current[id];
@@ -53,7 +51,6 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
     }
   };
 
-  // تابع فعال کردن حالت تمام صفحه (Fullscreen)
   const handleFullscreen = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     const videoEl = videoRefs.current[id];
@@ -104,20 +101,19 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                       const isPlaying = playingVideos[sub.id];
                       return (
                         <div key={sub.id} className="flex flex-col bg-neutral-900/80 rounded-sm overflow-hidden p-3 border border-neutral-800/60 group/sub">
-                          {/* کانتینر ویدیو با نسبت تصویر پورتره (9:16) */}
-                          <div className="relative w-full aspect-[9/16] bg-neutral-950 rounded-sm overflow-hidden mb-4">
+                          <div className="relative w-full aspect-[9/16] bg-neutral-950 rounded-sm overflow-hidden mb-4 flex items-center justify-center">
                             <video
                               ref={(el) => { videoRefs.current[sub.id] = el; }}
                               preload="none"
                               controls={isPlaying}
                               playsInline
                               poster={sub.posterUrl}
-                              className="w-full h-full object-cover filter brightness-90 group-hover/sub:brightness-100 transition-all duration-500"
+                              className="w-full h-full object-cover [&:fullscreen]:object-contain filter brightness-90 group-hover/sub:brightness-100 transition-all duration-500"
                             >
                               <source src={sub.videoUrl} type="video/mp4" />
                             </video>
 
-                            {/* دکمه پلی (فقط زمانی که ویدیو پلی نشده نمایش داده شود) */}
+                            {/* دکمه پلی */}
                             {!isPlaying && (
                               <button
                                 onClick={() => handlePlay(sub.id)}
@@ -166,12 +162,11 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                     controls={playingVideos[project.id]}
                     playsInline
                     poster={project.posterUrl}
-                    className="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 transition-all duration-700"
+                    className="w-full h-full object-cover [&:fullscreen]:object-contain filter brightness-90 group-hover:brightness-100 transition-all duration-700"
                   >
                     <source src={project.videoUrl} type="video/mp4" />
                   </video>
 
-                  {/* دکمه پلی برای کارت‌های تکی */}
                   {!playingVideos[project.id] && (
                     <button
                       onClick={() => handlePlay(project.id)}
@@ -186,7 +181,6 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                     </button>
                   )}
 
-                  {/* دکمه تمام‌صفحه */}
                   {playingVideos[project.id] && (
                     <button
                       onClick={(e) => handleFullscreen(project.id, e)}
@@ -199,24 +193,25 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                     </button>
                   )}
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent opacity-80 pointer-events-none" />
 
+                  {/* اصلاح استایل متن در موبایل و دکستاپ برای خوانایی کامل */}
                   <div 
-                    className={`absolute bottom-0 left-0 w-full p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pointer-events-none ${
+                    className={`absolute bottom-0 left-0 w-full p-4 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-2 md:gap-4 pointer-events-none ${
                       isFa ? 'text-right' : 'text-left'
                     }`}
                     dir={isFa ? 'rtl' : 'ltr'}
                   >
                     <div>
-                      <span className="text-accent text-xs tracking-[0.2em] uppercase mb-2 block">
+                      <span className="text-accent text-[10px] md:text-xs tracking-[0.2em] uppercase mb-1 block font-medium">
                         {project.category[lang]} — {project.year}
                       </span>
-                      <h3 className="text-2xl md:text-4xl font-light text-foreground tracking-wide">
+                      <h3 className="text-xl md:text-4xl font-light text-foreground tracking-wide">
                         {project.title[lang]}
                       </h3>
                     </div>
                     <div className="max-w-md">
-                      <p className="text-sm text-foreground/70 font-light leading-relaxed hidden md:block">
+                      <p className="text-xs md:text-sm text-foreground/80 font-light leading-relaxed hidden md:block">
                         {project.description[lang]}
                       </p>
                     </div>
