@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
     },
     year: "۱۴۰۵",
     videoUrl: "/videos/project-1.mp4",
-    posterUrl: "/images/project-1-poster.jpg",
+    posterUrl: "/images/1.png",
     description: {
       fa: "در این موشن گرافی به معرفی طرح اولیه از بیمارستانی واقع در رامسر می‌پردازیم",
       en: "In this motion graphic, we introduce the preliminary design of a hospital located in Ramsar."
@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
     },
     year: "1403",
     videoUrl: "/videos/L1.mp4",
-    posterUrl: "/images/project-3-poster.jpg",
+    posterUrl: "/images/2.png",
     description: {
       fa: "ویدئو معرفی بیمارستان شریعتی نوین",
       en: "Video introducing Shariati Novin Hospital"
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
     },
     year: "1402",
     videoUrl: "/videos/L2.mp4",
-    posterUrl: "/images/project-3-poster.jpg",
+    posterUrl: "/images/3.png",
     description: {
       fa: "ویدئو معرفی بیمارستان بوعلی",
       en: "Video introducing BUALI Hospital"
@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
     },
     year: "1402",
     videoUrl: "/videos/L3.mp4",
-    posterUrl: "/images/project-3-poster.jpg",
+    posterUrl: "/images/4.png",
     description: {
       fa: "ویدئو معرفی بیمارستان بوعلی",
       en: "Video introducing BUALI Hospital"
@@ -122,7 +122,7 @@ export const PROJECTS: Project[] = [
           en: "Video Resume (CV)"
         },
         videoUrl: "/videos/project-2-cv.mp4",
-        posterUrl: "/images/project-2-cv-poster.jpg",
+        posterUrl: "/images/cv.png",
         description: {
           fa: "موشن گرافیک معرفی مهارت‌ها",
           en: "Motion graphics introducing skills"
@@ -135,7 +135,7 @@ export const PROJECTS: Project[] = [
           en: "Shahyad Tower"
         },
         videoUrl: "/videos/project-2-shahyad.mp4",
-        posterUrl: "/images/project-2-shahyad-poster.jpg",
+        posterUrl: "/images/shahyad.png",
         description: {
           fa: "انیمیشن سه‌بعدی برج آزادی",
           en: "3D animation of Azadi Tower"
@@ -148,7 +148,7 @@ export const PROJECTS: Project[] = [
           en: "Dimensioning & Details"
         },
         videoUrl: "/videos/project-2-dim.mp4",
-        posterUrl: "/images/project-2-dim-poster.jpg",
+        posterUrl: "/images/j.png",
         description: {
           fa: "فرآیند اندازه‌گذاری سه‌بعدی",
           en: "3D dimensioning process"
@@ -180,7 +180,7 @@ export const PROJECTS: Project[] = [
           en: "Bu Ali Hospital"
         },
         videoUrl: "/videos/P1.mp4",
-        posterUrl: "/images/P1.jpg",
+        posterUrl: "/images/5.png",
         description: {
           fa: "بیمارستان بوعلی",
           en: "Bu Ali Hospital"
@@ -193,7 +193,7 @@ export const PROJECTS: Project[] = [
           en: "Section View"
         },
         videoUrl: "/videos/P2.mp4",
-        posterUrl: "/images/project-2-shahyad-poster.jpg",
+        posterUrl: "/images/6.png",
         description: {
           fa: "انیمیشن روابط بیمارستان",
           en: "Hospital circulation animation"
@@ -206,7 +206,7 @@ export const PROJECTS: Project[] = [
           en: "Ramsar Hospital"
         },
         videoUrl: "/videos/P3.mp4",
-        posterUrl: "/images/project-2-dim-poster.jpg",
+        posterUrl: "/images/7.png",
         description: {
           fa: "بررسی ویژگی‌های بیمارستان رامسر",
           en: "Reviewing features of Ramsar Hospital"
@@ -226,7 +226,7 @@ export const PROJECTS: Project[] = [
     },
     year: "۱۴۰۲",
     videoUrl: "/videos/project-3.mp4",
-    posterUrl: "/images/project-3-poster.jpg",
+    posterUrl: "/images/8.png",
     description: {
       fa: "طرح اولیه بیمارستان جنرال",
       en: "Preliminary concept of a general hospital"
