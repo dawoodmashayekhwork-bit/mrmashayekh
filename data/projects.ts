@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
       fa: "بیمارستان بوعلی",
       en: " BUALI Hospital"
     },
-    year: "1403",
+    year: "1402",
     videoUrl: "/videos/L2.mp4",
     posterUrl: "/images/project-3-poster.jpg",
     description: {
@@ -79,6 +79,25 @@ export const PROJECTS: Project[] = [
     },
   },
   
+    {
+    id: "clinical-space",
+    title: {
+      fa: "بیمارستان بوعلی ",
+      en: "BUALI Hospital"
+    },
+    category: {
+      fa: "بیمارستان بوعلی",
+      en: " BUALI Hospital"
+    },
+    year: "1402",
+    videoUrl: "/videos/L3.mp4",
+    posterUrl: "/images/project-3-poster.jpg",
+    description: {
+      fa: "ویدئو معرفی بیمارستان بوعلی",
+      en: "Video introducing BUALI Hospital"
+    },
+  },
+
   {
     id: "motion-arch-group",
     title: {
