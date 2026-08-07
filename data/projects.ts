@@ -61,44 +61,6 @@ export const PROJECTS: Project[] = [
     },
   },
     {
-    id: "BUALI-space",
-    title: {
-      fa: "بیمارستان بوعلی ",
-      en: "BUALI Hospital"
-    },
-    category: {
-      fa: "بیمارستان بوعلی",
-      en: " BUALI Hospital"
-    },
-    year: "1402",
-    videoUrl: "/videos/L2.mp4",
-    posterUrl: "/images/3.png",
-    description: {
-      fa: "ویدئو معرفی بیمارستان بوعلی",
-      en: "Video introducing BUALI Hospital"
-    },
-  },
-  
-    {
-    id: "clinical-Hospital",
-    title: {
-      fa: "بیمارستان بوعلی ",
-      en: "BUALI Hospital"
-    },
-    category: {
-      fa: "بیمارستان بوعلی",
-      en: " BUALI Hospital"
-    },
-    year: "1402",
-    videoUrl: "/videos/L3.mp4",
-    posterUrl: "/images/4.png",
-    description: {
-      fa: "ویدئو معرفی بیمارستان بوعلی",
-      en: "Video introducing BUALI Hospital"
-    },
-  },
-
-  {
     id: "motion-arch-group",
     title: {
       fa: "مجموعه ویدئوهای اول",
@@ -155,6 +117,43 @@ export const PROJECTS: Project[] = [
         },
       }
     ]
+  },
+    {
+    id: "BUALI-space",
+    title: {
+      fa: "بیمارستان بوعلی ",
+      en: "BUALI Hospital"
+    },
+    category: {
+      fa: "بیمارستان بوعلی",
+      en: " BUALI Hospital"
+    },
+    year: "1402",
+    videoUrl: "/videos/L2.mp4",
+    posterUrl: "/images/3.png",
+    description: {
+      fa: "ویدئو معرفی بیمارستان بوعلی",
+      en: "Video introducing BUALI Hospital"
+    },
+  },
+  
+    {
+    id: "clinical-Hospital",
+    title: {
+      fa: "بیمارستان بوعلی ",
+      en: "BUALI Hospital"
+    },
+    category: {
+      fa: "بیمارستان بوعلی",
+      en: " BUALI Hospital"
+    },
+    year: "1402",
+    videoUrl: "/videos/L3.mp4",
+    posterUrl: "/images/4.png",
+    description: {
+      fa: "ویدئو معرفی بیمارستان بوعلی",
+      en: "Video introducing BUALI Hospital"
+    },
   },
   {
     id: "motion-arch-group-2",

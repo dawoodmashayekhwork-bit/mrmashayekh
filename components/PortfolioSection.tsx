@@ -25,9 +25,10 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
 
     const cards = el.querySelectorAll(".project-card");
     cards.forEach((card) => {
+      // انیمیشن ورود اولیه کارت‌ها
       gsap.fromTo(
         card,
-        { opacity: 0, y: 80 },
+        { opacity: 0, y: 60 },
         {
           opacity: 1,
           y: 0,
@@ -35,17 +36,31 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
           ease: "power3.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 85%",
+            start: "top 90%",
             toggleActions: "play none none reverse",
           },
         }
       );
+
+      // افکت پارالکس حرکتی روان و عمق‌دار
+      gsap.to(card, {
+        y: -35,
+        ease: "none",
+        scrollTrigger: {
+          trigger: card,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     });
+
+    // به‌روزرسانی اسکرول‌تریگر برای محاسبه دقیق ابعاد در دسکتاپ
+    ScrollTrigger.refresh();
   }, []);
 
   // تابع مدیریت پلی کردن ویدیو (متوقف کردن بقیه ویدیوها و پخش ویدیوی جدید)
   const handlePlay = (id: string) => {
-    // ابتدا تمام ویدیوهای دیگر را متوقف و استیت آن‌ها را فالس می‌کنیم
     Object.keys(videoRefs.current).forEach((key) => {
       const vEl = videoRefs.current[key];
       if (vEl && key !== id) {
@@ -216,7 +231,7 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                     dir={isFa ? 'rtl' : 'ltr'}
                   >
                     <div>
-                      {/* متن زرد رنگ در موبایل مخفی (hidden) و در دسکتاپ به صورت block نمایش داده می‌شود */}
+                      {/* متن زرد رنگ در موبایل مخفی و در دسکتاپ نمایش داده می‌شود */}
                       <span className="text-accent text-xs tracking-[0.2em] uppercase mb-1 hidden md:block font-medium">
                         {project.category[lang]} — {project.year}
                       </span>

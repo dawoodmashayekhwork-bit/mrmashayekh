@@ -34,3 +34,11 @@
   50% { width: 70%; left: 15%; }
   100% { width: 100%; left: 0%; }
 }
+
+body {
+  cursor: none;
+}
+/* مخفی کردن کورسور پیش‌فرض مرورگر در کل صفحه */
+* {
+  cursor: none !important;
+}
