@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "../data/projects";
@@ -15,6 +15,10 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isFa = lang === 'fa';
+
+  // نگهداری وضعیت پخش ویدیوها (کدام ویدیو در حال پخش است)
+  const [playingVideos, setPlayingVideos] = useState<{ [key: string]: boolean }>({});
+  const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
   useEffect(() => {
     const el = containerRef.current;
@@ -39,6 +43,30 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
       );
     });
   }, []);
+
+  // تابع مدیریت پلی کردن ویدیو با لود و پرفورمنس بالا
+  const handlePlay = (id: string) => {
+    setPlayingVideos((prev) => ({ ...prev, [id]: true }));
+    const videoEl = videoRefs.current[id];
+    if (videoEl) {
+      videoEl.play();
+    }
+  };
+
+  // تابع فعال کردن حالت تمام صفحه (Fullscreen)
+  const handleFullscreen = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const videoEl = videoRefs.current[id];
+    if (!videoEl) return;
+
+    if (videoEl.requestFullscreen) {
+      videoEl.requestFullscreen();
+    } else if ((videoEl as any).webkitRequestFullscreen) {
+      (videoEl as any).webkitRequestFullscreen();
+    } else if ((videoEl as any).msRequestFullscreen) {
+      (videoEl as any).msRequestFullscreen();
+    }
+  };
 
   return (
     <section id="portfolio" ref={sectionRef} className="relative w-full py-32 px-6 md:px-16 bg-background">
@@ -72,49 +100,109 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
 
                   {/* گرید ۳ تایی برای نمایش ویدیوهای عمودی (پورتره) */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {project.subProjects?.map((sub) => (
-                      <div key={sub.id} className="flex flex-col bg-neutral-900/80 rounded-sm overflow-hidden p-3 border border-neutral-800/60 group/sub">
-                        {/* کانتینر با نسبت تصویر پورتره (9:16) */}
-                        <div className="relative w-full aspect-[9/16] bg-neutral-950 rounded-sm overflow-hidden mb-4">
-                          <video
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            poster={sub.posterUrl}
-                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/sub:scale-105 filter brightness-90 group-hover/sub:brightness-100"
-                          >
-                            <source src={sub.videoUrl} type="video/mp4" />
-                          </video>
+                    {project.subProjects?.map((sub) => {
+                      const isPlaying = playingVideos[sub.id];
+                      return (
+                        <div key={sub.id} className="flex flex-col bg-neutral-900/80 rounded-sm overflow-hidden p-3 border border-neutral-800/60 group/sub">
+                          {/* کانتینر ویدیو با نسبت تصویر پورتره (9:16) */}
+                          <div className="relative w-full aspect-[9/16] bg-neutral-950 rounded-sm overflow-hidden mb-4">
+                            <video
+                              ref={(el) => { videoRefs.current[sub.id] = el; }}
+                              preload="none"
+                              controls={isPlaying}
+                              playsInline
+                              poster={sub.posterUrl}
+                              className="w-full h-full object-cover filter brightness-90 group-hover/sub:brightness-100 transition-all duration-500"
+                            >
+                              <source src={sub.videoUrl} type="video/mp4" />
+                            </video>
+
+                            {/* دکمه پلی (فقط زمانی که ویدیو پلی نشده نمایش داده شود) */}
+                            {!isPlaying && (
+                              <button
+                                onClick={() => handlePlay(sub.id)}
+                                className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/40 group-hover/sub:bg-black/25 transition-colors cursor-pointer z-10"
+                                aria-label="Play video"
+                              >
+                                <div className="w-12 h-12 rounded-full bg-accent text-background flex items-center justify-center shadow-lg transform group-hover/sub:scale-110 transition-transform">
+                                  <svg className="w-5 h-5 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                  </svg>
+                                </div>
+                              </button>
+                            )}
+
+                            {/* دکمه تمام‌صفحه */}
+                            {isPlaying && (
+                              <button
+                                onClick={(e) => handleFullscreen(sub.id, e)}
+                                className="absolute top-3 right-3 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-sm transition-colors z-20 cursor-pointer"
+                                title="Fullscreen"
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                </svg>
+                              </button>
+                            )}
+                          </div>
+
+                          <h4 className="font-medium text-foreground text-base mb-1" dir={isFa ? 'rtl' : 'ltr'}>
+                            {sub.title[lang]}
+                          </h4>
+                          <p className="text-xs text-foreground/70 font-light leading-relaxed" dir={isFa ? 'rtl' : 'ltr'}>
+                            {sub.description[lang]}
+                          </p>
                         </div>
-                        <h4 className="font-medium text-foreground text-base mb-1" dir={isFa ? 'rtl' : 'ltr'}>
-                          {sub.title[lang]}
-                        </h4>
-                        <p className="text-xs text-foreground/70 font-light leading-relaxed" dir={isFa ? 'rtl' : 'ltr'}>
-                          {sub.description[lang]}
-                        </p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               ) : (
-                // --- کارت‌های معمولی پروژه ---
-                <div className="relative w-full aspect-[16/9] overflow-hidden bg-neutral-900 rounded-sm cursor-pointer">
+                // --- کارت‌های معمولی پروژه (16:9) ---
+                <div className="relative w-full aspect-[16/9] overflow-hidden bg-neutral-900 rounded-sm">
                   <video
-                    autoPlay
-                    muted
-                    loop
+                    ref={(el) => { videoRefs.current[project.id] = el; }}
+                    preload="none"
+                    controls={playingVideos[project.id]}
                     playsInline
                     poster={project.posterUrl}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
+                    className="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 transition-all duration-700"
                   >
                     <source src={project.videoUrl} type="video/mp4" />
                   </video>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                  {/* دکمه پلی برای کارت‌های تکی */}
+                  {!playingVideos[project.id] && (
+                    <button
+                      onClick={() => handlePlay(project.id)}
+                      className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-colors cursor-pointer z-10"
+                      aria-label="Play video"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-accent text-background flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform">
+                        <svg className="w-7 h-7 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </button>
+                  )}
+
+                  {/* دکمه تمام‌صفحه */}
+                  {playingVideos[project.id] && (
+                    <button
+                      onClick={(e) => handleFullscreen(project.id, e)}
+                      className="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2.5 rounded-full backdrop-blur-sm transition-colors z-20 cursor-pointer"
+                      title="Fullscreen"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                      </svg>
+                    </button>
+                  )}
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-500 pointer-events-none" />
 
                   <div 
-                    className={`absolute bottom-0 left-0 w-full p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 ${
+                    className={`absolute bottom-0 left-0 w-full p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pointer-events-none ${
                       isFa ? 'text-right' : 'text-left'
                     }`}
                     dir={isFa ? 'rtl' : 'ltr'}

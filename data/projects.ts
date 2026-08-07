@@ -25,7 +25,7 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: "hospital-facade",
+    id: "Ramsar-facade",
     title: {
       fa: "مرکز درمانی رامسر",
       en: "Ramsar Medical Center"
@@ -43,7 +43,7 @@ export const PROJECTS: Project[] = [
     },
   },
     {
-    id: "clinical-space",
+    id: "Shariati-space",
     title: {
       fa: "بیمارستان شریعتی نوین",
       en: "Novin Shariati Hospital"
@@ -61,7 +61,7 @@ export const PROJECTS: Project[] = [
     },
   },
     {
-    id: "clinical-space",
+    id: "BUALI-space",
     title: {
       fa: "بیمارستان بوعلی ",
       en: "BUALI Hospital"
@@ -80,7 +80,7 @@ export const PROJECTS: Project[] = [
   },
   
     {
-    id: "clinical-space",
+    id: "clinical-Hospital",
     title: {
       fa: "بیمارستان بوعلی ",
       en: "BUALI Hospital"
@@ -174,7 +174,7 @@ export const PROJECTS: Project[] = [
     isGroup: true,
     subProjects: [
       {
-        id: "bouali-hospital",
+        id: "bouali2-hospital",
         title: {
           fa: "بیمارستان بوعلی",
           en: "Bu Ali Hospital"
@@ -215,7 +215,7 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
-    id: "clinical-space",
+    id: "General",
     title: {
       fa: "بیمارستان جنرال",
       en: "General Hospital"
