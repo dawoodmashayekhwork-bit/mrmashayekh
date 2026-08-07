@@ -91,11 +91,11 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "clinical-space",
-    title: "هاب تشخیصی سرنیتی",
-    category: "طراحی داخلی درمانی و فضا",
-    year: "۱۴۰۴",
+    title: "بیمارستان جنرال",
+    category: "طرح اولیه بیمارستان جنرال ",
+    year: "۱۴۰2",
     videoUrl: "/videos/project-3.mp4",
     posterUrl: "/images/project-3-poster.jpg",
-    description: "بازتعریف محیط‌های استریل بالینی از طریق اصول طراحی بیوفیلیک و متریال آرامش‌بخش.",
+    description:"طرح اولیه بیمارستان جنرال ",
   },
 ];
