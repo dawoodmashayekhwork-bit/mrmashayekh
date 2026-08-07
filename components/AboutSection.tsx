@@ -33,8 +33,8 @@ export default function AboutSection({ lang }: AboutSectionProps) {
           dir={isFa ? 'rtl' : 'ltr'}
         >
           {isFa 
-            ? 'پل زدن میان مهندسی سازه، معماری درمان‌بخش و موشن‌دیزاین سینمایی. هر فضا داستانی را از طریق نور، هندسه و حرکت روایت می‌کند.' 
-            : 'Bridging structural engineering, healing architecture, and cinematic motion design. Every space tells a story through light, geometry, and motion.'}
+            ? ' به‌منظور رعایت تعهدات حرفه‌ای و محرمانگی پروژه‌ها، برخی از موشن‌گرافی‌ها و ویدئوها به‌دلیل عدم دریافت مجوز انتشار از کارفرما یا کارفرمایان، در این پلتفرم قابل نمایش نیستند.' 
+            : 'To respect professional obligations and project confidentiality, some motion graphics and videos are not available on this platform, as permission for public release has not been granted by the client(s).'}
         </motion.h2>
 
         <div 
