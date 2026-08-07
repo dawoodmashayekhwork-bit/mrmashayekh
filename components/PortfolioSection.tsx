@@ -43,8 +43,22 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
     });
   }, []);
 
+  // تابع مدیریت پلی کردن ویدیو (متوقف کردن بقیه ویدیوها و پخش ویدیوی جدید)
   const handlePlay = (id: string) => {
-    setPlayingVideos((prev) => ({ ...prev, [id]: true }));
+    // ابتدا تمام ویدیوهای دیگر را متوقف و استیت آن‌ها را فالس می‌کنیم
+    Object.keys(videoRefs.current).forEach((key) => {
+      const vEl = videoRefs.current[key];
+      if (vEl && key !== id) {
+        vEl.pause();
+      }
+    });
+
+    setPlayingVideos(() => {
+      const newPlayingState: { [key: string]: boolean } = {};
+      newPlayingState[id] = true;
+      return newPlayingState;
+    });
+
     const videoEl = videoRefs.current[id];
     if (videoEl) {
       videoEl.play();
@@ -195,7 +209,6 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent opacity-80 pointer-events-none" />
 
-                  {/* اصلاح استایل متن در موبایل و دکستاپ برای خوانایی کامل */}
                   <div 
                     className={`absolute bottom-0 left-0 w-full p-4 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-2 md:gap-4 pointer-events-none ${
                       isFa ? 'text-right' : 'text-left'
@@ -203,7 +216,8 @@ export default function PortfolioSection({ lang }: PortfolioSectionProps) {
                     dir={isFa ? 'rtl' : 'ltr'}
                   >
                     <div>
-                      <span className="text-accent text-[10px] md:text-xs tracking-[0.2em] uppercase mb-1 block font-medium">
+                      {/* متن زرد رنگ در موبایل مخفی (hidden) و در دسکتاپ به صورت block نمایش داده می‌شود */}
+                      <span className="text-accent text-xs tracking-[0.2em] uppercase mb-1 hidden md:block font-medium">
                         {project.category[lang]} — {project.year}
                       </span>
                       <h3 className="text-xl md:text-4xl font-light text-foreground tracking-wide">
