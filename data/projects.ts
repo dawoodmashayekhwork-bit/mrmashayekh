@@ -1,101 +1,179 @@
+export interface LocalizedText {
+  fa: string;
+  en: string;
+}
+
+export interface SubProject {
+  id: string;
+  title: LocalizedText;
+  videoUrl: string;
+  posterUrl: string;
+  description: LocalizedText;
+}
+
 export interface Project {
   id: string;
-  title: string;
-  category: string;
+  title: LocalizedText;
+  category: LocalizedText;
   year: string;
   videoUrl?: string;
   posterUrl?: string;
-  description: string;
-  // برای حالت ۳ تایی کنار هم:
+  description: LocalizedText;
   isGroup?: boolean;
-  subProjects?: {
-    id: string;
-    title: string;
-    videoUrl: string;
-    posterUrl: string;
-    description: string;
-  }[];
+  subProjects?: SubProject[];
 }
 
 export const PROJECTS: Project[] = [
   {
     id: "hospital-facade",
-    title: "مرکز درمانی رامسر",
-    category: "معماری و طراحی درمانی",
+    title: {
+      fa: "مرکز درمانی رامسر",
+      en: "Ramsar Medical Center"
+    },
+    category: {
+      fa: "معماری و طراحی درمانی",
+      en: "Healthcare Architecture & Design"
+    },
     year: "۱۴۰۵",
     videoUrl: "/videos/project-1.mp4",
     posterUrl: "/images/project-1-poster.jpg",
-    description: "در این موشن گرافی به معرفی طرح اولیه از بیمارستانی واقع در رامسر می‌پردازیم",
+    description: {
+      fa: "در این موشن گرافی به معرفی طرح اولیه از بیمارستانی واقع در رامسر می‌پردازیم",
+      en: "In this motion graphic, we introduce the preliminary design of a hospital located in Ramsar."
+    },
   },
   {
     id: "motion-arch-group",
-    title: "مجموعه ویدئوهای",
-    category: "موشن معماری و انیمیشن سه‌بعدی",
+    title: {
+      fa: "مجموعه ویدئوهای اول",
+      en: "First Video Collection"
+    },
+    category: {
+      fa: "موشن معماری و انیمیشن سه‌بعدی",
+      en: "Architectural Motion & 3D Animation"
+    },
     year: "1403",
-    description: "ویدئو های رزومه ، برج شهیاد و اندازه گذاری",
-    isGroup: true, // مشخص می‌کند که این کارت یک کانتینر گروهی است
+    description: {
+      fa: "ویدئو های رزومه ، برج شهیاد و اندازه گذاری",
+      en: "Resume videos, Shahyad tower, and dimensioning"
+    },
+    isGroup: true,
     subProjects: [
-       {
+      {
         id: "cv-motion",
-        title: "1403 رزومه ویدئویی (CV)",
+        title: {
+          fa: "رزومه ویدئویی (CV)",
+          en: "Video Resume (CV)"
+        },
         videoUrl: "/videos/project-2-cv.mp4",
         posterUrl: "/images/project-2-cv-poster.jpg",
-        description: "موشن گرافیک معرفی مهارت‌ها",
+        description: {
+          fa: "موشن گرافیک معرفی مهارت‌ها",
+          en: "Motion graphics introducing skills"
+        },
       },
       {
         id: "shahyad-tower",
-        title: "برج شهیاد",
+        title: {
+          fa: "برج شهیاد",
+          en: "Shahyad Tower"
+        },
         videoUrl: "/videos/project-2-shahyad.mp4",
         posterUrl: "/images/project-2-shahyad-poster.jpg",
-        description: "انیمیشن سه‌بعدی برج آزادی",
+        description: {
+          fa: "انیمیشن سه‌بعدی برج آزادی",
+          en: "3D animation of Azadi Tower"
+        },
       },
       {
         id: "dimensioning",
-        title: "اندازه‌گذاری و دیتیل",
+        title: {
+          fa: "اندازه‌گذاری و دیتیل",
+          en: "Dimensioning & Details"
+        },
         videoUrl: "/videos/project-2-dim.mp4",
         posterUrl: "/images/project-2-dim-poster.jpg",
-        description: "فرآیند اندازه‌گذاری سه‌بعدی",
+        description: {
+          fa: "فرآیند اندازه‌گذاری سه‌بعدی",
+          en: "3D dimensioning process"
+        },
       }
     ]
   },
-   {
-    id: "motion-arch-group",
-    title: "مجموعه ویدئوهای",
-    category: "موشن معماری و انیمیشن سه‌بعدی",
+  {
+    id: "motion-arch-group-2",
+    title: {
+      fa: "مجموعه ویدئوهای دوم",
+      en: "Second Video Collection"
+    },
+    category: {
+      fa: "موشن معماری و انیمیشن سه‌بعدی",
+      en: "Architectural Motion & 3D Animation"
+    },
     year: "1403",
-    description: "بیمارستان بوعلی، مقطع و بیمارستان رامسر",
-    isGroup: true, // مشخص می‌کند که این کارت یک کانتینر گروهی است
+    description: {
+      fa: "بیمارستان بوعلی، مقطع و بیمارستان رامسر",
+      en: "Bu Ali Hospital, Section, and Ramsar Hospital"
+    },
+    isGroup: true,
     subProjects: [
-       {
-        id: "cv-motion",
-        title: "بیمارستان بوعلی",
+      {
+        id: "bouali-hospital",
+        title: {
+          fa: "بیمارستان بوعلی",
+          en: "Bu Ali Hospital"
+        },
         videoUrl: "/videos/P1.mp4",
         posterUrl: "/images/P1.jpg",
-        description: "بیمارستان بوعلی ",
+        description: {
+          fa: "بیمارستان بوعلی",
+          en: "Bu Ali Hospital"
+        },
       },
       {
-        id: "shahyad-tower",
-        title: "مقطع",
+        id: "section-view",
+        title: {
+          fa: "مقطع",
+          en: "Section View"
+        },
         videoUrl: "/videos/P2.mp4",
         posterUrl: "/images/project-2-shahyad-poster.jpg",
-        description: "انیمیشن روابط بمارستان",
+        description: {
+          fa: "انیمیشن روابط بیمارستان",
+          en: "Hospital circulation animation"
+        },
       },
       {
-        id: "dimensioning",
-        title: "بیمارستان رامسر",
+        id: "ramsar-hospital",
+        title: {
+          fa: "بیمارستان رامسر",
+          en: "Ramsar Hospital"
+        },
         videoUrl: "/videos/P3.mp4",
         posterUrl: "/images/project-2-dim-poster.jpg",
-        description: "بررسی ویژگی های بیمارستان رامسر",
+        description: {
+          fa: "بررسی ویژگی‌های بیمارستان رامسر",
+          en: "Reviewing features of Ramsar Hospital"
+        },
       }
     ]
   },
   {
     id: "clinical-space",
-    title: "بیمارستان جنرال",
-    category: "طرح اولیه بیمارستان جنرال ",
-    year: "۱۴۰2",
+    title: {
+      fa: "بیمارستان جنرال",
+      en: "General Hospital"
+    },
+    category: {
+      fa: "طرح اولیه بیمارستان جنرال",
+      en: "General Hospital Concept Design"
+    },
+    year: "۱۴۰۲",
     videoUrl: "/videos/project-3.mp4",
     posterUrl: "/images/project-3-poster.jpg",
-    description:"طرح اولیه بیمارستان جنرال ",
+    description: {
+      fa: "طرح اولیه بیمارستان جنرال",
+      en: "Preliminary concept of a general hospital"
+    },
   },
 ];
