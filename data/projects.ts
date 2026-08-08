@@ -93,7 +93,7 @@ export const PROJECTS: Project[] = [
       {
         id: "shahyad-tower",
         title: {
-          fa: "برج شهیاد",
+          fa: " برج شهیاد",
           en: "Shahyad Tower"
         },
         videoUrl: "/videos/project-2-shahyad.mp4",
