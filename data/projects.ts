@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
     },
     year: "1403",
     description: {
-      fa: "ویدئو های رزومه ، برج شهیاد و اندازه گذاری",
+      fa: "ویدئو های رزومه ، برج شهیاد و همکاری با مهندس سبک پا ",
       en: "Resume videos, Shahyad tower, and dimensioning"
     },
     isGroup: true,
@@ -106,7 +106,7 @@ export const PROJECTS: Project[] = [
       {
         id: "dimensioning",
         title: {
-          fa: "اندازه‌گذاری و دیتیل",
+          fa: "همکاری با مهندس سبک پا",
           en: "Dimensioning & Details"
         },
         videoUrl: "/videos/project-2-dim.mp4",
