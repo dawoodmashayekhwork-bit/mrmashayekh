@@ -107,13 +107,13 @@ export const PROJECTS: Project[] = [
         id: "dimensioning",
         title: {
           fa: "همکاری با مهندس سبک پا",
-          en: "Dimensioning & Details"
+          en: "Collaboration with sabokpa"
         },
         videoUrl: "/videos/project-2-dim.mp4",
         posterUrl: "/images/j.png",
         description: {
-          fa: "فرآیند اندازه‌گذاری سه‌بعدی",
-          en: "3D dimensioning process"
+          fa: "نگاه متفاوت نسبت به عناصر ساختمانی",
+          en: "A different perspective on building elements"
         },
       }
     ]
