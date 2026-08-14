@@ -9,58 +9,63 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
   return (
     <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-6 bg-background overflow-hidden">
-      {/* ویدیو پس‌زمینه */}
+      {/* ویدیو پس‌زمینه با تاریکی ملایم و سینمایی */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover filter brightness-50 z-0"
+        className="absolute inset-0 w-full h-full object-cover filter brightness-[0.4] z-0"
       >
-        {/* مسیر ویدیوی پس‌زمینه خود را در پوشه public وارد کنید */}
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
       </video>
 
-      {/* لایه گرادینت تاریک برای خوانایی بهتر متن‌ها روی ویدیو */}
-      <div className="absolute inset-0 bg-background/60 z-10 pointer-events-none" />
+      {/* گرادینت تیره ملایم برای خوانایی بهتر */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/40 z-10 pointer-events-none" />
 
-      {/* محتوای متنی و دکمه‌ها */}
-      <div className="relative z-20 max-w-4xl mx-auto" dir={isFa ? 'rtl' : 'ltr'}>
-        <span className="text-accent text-xs md:text-sm tracking-[0.4em] uppercase block mb-4">
-          {isFa ? 'داوود مشایخ • موشن دیزاینر و معمار' : 'Dawood Mashayekh • Motion Designer & Architect'}
+      {/* محتوا بدون کادر و کاملاً هماهنگ با سبک مینیمال */}
+      <div className="relative z-20 max-w-5xl mx-auto flex flex-col items-center" dir={isFa ? 'rtl' : 'ltr'}>
+        
+        {/* ۱. متن زرد بالای صفحه (به روز شده) */}
+        <span className="text-accent text-xs md:text-sm tracking-[0.35em] uppercase block mb-6 font-light opacity-90">
+          {isFa ? 'وبسایت معرفی' : 'Portfolio Website'}
         </span>
-        <h1 className="text-4xl md:text-7xl font-light tracking-tight mb-6 leading-tight">
-          {isFa ? 'آفرینش حرکت، فضاسازی و روایت' : 'Crafting Motion, Space & Narrative'}
-        </h1>
-        <p className="text-sm md:text-base text-foreground/80 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
-          {isFa 
-            ? 'ترکیبی از هنر معماری و انیمیشن‌های حرکتی برای خلق تجربه‌های بصری مدرن و ماندگار.' 
-            : 'A fusion of architectural design and motion graphics to build modern, lasting visual experiences.'}
-        </p>
 
-        {/* سه دکمه‌ی اصلی */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
+        {/* ۲. نام بزرگ و سفید (بدون دایره زرد) */}
+        <div className="relative mb-10">
+          <h1 className="text-5xl md:text-8xl font-light tracking-tight text-foreground leading-none drop-shadow-lg">
+            {isFa ? 'داود مشایخ' : 'Dawood Mashayekh'}
+          </h1>
+        </div>
+
+        {/* ۳. گزینه‌ها با خط زیرین (Underline) */}
+        <div className="flex items-center justify-center gap-3 md:gap-4 text-foreground/80 text-sm md:text-base font-light tracking-wider">
           <a
             href="/page/Skills.html"
-            className="px-6 py-3 rounded-full text-sm font-medium bg-neutral-900/80 text-foreground border border-neutral-800 hover:border-accent hover:text-accent transition-all duration-300"
+            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
           >
             {isFa ? 'مهارت‌ها' : 'Skills'}
           </a>
 
+          <span className="text-accent/60">/</span>
+
           <a
             href="/page/Experience.html"
-            className="px-6 py-3 rounded-full text-sm font-medium bg-neutral-900/80 text-foreground border border-neutral-800 hover:border-accent hover:text-accent transition-all duration-300"
+            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
           >
             {isFa ? 'تجربیات' : 'Experience'}
           </a>
 
+          <span className="text-accent/60">/</span>
+
           <a
             href="#portfolio"
-            className="px-6 py-3 rounded-full text-sm font-medium bg-accent text-background hover:opacity-95 transition-all duration-300 shadow-lg"
+            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
           >
             {isFa ? 'پروژه‌ها' : 'Projects'}
           </a>
         </div>
+
       </div>
     </section>
   );
