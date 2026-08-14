@@ -22,7 +22,13 @@ export default function Home() {
       {/* ارسال وضعیت زبان و تابع تغییر آن به Navbar */}
       <Navbar lang={lang} onToggleLang={() => setLang(prev => prev === 'fa' ? 'en' : 'fa')} />
       
-      <HeroSection lang={lang} />
+      {/* بخش هیرو با دکمه‌های لینک‌شده به صفحات Skills، Experience و اسکرول پروژه‌ها */}
+      <HeroSection 
+        lang={lang} 
+        skillsUrl="/page/Skills.html" 
+        experienceUrl="/page/Experience.html" 
+      />
+
       <PortfolioSection lang={lang} />
       <AboutSection lang={lang} />
       <ContactSection lang={lang} />
