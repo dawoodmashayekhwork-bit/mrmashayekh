@@ -1,8 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-import ScrollIndicator from "./ScrollIndicator";
-
 interface HeroSectionProps {
   lang: 'fa' | 'en';
 }
@@ -11,59 +8,46 @@ export default function HeroSection({ lang }: HeroSectionProps) {
   const isFa = lang === 'fa';
 
   return (
-    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover scale-105 filter brightness-75"
-        >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/60" />
-      </div>
-
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2 }}
-          className="text-accent text-xs md:text-sm tracking-[0.4em] uppercase mb-4 font-medium"
-        >
-          {isFa ? 'وبسایت معرفی آثار موشن گرافی' : 'Motion Graphics & Architecture Portfolio'}
-        </motion.span>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2.2 }}
-          className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tight mb-6 text-foreground"
-        >
-          {isFa ? 'داود مشایخ' : 'DAWOOD MASHAYEKH'}
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2.4 }}
-          className="text-sm md:text-lg text-foreground/70 tracking-[0.2em] uppercase font-light"
-        >
-          {isFa ? (
-            <>معماری <span className="text-accent mx-2">/</span> گرافیک <span className="text-accent mx-2">/</span> موشن گرافی</>
-          ) : (
-            <>Architecture <span className="text-accent mx-2">/</span> Graphic <span className="text-accent mx-2">/</span> Motion Graphics</>
-          )}
-        </motion.p>
-      </div>
-
-      {/* متن اسکرول همراه با خط انیمیشن */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 opacity-70">
-        <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/60">
-          {isFa ? 'به پایین برو' : 'Scroll'}
+    <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-6 bg-background">
+      <div className="max-w-4xl mx-auto" dir={isFa ? 'rtl' : 'ltr'}>
+        <span className="text-accent text-xs md:text-sm tracking-[0.4em] uppercase block mb-4">
+          {isFa ? 'داوود مشایخ • موشن دیزاینر و معمار' : 'Dawood Mashayekh • Motion Designer & Architect'}
         </span>
-        <ScrollIndicator />
+        <h1 className="text-4xl md:text-7xl font-light tracking-tight mb-6 leading-tight">
+          {isFa ? 'آفرینش حرکت، فضاسازی و روایت' : 'Crafting Motion, Space & Narrative'}
+        </h1>
+        <p className="text-sm md:text-base text-foreground/70 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+          {isFa 
+            ? 'ترکیبی از هنر معماری و انیمیشن‌های حرکتی برای خلق تجربه‌های بصری مدرن و ماندگار.' 
+            : 'A fusion of architectural design and motion graphics to build modern, lasting visual experiences.'}
+        </p>
+
+        {/* سه دکمه‌ی درخواست‌شده */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
+          {/* دکمه اول: مهارت‌ها */}
+          <a
+            href="/page/Skills.html"
+            className="px-6 py-3 rounded-full text-sm font-medium bg-neutral-900/80 text-foreground border border-neutral-800 hover:border-accent hover:text-accent transition-all duration-300"
+          >
+            {isFa ? 'مهارت‌ها' : 'Skills'}
+          </a>
+
+          {/* دکمه دوم: تجربیات */}
+          <a
+            href="/page/Experience.html"
+            className="px-6 py-3 rounded-full text-sm font-medium bg-neutral-900/80 text-foreground border border-neutral-800 hover:border-accent hover:text-accent transition-all duration-300"
+          >
+            {isFa ? 'تجربیات' : 'Experience'}
+          </a>
+
+          {/* دکمه سوم: اسکرول به پروژه‌ها */}
+          <a
+            href="#portfolio"
+            className="px-6 py-3 rounded-full text-sm font-medium bg-accent text-background hover:opacity-95 transition-all duration-300 shadow-lg"
+          >
+            {isFa ? 'پروژه‌ها' : 'Projects'}
+          </a>
+        </div>
       </div>
     </section>
   );

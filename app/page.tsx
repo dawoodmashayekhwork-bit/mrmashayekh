@@ -19,16 +19,9 @@ export default function Home() {
     >
       {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
       
-      {/* ارسال وضعیت زبان و تابع تغییر آن به Navbar */}
       <Navbar lang={lang} onToggleLang={() => setLang(prev => prev === 'fa' ? 'en' : 'fa')} />
       
-      {/* بخش هیرو با دکمه‌های لینک‌شده به صفحات Skills، Experience و اسکرول پروژه‌ها */}
-      <HeroSection 
-        lang={lang} 
-        skillsUrl="/page/Skills.html" 
-        experienceUrl="/page/Experience.html" 
-      />
-
+      <HeroSection lang={lang} />
       <PortfolioSection lang={lang} />
       <AboutSection lang={lang} />
       <ContactSection lang={lang} />
