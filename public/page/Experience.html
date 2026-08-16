@@ -3,485 +3,303 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>داود مشایخ — Professional Journey</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>داود مشایخ — Horizontal Gold Journey</title>
 
 <style>
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
-
-html {
-    width: 100%;
-    min-height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
     margin: 0;
-    width: 100%;
-    min-height: 800vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background: #050403;
-    color: #ffffff;
-    font-family: Tahoma, Arial, sans-serif;
+    padding: 0;
 }
 
-/* =========================================================
-    FIXED WORLD
-========================================================= */
-#world {
-    position: fixed;
-    inset: 0;
+html, body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background: #0a0a0c;
+    color: #e5e5e5;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.horizontal-slider {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    align-items: center;
+    padding: 0 calc(50vw - 270px);
+}
+
+.horizontal-slider::-webkit-scrollbar {
+    display: none;
+}
+.horizontal-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.section {
+    flex: 0 0 680px;
+    height: 100vh;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+.bg-ambient-glow {
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(180, 130, 40, 0.04) 0%, transparent 50%),
+        #0a0a0c;
     pointer-events: none;
     z-index: 1;
 }
 
-/* =========================================================
-    GRID & AMBIENT LIGHTING
-========================================================= */
 .bg-grid {
-    position: absolute;
-    inset: -10%;
-    background-image:
-        linear-gradient(rgba(240,185,11, .022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212,160,80, .022) 1px, transparent 1px);
-    background-size: 70px 70px;
-    transform: none !important;
-}
-
-.ambient {
-    position: absolute;
-    inset: 0;
-    background: 
-        radial-gradient(circle at 30% 25%, rgba(245,197,66,.09) 0%, transparent 40%),
-        radial-gradient(circle at 70% 75%, rgba(193,124,31,.07) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(13,11,9,.85) 0%, #030302 100%);
-}
-
-/* =========================================================
-    SCROLL INDICATOR (Fixed to Top-Left)
-========================================================= */
-.scroll-indicator {
     position: fixed;
-    top: 32px;
-    left: 40px;
-    z-index: 50;
-    transition: opacity .5s ease;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    z-index: 2;
     pointer-events: none;
 }
 
-.scroll-indicator span {
-    display: block;
-    padding: 12px 24px;
-    border: 1px solid rgba(245,197,66,.35);
-    border-radius: 50px;
-    background: rgba(14,12,10,.88);
+.experience-card {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 540px;
+    background: rgba(18, 18, 22, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    color: rgba(255,243,210,.9);
-    font-size: .78rem;
-    letter-spacing: 1px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.6);
-    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 50px 35px 35px 35px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    opacity: 0.2;
+    transform: scale(0.85);
+    filter: blur(2px);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* =========================================================
-    SVG PATH, NODES & LABELS (سمت راست)
-========================================================= */
-.path-layer {
-    position: absolute;
-    inset: 0;
-    left: 55%;
-    z-index: 5;
-    pointer-events: none;
-    isolation: isolate;
+.experience-card.active-card {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: blur(0px);
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15), 0 0 30px rgba(0, 0, 0, 0.9);
 }
 
-.path-layer svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-}
-
-.path-base {
-    fill: none;
-    stroke: rgba(245,197,66,.09);
-    stroke-width: 1.4;
-}
-
-.path-progress {
-    fill: none;
-    stroke: url(#pathGradient);
-    stroke-width: 2.6;
-    filter: drop-shadow(0 0 16px rgba(245,197,66,.7));
-}
-
-.path-node {
-    fill: #090807;
-    stroke: rgba(245,197,66,0.6);
-    stroke-width: 2;
-    transition: all 0.4s ease;
-}
-
-.path-node.passed {
-    fill: #f5c542;
-    stroke: #fff3d2;
-}
-
-.node-label-text {
-    position: absolute;
-    transform: translateY(-50%);
-    font-size: 0.75rem;
-    font-family: Tahoma, Arial, sans-serif;
-    color: rgba(255, 255, 255, 0.55);
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: 6;
-    transition: color 0.3s ease, text-shadow 0.3s ease, opacity 0.3s ease;
-    letter-spacing: 0.5px;
-    background: rgba(5,4,3,0.75);
-    padding: 4px 10px;
-    border-radius: 6px;
-    border: 1px solid rgba(245,197,66,0.12);
-}
-
-.node-label-text.active-label {
-    color: #fff3d2;
-    border-color: rgba(245,197,66,0.4);
-    text-shadow: 0 0 12px rgba(245,197,66,0.8);
-    opacity: 1 !important;
-}
-
-/* =========================================================
-    GLOW HEAD
-========================================================= */
-.glow-head {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background:
-        radial-gradient(
-            circle,
-            #ffffff 0%,
-            #fff3d2 22%,
-            #f5c542 48%,
-            rgba(245,197,66,.55) 68%,
-            rgba(245,197,66,0) 100%
-        );
-    box-shadow:
-        0 0 10px rgba(255,255,255,1),
-        0 0 25px rgba(255,243,210,.95),
-        0 0 50px rgba(245,197,66,.9),
-        0 0 90px rgba(193,124,31,.65);
-    transform: translate(-50%, -50%);
-    z-index: 20 !important;
-    pointer-events: none;
-    will-change: left, top, transform;
-    mix-blend-mode: normal;
-    transition: opacity .3s ease, transform .2s ease;
-    isolation: isolate;
-}
-
-/* =========================================================
-    SCENE LABEL
-========================================================= */
-.scene-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 4;
-    text-align: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .5s ease;
-}
-
-.scene-small {
-    margin-bottom: 12px;
-    color: rgba(245,197,66,.95);
+.card-header .sequence {
     font-family: monospace;
-    font-size: .7rem;
-    letter-spacing: 5px;
-}
-
-.scene-large {
-    color: rgba(255,255,255,.025);
-    font-size: clamp(2rem, 5vw, 5rem);
-    font-weight: 700;
-    letter-spacing: -3px;
-}
-
-/* =========================================================
-    EXPERIENCE STAGE & CARDS (سمت چپ)
-========================================================= */
-.experience-stage {
-    position: absolute;
-    inset: 0;
-    z-index: 35;
-    pointer-events: none;
-}
-
-.experience-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 22%;
-    transform: translate(-50%, -50%);
+    font-size: 0.85rem;
+    color: #d4af37;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
-    gap: 20px;
-    opacity: 0;
-    pointer-events: none;
-    will-change: transform, opacity, filter;
-    z-index: 35;
-    transition: border-color .3s ease, box-shadow .3s ease;
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
-.experience-wrapper.active {
-    pointer-events: auto;
+.experience-card h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.experience-card .date {
+    display: block;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 15px;
+}
+
+.experience-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(212, 175, 55, 0.15);
+}
+
+.tag {
+    font-size: 0.72rem;
+    background: rgba(212, 175, 55, 0.08);
+    color: #d4af37;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.card-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    font-size: 0.78rem;
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: rgba(212, 175, 55, 0.05);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.card-btn:hover {
+    background: #d4af37;
+    color: #0a0a0c;
 }
 
 .card-asset-box {
-    width: 96px;
-    height: 96px;
-    background: linear-gradient(135deg, rgba(30,24,18,.96), rgba(12,10,8,.96));
-    border: 1px solid rgba(245,197,66,.4);
-    border-radius: 26px;
+    position: absolute;
+    top: -30px;
+    right: 25px;
+    width: 70px;
+    height: 70px;
+    background: #0d0d10;
+    border: 1.5px solid #d4af37;
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 20px 40px rgba(0,0,0,.75), inset 0 0 15px rgba(245,197,66,.08);
-    flex-shrink: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
     overflow: hidden;
-    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    z-index: 15;
 }
 
-.experience-wrapper.active:hover .card-asset-box {
-    border-color: rgba(255,243,210,.9);
-    transform: scale(1.06);
-    box-shadow: 0 0 30px rgba(245,197,66,.35), 0 20px 40px rgba(0,0,0,.85);
+.card-asset-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.card-asset-box svg {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,.6));
-}
-
-.card-asset-box img.heritage-logo {
-    width: 82px;
-    height: 82px;
-    object-fit: contain;
-    border-radius: 18px;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 2px;
-}
-
-.experience {
-    width: min(380px, 32vw);
-    min-height: 200px;
-    padding: 26px;
-    background: linear-gradient(135deg, rgba(24,20,15,.94), rgba(10,8,7,.92));
-    border: 1px solid rgba(245,197,66,.25);
-    border-radius: 26px;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    box-shadow: 0 40px 100px rgba(0,0,0,.85), inset 0 0 35px rgba(193,124,31,.06);
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.experience-wrapper.active:hover .experience {
-    border-color: rgba(245,197,66,.65);
-    box-shadow: 0 0 55px rgba(245,197,66,.25), 0 40px 100px rgba(0,0,0,.95);
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 8px;
-}
-
-.sequence {
-    display: block;
-    color: #f5c542;
-    font-family: monospace;
-    font-size: .72rem;
-    letter-spacing: 2px;
-}
-
-.experience h2 {
-    margin: 0 0 8px;
-    font-size: 1.15rem;
-    line-height: 1.5;
-    background: linear-gradient(135deg, #ffffff 30%, #fff3d2 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.experience .date {
-    display: block;
-    margin-bottom: 12px;
-    color: #c17c1f;
-    font-size: .78rem;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
-
-.experience p {
-    margin: 0;
-    color: rgba(226,232,240,.78);
-    font-size: .86rem;
-    line-height: 1.8;
-}
-
-/* =========================================================
-    TRANSITION MARKER & END SCENE (سمت چپ)
-========================================================= */
-.transition-marker {
-    position: absolute;
-    bottom: 32px;
-    left: 22%;
-    transform: translateX(-50%);
-    z-index: 30;
-    font-family: monospace;
-    font-size: .65rem;
-    letter-spacing: 4px;
-    color: rgba(255,255,255,.3);
-    pointer-events: none;
+.gold-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #d4af37;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #d4af37;
 }
 
 .end-scene {
-    position: absolute;
-    top: 50%;
-    left: 22%;
-    transform: translate(-50%, -50%) scale(.95);
-    width: min(440px, 38vw);
-    min-height: 320px;
-    padding: 35px;
-    background: linear-gradient(135deg, rgba(24,20,15,.96), rgba(10,8,7,.95));
-    border: 1px solid rgba(245,197,66,.4);
-    border-radius: 30px;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    box-shadow: 0 40px 100px rgba(0,0,0,.9), inset 0 0 40px rgba(245,197,66,.08);
-    z-index: 40;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+    z-index: 10;
+    width: 100%;
+    max-width: 540px;
+    opacity: 0.2;
+    transform: scale(0.85);
+    transition: all 0.5s ease;
 }
 
-.end-scene.show {
+.end-scene.active-card {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    pointer-events: auto;
-}
-
-.end-kicker {
-    color: #f5c542;
-    font-family: monospace;
-    font-size: .7rem;
-    letter-spacing: 4px;
-    margin-bottom: 12px;
+    transform: scale(1.08);
 }
 
 .end-scene h1 {
-    margin: 0 0 15px;
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    line-height: 1.2;
-    letter-spacing: -2px;
-    background: linear-gradient(135deg, #ffffff 0%, #fff3d2 40%, #f5c542 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 30px rgba(245,197,66,.3);
-}
-
-.end-scene p {
-    max-width: 380px;
-    margin: 0 0 25px;
-    color: rgba(226,232,240,.8);
-    font-size: .92rem;
-    line-height: 2;
-    font-weight: 500;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 25px;
 }
 
 .end-actions {
     display: flex;
-    gap: 12px;
-    width: 100%;
     justify-content: center;
 }
 
 .end-button {
-    padding: 12px 24px;
-    border-radius: 50px;
+    padding: 14px 36px;
+    font-size: 0.85rem;
     text-decoration: none;
-    font-size: .85rem;
-    transition: .3s ease;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
 }
 
-.primary {
-    background: linear-gradient(135deg, #fff3d2 0%, #f5c542 50%, #c17c1f 100%);
-    color: #050403;
-    font-weight: bold;
-    box-shadow: 0 0 25px rgba(245,197,66,.4);
+.end-button.primary {
+    background: #d4af37;
+    color: #0a0a0c;
+    border: 1px solid #d4af37;
+    font-weight: 600;
 }
 
-.primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 45px rgba(245,197,66,.7);
+.end-button.primary:hover {
+    background: transparent;
+    color: #d4af37;
 }
 
-.secondary {
-    color: white;
-    border: 1px solid rgba(255,255,255,.2);
+.scroll-hint-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 40px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(18, 18, 22, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-.secondary:hover {
-    background: rgba(255,255,255,.05);
-    border-color: rgba(245,197,66,.5);
-    transform: translateY(-3px);
+.scroll-hint-btn:hover {
+    border-color: #d4af37;
+    color: #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-/* =========================================================
-    MODAL
-========================================================= */
+.scroll-hint-btn .arrow-icon {
+    display: inline-block;
+    animation: bounceLeft 1.5s infinite;
+}
+
+@keyframes bounceLeft {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-6px); }
+}
+
 .modal {
     position: fixed;
     inset: 0;
-    z-index: 100;
+    background: rgba(5, 5, 7, 0.9);
+    backdrop-filter: blur(20px);
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
-    background: rgba(0,0,0,.9);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .4s ease;
+    transition: opacity 0.4s ease;
+    z-index: 100;
 }
 
 .modal.show {
@@ -490,148 +308,70 @@ body {
 }
 
 .modal-box {
-    width: min(540px, 92vw);
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 40px 30px;
-    background: linear-gradient(135deg, rgba(24,20,15,.98), rgba(10,8,7,.98));
-    border: 1px solid rgba(245,197,66,.4);
-    border-radius: 30px;
-    transform: scale(.85);
-    transition: transform .5s cubic-bezier(.16, 1, .3, 1);
-    box-shadow: 0 30px 80px rgba(0,0,0,.95);
-}
-
-.modal.show .modal-box {
-    transform: scale(1);
+    background: #121216;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 40px;
+    width: min(90%, 540px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
 }
 
 .modal-box h2 {
     margin-top: 0;
-    color: #f5c542;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    color: #ffffff;
 }
 
 .modal-box p {
-    color: rgba(255,255,255,.8);
-    line-height: 2;
-    white-space: pre-line;
-    font-size: .92rem;
-}
-
-.modal-link-btn {
-    display: inline-block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.8;
     margin-top: 15px;
-    padding: 10px 20px;
-    background: rgba(245,197,66,.15);
-    border: 1px solid rgba(245,197,66,.5);
-    color: #fff3d2;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: .85rem;
-    transition: .3s ease;
-}
-
-.modal-link-btn:hover {
-    background: rgba(245,197,66,.3);
-    box-shadow: 0 0 20px rgba(245,197,66,.4);
+    white-space: pre-line;
 }
 
 .close-modal {
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    border: 1px solid rgba(255,255,255,.2);
+    margin-top: 25px;
     background: transparent;
-    color: white;
-    border-radius: 50px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 10px 24px;
     cursor: pointer;
-    font-family: Tahoma;
-    font-size: .9rem;
-    transition: .3s ease;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
 }
 
 .close-modal:hover {
-    background: rgba(245,197,66,.12);
-    border-color: rgba(245,197,66,.6);
+    background: #d4af37;
+    color: #0a0a0c;
 }
 
-/* =========================================================
-    MOBILE RESPONSIVE
-========================================================= */
-@media(max-width:900px){
-    .node-label-text {
-        display: none;
+@media (max-width: 768px) {
+    .horizontal-slider {
+        padding: 0 calc(50vw - 160px);
     }
-}
 
-@media(max-width:650px){
-    body {
-        min-height: 600vh;
+    .section {
+        flex: 0 0 360px;
+        padding: 0 20px;
     }
-    .path-layer {
-        left: 0;
-        width: 100%;
+
+    .experience-card {
+        padding: 45px 20px 20px 20px;
     }
-    .experience-wrapper {
-        flex-direction: column;
-        gap: 14px;
-        width: 86vw;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-    }
+
     .card-asset-box {
-        width: 72px;
-        height: 72px;
-        border-radius: 20px;
+        top: -25px;
+        right: 15px;
+        width: 60px;
+        height: 60px;
     }
-    .card-asset-box svg {
-        width: 34px;
-        height: 34px;
-    }
-    .card-asset-box img.heritage-logo {
-        width: 62px;
-        height: 62px;
-    }
-    .experience, .end-scene {
-        width: 100%;
-        min-height: 0;
-        padding: 20px;
-        border-radius: 20px;
-        left: 50% !important;
-    }
-    .end-scene {
-        transform: translate(-50%, -50%) scale(.95);
-    }
-    .experience h2 {
-        font-size: 1.05rem;
-    }
-    .experience p {
-        font-size: .82rem;
-        line-height: 1.7;
-    }
-    .end-actions {
-        flex-direction: column;
-    }
-    .end-button {
-        text-align: center;
-        width: 100%;
-    }
-    .scene-large {
-        font-size: 2.2rem;
-    }
-    .end-scene p {
-        font-size: .85rem;
-        max-width: 100%;
-    }
-    .scroll-indicator {
+
+    .scroll-hint-btn {
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        width: max-content;
-    }
-    .scroll-indicator span {
-        padding: 10px 18px;
-        font-size: .7rem;
+        font-size: 0.75rem;
+        padding: 8px 16px;
     }
 }
 </style>
@@ -639,365 +379,283 @@ body {
 
 <body>
 
-<div id="world">
-    <div class="bg-grid" id="grid"></div>
-    <div class="ambient"></div>
+<div class="bg-ambient-glow"></div>
+<div class="bg-grid"></div>
 
-    <!-- SCROLL INDICATOR -->
-    <div class="scroll-indicator" id="scrollIndicator">
-        <span>برای مشاهده هر تجربه اسکرول کنید ↓</span>
-    </div>
+<div class="scroll-hint-btn" onclick="nextSlide()">
+    <span>برای مشاهده تجارب اسکرول کنید</span>
+    <span class="arrow-icon">←</span>
+</div>
 
-    <!-- SVG PATH, NODES & GLOW HEAD -->
-    <div class="path-layer">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="50%" stop-color="#fff3d2"/>
-                    <stop offset="100%" stop-color="#f5c542"/>
-                </linearGradient>
-            </defs>
+<main class="horizontal-slider" id="slider">
 
-            <path class="path-base" d="M50 0 C30 10 70 20 50 30 C30 40 70 50 50 60 C30 70 70 80 50 90 C30 95 60 98 50 100"/>
-            <path id="progressPath" class="path-progress" d="M50 0 C30 10 70 20 50 30 C30 40 70 50 50 60 C30 70 70 80 50 90 C30 95 60 98 50 100"/>
-
-            <circle class="path-node" id="node-0" cx="50" cy="5" r="1.5" />
-            <circle class="path-node" id="node-1" cx="41.2" cy="16.5" r="1.5" />
-            <circle class="path-node" id="node-2" cx="61.5" cy="27.5" r="1.5" />
-            <circle class="path-node" id="node-3" cx="39.2" cy="38.5" r="1.5" />
-            <circle class="path-node" id="node-4" cx="62.5" cy="49.5" r="1.5" />
-            <circle class="path-node" id="node-5" cx="39.2" cy="60.5" r="1.5" />
-            <circle class="path-node" id="node-6" cx="61.5" cy="71.5" r="1.5" />
-            <circle class="path-node" id="node-7" cx="41.2" cy="82.5" r="1.5" />
-            <circle class="path-node" id="node-8" cx="53.5" cy="92.5" r="1.5" />
-        </svg>
-
-        <div class="node-label-text" id="label-0" style="top: 5%; right: 55%;">همکار پژوهشی میراث</div>
-        <div class="node-label-text" id="label-1" style="top: 16.5%; left: 55%;">مدرس دوره‌های تخصصی فرادرس</div>
-        <div class="node-label-text" id="label-2" style="top: 27.5%; right: 55%;">طراح فضاهای درمانی HOZ</div>
-        <div class="node-label-text" id="label-3" style="top: 38.5%; left: 55%;">تولیدکننده محتوا و مدرس یوتیوب</div>
-        <div class="node-label-text" id="label-4" style="top: 49.5%; right: 55%;">کمک استاد کارگاه بیمارستان ۳</div>
-        <div class="node-label-text" id="label-5" style="top: 60.5%; left: 55%;">مدرس کارگاه‌های پرزانته کارکنان</div>
-        <div class="node-label-text" id="label-6" style="top: 71.5%; right: 55%;">مدرس موشن گرافیک iust_plus</div>
-        <div class="node-label-text" id="label-7" style="top: 82.5%; left: 55%;">کارآموز مدیریت پروژه</div>
-        <div class="node-label-text" id="label-8" style="top: 92.5%; right: 55%;">عضو هیئت تحریریه رادیو زریر</div>
-
-        <!-- GLOW HEAD MOVED HERE -->
-        <div class="glow-head" id="glowHead"></div>
-    </div>
-
-    <!-- SCENE LABEL -->
-    <div class="scene-label" id="sceneLabel">
-        <div class="scene-small" id="sceneSmall">TRANSITION 01</div>
-        <div class="scene-large" id="sceneLarge">RECENT YEARS</div>
-    </div>
-
-    <!-- EXPERIENCES -->
-    <div class="experience-stage">
-
-        <!-- 1. همکار پژوهشی میراث -->
-        <div class="experience-wrapper" data-index="0">
-            <div class="card-asset-box" title="وزارت میراث فرهنگی، گردشگری و صنایع دستی ایران">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu3efkXZOhOHOpFLAKBU7UQHV3mmPZyMzQjcNymb0b6g&s=10" alt="وزارت میراث فرهنگی" class="heritage-logo">
+    <!-- ۱۰. میراث فرهنگی -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('همکار پژوهشی', 'وزارت میراث فرهنگی، گردشگری و صنایع دستی ایران\n\nآبان 1404 — تاکنون | تمام وقت • ترکیبی (تهران)\n\nمشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی. مسئول تحلیل‌های فضایی مبتنی بر سیستم اطلاعات جغرافیایی (GIS)، ساختاردهی متاداده‌ها و توسعه سیستم‌های آرشیو دیجیتال جهت تقویت استراتژی‌های حفاظت داده‌محور و مدیریت میراث.')">
+            <div class="card-asset-box">
+                <img src="../images/miras.png" alt="وزارت میراث فرهنگی">
             </div>
-            <article class="experience" onclick="openModal('همکار پژوهشی', 'وزارت میراث فرهنگی، گردشگری و صنایع دستی ایران\n\nآبان 1404 — تاکنون | تمام‌وقت • ترکیبی (تهران)\n\nمشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی. مسئول تحلیل‌های فضایی مبتنی بر سیستم اطلاعات جغرافیایی (GIS)، ساختاردهی متاداده‌ها و توسعه سیستم‌های آرشیو دیجیتال جهت تقویت استراتژی‌های حفاظت داده‌محور و مدیریت میراث.')">
-                <div class="card-header">
-                    <span class="sequence">01 // وزارت میراث فرهنگی</span>
-                </div>
-                <h2>همکار پژوهشی</h2>
-                <span class="date">آبان 1404 — تاکنون</span>
-                <p>مشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی و تحلیل‌های فضایی مبتنی بر GIS.</p>
-            </article>
-        </div>
-
-        <!-- 2. مدرس دوره‌های تخصصی فرادرس -->
-        <div class="experience-wrapper" data-index="1">
-            <div class="card-asset-box" title="فرادرس (FaraDars)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="23 7 16 12 23 17 23 7"/>
-                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-                </svg>
+            <div class="card-header">
+                <span class="sequence">10 // وزارت میراث فرهنگی <span class="gold-dot"></span></span>
             </div>
-            <article class="experience" onclick="openModal('مدرس دوره‌های تخصصی', 'فرادرس (FaraDars)\n\nاسفند 1403 — تاکنون | پاره‌وقت • دورکاری\n\nتالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری برای مهندسان و دانشجویان.', 'https://faradars.org/instructors/dawood-mashayekh')">
-                <div class="card-header">
-                    <span class="sequence">02 // فرادرس (FaraDars)</span>
-                </div>
-                <h2>مدرس دوره‌های تخصصی</h2>
-                <span class="date">اسفند 1403 — تاکنون</span>
-                <p>تالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری.</p>
-            </article>
-        </div>
-
-        <!-- 3. طراح فضاهای درمانی -->
-        <div class="experience-wrapper" data-index="2">
-            <div class="card-asset-box" title="مهندسین مشاور HOZ (hozco)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                    <path d="M12 8v8"/>
-                    <path d="M8 12h8"/>
-                </svg>
+            <h2>همکار پژوهشی</h2>
+            <span class="date">آبان 1404 — تاکنون</span>
+            <p>مشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی، تحلیل‌های فضایی (GIS) و توسعه آرشیو دیجیتال.</p>
+            <div class="card-tags">
+                <span class="tag">GIS</span>
+                <span class="tag">میراث دیجیتال</span>
+                <span class="tag">تحلیل فضایی</span>
+                <span class="tag">حفاظت داده‌محور</span>
             </div>
-            <article class="experience" onclick="openModal('طراح فضاهای درمانی (Healthcare Designer)', 'مهندسین مشاور HOZ (hozco)\n\nمهر 1403 — آبان 1404 | تمام‌وقت\n\nطراحی معماری فضاها و مراکز تخصصی درمانی مطابق با استانداردهای روز طراحی بیمارستان، ضوابط فیزیکی و سیرکولاسیون درمانی؛ همچنین تولید محتوای تخصصی، ویدئوهای معرفی پروژه و ارائه‌های بصری با هدف مستندسازی فرایند طراحی، معرفی توانمندی‌های شرکت و ارائه حرفه‌ای پروژه‌ها به کارفرمایان.')">
-                <div class="card-header">
-                    <span class="sequence">03 // مهندسین مشاور HOZ</span>
-                </div>
-                <h2>طراح فضاهای درمانی</h2>
-                <span class="date">مهر 1403 — آبان 1404</span>
-                <p>طراحی معماری فضاها و مراکز تخصصی درمانی مطابق با استانداردهای روز بیمارستان.</p>
-            </article>
-        </div>
+        </article>
+    </section>
 
-        <!-- 4. تولیدکننده محتوا و مدرس معماری -->
-        <div class="experience-wrapper" data-index="3">
-            <div class="card-asset-box" title="کانال شخصی یوتیوب">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#f5c542"/>
-                </svg>
+    <!-- ۹. فرادرس -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('مدرس دوره‌های تخصصی', 'فرادرس (FaraDars)\n\nاسفند 1403 — تاکنون | پاره‌وقت • دورکاری\n\nتالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری برای مهندسان و دانشجویان.\n\nمجموعه جدیدترین دوره‌های آموزش داده‌شده در فرادرس')">
+            <div class="card-asset-box">
+                <img src="../images/faradars.jpg" alt="فرادرس">
             </div>
-            <article class="experience" onclick="openModal('تولیدکننده محتوا و مدرس معماری', 'کانال شخصی یوتیوب\n\nاردیبهشت 1401 — تاکنون | خوداشتغالی • دورکاری\n\nتولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری، پرزانته و تحلیل تاریخ معماری جهان.\n\nجهت مشاهده نمونه ویدیوها می‌توانید از لینک‌های زیر استفاده کنید:', 'https://www.youtube.com/watch?v=q8VHZeBz8q4')">
-                <div class="card-header">
-                    <span class="sequence">04 // کانال شخصی یوتیوب</span>
-                </div>
-                <h2>تولیدکننده محتوا و مدرس یوتیوب</h2>
-                <span class="date">اردیبهشت 1401 — تاکنون</span>
-                <p>تولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری و تحلیل تاریخ معماری.</p>
-            </article>
-        </div>
-
-        <!-- 5. کمک استاد کارگاه طراحی بیمارستان ۳ -->
-        <div class="experience-wrapper" data-index="4">
-            <div class="card-asset-box" title="دانشگاه علم و صنعت ایران">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-                    <path d="M2 2l7.586 7.586"/>
-                    <circle cx="11" cy="11" r="2"/>
-                </svg>
+            <div class="card-header">
+                <span class="sequence">09 // فرادرس (FaraDars) <span class="gold-dot"></span></span>
             </div>
-            <article class="experience" onclick="openModal('کمک استاد کارگاه طراحی بیمارستان ۳', 'دانشگاه علم و صنعت ایران\n\nمهر 1403 — تاکنون | دستیار استاد (TA)\n\nهمکاری با استاد در مدیریت کلاس و بازخورد به دانشجویان و هدایت پروژه‌های تخصصی طراحی فضاهای پیچیده بیمارستانی.')">
-                <div class="card-header">
-                    <span class="sequence">05 // دانشگاه علم و صنعت ایران</span>
-                </div>
-                <h2>کمک استاد کارگاه طراحی بیمارستان ۳</h2>
-                <span class="date">مهر 1403 — تاکنون</span>
-                <p>همکاری با استاد در مدیریت کلاس و هدایت پروژه‌های تخصصی طراحی بیمارستان.</p>
-            </article>
-        </div>
-
-        <!-- 6. مدرس کارگاه‌های آموزش پرزانته برای کارکنان -->
-        <div class="experience-wrapper" data-index="5">
-            <div class="card-asset-box" title="دانشگاه علم و صنعت ایران - دانشکده معماری">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                </svg>
+            <h2>مدرس دوره‌های تخصصی</h2>
+            <span class="date">اسفند 1403 — تاکنون</span>
+            <p>تالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری برای مهندسان و دانشجویان.</p>
+            <a href="https://faradars.org/instructors/dawood-mashayekh" target="_blank" class="card-btn" onclick="event.stopPropagation()">مشاهده دوره‌ها در فرادرس ↗</a>
+            <div class="card-tags">
+                <span class="tag">آموزش آنلاین</span>
+                <span class="tag">هوش مصنوعی در معماری</span>
+                <span class="tag">افترافکت</span>
             </div>
-            <article class="experience" onclick="openModal('مدرس کارگاه‌های پرزانته برای کارکنان', 'دانشگاه علم و صنعت ایران\n\nشهریور 1402 — اردیبهشت 1403 | حضوری • دانشکده معماری\n\nبرگزاری دوره‌ها و کارگاه‌های تخصصی آموزش نرم‌افزارهای گرافیکی (افترافکت و فتوشاپ) جهت ارتقای مهارت‌های ارائه و پرزانته برای کارکنان دانشگاه علم وصنعت.')">
-                <div class="card-header">
-                    <span class="sequence">06 // دانشکده معماری علم و صنعت</span>
-                </div>
-                <h2>مدرس کارگاه‌های پرزانته کارکنان</h2>
-                <span class="date">شهریور 1402 — اردیبهشت 1403</span>
-                <p>برگزاری کارگاه‌های تخصصی افترافکت و فتوشاپ جهت ارتقای مهارت‌های ارائه کارکنان.</p>
-            </article>
-        </div>
+        </article>
+    </section>
 
-        <!-- 7. مدرس موشن گرافیک -->
-        <div class="experience-wrapper" data-index="6">
-            <div class="card-asset-box" title="iust_plus">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                    <line x1="8" y1="21" x2="16" y2="21"/>
-                    <line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
+    <!-- ۸. HOZ -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('طراح فضاهای درمانی (Healthcare Designer)', 'مهندسین مشاور HOZ (hozco)\n\nمهر 1403 — آبان 1404 | تمام‌وقت\n\nطراحی معماری فضاها و مراکز تخصصی درمانی مطابق با استانداردهای روز طراحی بیمارستان، ضوابط فیزیکی و سیرکولاسیون درمانی؛ همچنین تولید محتوای تخصصی، ویدئوهای معرفی پروژه و ارائه‌های بصری جهت مستندسازی فرایند طراحی.')">
+            <div class="card-asset-box">
+                <img src="../images/hoz.jpg" alt="مهندسین مشاور HOZ">
             </div>
-            <article class="experience" onclick="openModal('مدرس موشن گرافیک', 'iust_plus\n\nخرداد 1403 — مهر 1403 | پاره‌وقت • دورکاری\n\nطراحی سرفصل و تدریس دوره جامع موشن گرافیک جهت آموزش مهارت‌های گرافیک متحرک به علاقمندان و دانشجویان.')">
-                <div class="card-header">
-                    <span class="sequence">07 // iust_plus</span>
-                </div>
-                <h2>مدرس موشن گرافیک</h2>
-                <span class="date">خرداد 1403 — مهر 1403</span>
-                <p>طراحی سرفصل و تدریس دوره جامع موشن گرافیک جهت آموزش گرافیک متحرک.</p>
-            </article>
-        </div>
-
-        <!-- 8. کارآموز مدیریت پروژه کارگاه ساختمانی -->
-        <div class="experience-wrapper" data-index="7">
-            <div class="card-asset-box" title="پروژه ساختمانی نوروزی">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 20h20"/>
-                    <path d="M5 20V8h14v12"/>
-                    <path d="M9 12h6"/>
-                    <path d="M9 16h6"/>
-                    <path d="M12 3l7 5H5l7-5z"/>
-                </svg>
+            <div class="card-header">
+                <span class="sequence">08 // مهندسین مشاور HOZ <span class="gold-dot"></span></span>
             </div>
-            <article class="experience" onclick="openModal('کارآموز مدیریت پروژه کارگاه ساختمانی', 'پروژه ساختمانی نوروزی\n\nخرداد 1401 — خرداد 1401 | تمام‌وقت • حضوری (تهران)\n\nکسب تجربه اجرایی در پروژه‌های ساختمانی واقعی، نظارت بر عملیات اجرایی شامل بتن‌ریزی‌سقف‌ها، تیرریزی و اجرای اسکلت سازه.')">
-                <div class="card-header">
-                    <span class="sequence">08 // پروژه ساختمانی نوروزی</span>
-                </div>
-                <h2>کارآموز مدیریت پروژه</h2>
-                <span class="date">خرداد 1400 — خرداد 1401</span>
-                <p>کسب تجربه اجرایی در پروژه‌های ساختمانی واقعی و نظارت بر بتن‌ریزی و اجرای اسکلت.</p>
-            </article>
-        </div>
-
-        <!-- 9. عضو هیئت تحریریه -->
-        <div class="experience-wrapper" data-index="8">
-            <div class="card-asset-box" title="رادیو زریر (Radio Zarir)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 20h9"/>
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                </svg>
+            <h2>طراح فضاهای درمانی</h2>
+            <span class="date">مهر 1403 — آبان 1404</span>
+            <p>طراحی معماری مراکز تخصصی درمانی مطابق استانداردهای بیمارستانی و تولید محتوای تخصصی ارائه‌ها.</p>
+            <div class="card-tags">
+                <span class="tag">AutoCAD</span>
+                <span class="tag">مدیریت پروژه</span>
+                <span class="tag">طراحی بیمارستانی</span>
+                <span class="tag">ارائه پروژه</span>
+                <span class="tag">تولید محتوای تخصصی</span>
+                <span class="tag">Motion Design</span>
             </div>
-            <article class="experience" onclick="openModal('عضو هیئت تحریریه', 'رادیو زریر (Radio Zarir)\n\nخرداد 1399 — خرداد 1400 | پاره‌وقت\n\nمشارکت در نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته (از جمله اپیزود مناره هشتم).')">
-                <div class="card-header">
-                    <span class="sequence">09 // رادیو زریر (Radio Zarir)</span>
-                </div>
-                <h2>عضو هیئت تحریریه</h2>
-                <span class="date">خرداد 1399 — خرداد 1400</span>
-                <p>مشارکت در نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته.</p>
-            </article>
-        </div>
+        </article>
+    </section>
 
-    </div>
+    <!-- ۷. یوتیوب -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('تولیدکننده محتوا و مدرس معماری', 'کانال شخصی یوتیوب\n\nاردیبهشت 1401 — تاکنون | خوداشتغالی • دورکاری\n\nتولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری و تحلیل تاریخ معماری جهان.\n\n• در اتوکد: نصب و کاربردهای YQ ARCH | آموزش کامل پلاگین\n• تاریخ معماری مصر: بررسی مختصری راجع به تاریخ مصر')">
+            <div class="card-asset-box">
+                <img src="../images/youtube.png" alt="یوتیوب">
+            </div>
+            <div class="card-header">
+                <span class="sequence">07 // کانال شخصی یوتیوب <span class="gold-dot"></span></span>
+            </div>
+            <h2>تولیدکننده محتوا و مدرس معماری</h2>
+            <span class="date">اردیبهشت 1401 — تاکنون</span>
+            <p>تولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری و تحلیل تاریخ معماری جهان.</p>
+            <div class="card-tags">
+                <span class="tag">تدریس</span>
+                <span class="tag">Adobe After Effects</span>
+                <span class="tag">تولید محتوا</span>
+            </div>
+        </article>
+    </section>
 
-    <!-- TRANSITION MARKER -->
-    <div class="transition-marker" id="transitionMarker">TRANSITION 01</div>
+    <!-- ۶. دانشگاه علم و صنعت -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('کمک استاد کارگاه طراحی بیمارستان ۳', 'دانشگاه علم و صنعت ایران\n\nمهر 1403 — تاکنون | دستیار استاد (TA)\n\nهمکاری با استاد در مدیریت کلاس و بازخورد به دانشجویان و هدایت پروژه‌های تخصصی طراحی فضاهای پیچیده بیمارستانی.')">
+            <div class="card-asset-box">
+                <img src="../images/iust.png" alt="دانشگاه علم و صنعت ایران">
+            </div>
+            <div class="card-header">
+                <span class="sequence">06 // دانشگاه علم و صنعت ایران <span class="gold-dot"></span></span>
+            </div>
+            <h2>کمک استاد کارگاه طراحی بیمارستان ۳</h2>
+            <span class="date">مهر 1403 — تاکنون</span>
+            <p>همکاری با استاد در مدیریت کلاس، بازخورد به دانشجویان و هدایت پروژه‌های پیچیده بیمارستانی.</p>
+            <div class="card-tags">
+                <span class="tag">دستیار استاد</span>
+                <span class="tag">طراحی بیمارستان</span>
+                <span class="tag">مدیریت آتلیه</span>
+            </div>
+        </article>
+    </section>
 
-    <!-- END SCENE -->
-    <section class="end-scene" id="endScene">
-        <div class="end-kicker">END SCENE // 2026</div>
-        <h1>ادامه دارد.</h1>
-        <p>
-            این مسیر مجموعه‌ای از تجربه‌ها و یادگیری‌هاست. فصل بعدی، جایی است که تجربه به پروژه تبدیل می‌شود.
-        </p>
-        <div class="end-actions">
-            <a href="#portfolio" class="end-button primary">مشاهده پورتفولیو</a>
-            <a href="#about" class="end-button secondary">درباره من</a>
+    <!-- ۵. دانشکده معماری علم و صنعت -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('مدرس کارگاه‌های آموزش پرزانته برای کارکنان', 'دانشگاه علم و صنعت ایران\n\nشهریور 1402 — اردیبهشت 1403 | حضوری • دانشکده معماری\n\nبرگزاری دوره‌ها و کارگاه‌های تخصصی آموزش نرم‌افزارهای گرافیکی (افترافکت و فتوشاپ) جهت ارتقای مهارت‌های ارائه و پرزانته برای کارکنان دانشگاه علم وصنعت.')">
+            <div class="card-asset-box">
+                <img src="../images/iust.png" alt="دانشگاه علم و صنعت ایران">
+            </div>
+            <div class="card-header">
+                <span class="sequence">05 // دانشکده معماری علم و صنعت <span class="gold-dot"></span></span>
+            </div>
+            <h2>مدرس کارگاه‌های آموزش پرزانته</h2>
+            <span class="date">شهریور 1402 — اردیبهشت 1403</span>
+            <p>برگزاری کارگاه‌های تخصصی افترافکت و فتوشاپ جهت ارتقای مهارت‌های ارائه کارکنان.</p>
+            <div class="card-tags">
+                <span class="tag">پرزانته معماری</span>
+                <span class="tag">After Effects</span>
+                <span class="tag">Photoshop</span>
+            </div>
+        </article>
+    </section>
+
+    <!-- ۴. iust_plus -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('مدرس موشن گرافیک', 'iust_plus\n\nخرداد 1403 — مهر 1403 | پاره‌وقت • دورکاری\n\nطراحی سرفصل و تدریس «دوره جامع موشن گرافیک» جهت آموزش مهارت‌های گرافیک متحرک به علاقمندان و دانشجویان.')">
+            <div class="card-asset-box">
+                <img src="../images/iust_plus.png" alt="iust_plus">
+            </div>
+            <div class="card-header">
+                <span class="sequence">04 // iust_plus <span class="gold-dot"></span></span>
+            </div>
+            <h2>مدرس موشن گرافیک</h2>
+            <span class="date">خرداد 1403 — مهر 1403</span>
+            <p>طراحی سرفصل و تدریس دوره جامع موشن گرافیک جهت آموزش مهارت‌های گرافیک متحرک.</p>
+            <div class="card-tags">
+                <span class="tag">موشن گرافیک</span>
+                <span class="tag">آموزش گام‌به‌گام</span>
+            </div>
+        </article>
+    </section>
+
+    <!-- ۳. ارشد - دانشگاه علم و صنعت -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('دانشجوی مقطع ارشد رشته طراحی درمانی', 'دانشگاه علم و صنعت ایران\n\nشهریور 1401 — مهر 1403 | حضوری • تهران\n\nتحصیل در مقطع کارشناسی ارشد معماری با تمرکز بر پژوهش‌های علمی، تحلیل فضایی و استانداردهای طراحی محیط‌های درمانی و سلامت.')">
+            <div class="card-asset-box">
+                <img src="../images/iust.png" alt="دانشگاه علم و صنعت ایران">
+            </div>
+            <div class="card-header">
+                <span class="sequence">03 // دانشگاه علم و صنعت ایران <span class="gold-dot"></span></span>
+            </div>
+            <h2>دانشجوی ارشد طراحی درمانی</h2>
+            <span class="date">شهریور 1401 — مهر 1403</span>
+            <p>تحصیل ارشد معماری با تمرکز بر پژوهش‌های علمی و استانداردهای طراحی محیط‌های درمانی.</p>
+            <div class="card-tags">
+                <span class="tag">طراحی درمانی</span>
+                <span class="tag">معماری و سلامت</span>
+                <span class="tag">پژوهش علمی</span>
+            </div>
+        </article>
+    </section>
+
+    <!-- ۲. پروژه ساختمانی -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('کارآموز مدیریت پروژه کارگاه ساختمانی', 'پروژه ساختمانی نوروزی\n\nخرداد 1400 — خرداد 1401 | تمام‌وقت • حضوری (تهران)\n\nکسب تجربه اجرایی در پروژه‌های ساختمانی واقعی، نظارت بر عملیات اجرایی شامل بتن‌ریزی‌سقف‌ها، تیرریزی و اجرای اسکلت سازه.')">
+            <div class="card-asset-box">
+                <img src="../images/1.png" alt="پروژه ساختمانی نوروزی">
+            </div>
+            <div class="card-header">
+                <span class="sequence">02 // پروژه ساختمانی نوروزی <span class="gold-dot"></span></span>
+            </div>
+            <h2>کارآموز مدیریت پروژه کارگاه ساختمانی</h2>
+            <span class="date">خرداد 1400 — خرداد 1401</span>
+            <p>تجربه اجرایی در پروژه‌های واقعی، نظارت بر بتن‌ریزی سقف‌ها، تیرریزی و اجرای اسکلت سازه.</p>
+            <div class="card-tags">
+                <span class="tag">مدیریت پروژه</span>
+                <span class="tag">بتن‌ریزی</span>
+                <span class="tag">اجرای سازه</span>
+                <span class="tag">ساختمان بتنی</span>
+            </div>
+        </article>
+    </section>
+
+    <!-- ۱. رادیو زریر -->
+    <section class="section">
+        <article class="experience-card" onclick="openModal('عضو هیئت تحریریه', 'رادیو زریر (Radio Zarir)\n\nخرداد 1399 — خرداد 1400 | پاره‌وقت\n\nمشارکت در نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته (از جمله اپیزود منارۀ هشتم).')">
+            <div class="card-asset-box">
+                <img src="../images/zarir.jpg" alt="رادیو زریر">
+            </div>
+            <div class="card-header">
+                <span class="sequence">01 // رادیو زریر (Radio Zarir) <span class="gold-dot"></span></span>
+            </div>
+            <h2>عضو هیئت تحریریه</h2>
+            <span class="date">خرداد 1399 — خرداد 1400</span>
+            <p>نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته (اپیزود منارۀ هشتم).</p>
+            <div class="card-tags">
+                <span class="tag">تولید محتوا</span>
+                <span class="tag">پادکست معماری</span>
+            </div>
+        </article>
+    </section>
+
+    <!-- اسلاید پایانی -->
+    <section class="section">
+        <div class="end-scene">
+            <h1>از تایمی که برای بررسی این صفحه گذاشتید سپاسگذارم<span style="color:#d4af37;">.</span></h1>
+            <div class="end-actions">
+                <a href="https://mrmashayekh.ir" class="end-button primary">صفحه اصلی</a>
+            </div>
         </div>
     </section>
 
-</div>
+</main>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
     <div class="modal-box">
         <h2 id="modalTitle">عنوان</h2>
         <p id="modalText">توضیحات</p>
-        <div id="modalLinkContainer"></div>
         <button class="close-modal" onclick="closeModal()">بازگشت</button>
     </div>
 </div>
 
 <script>
-const experiences = [...document.querySelectorAll('.experience-wrapper')];
-const progressPath = document.getElementById('progressPath');
-const glowHead = document.getElementById('glowHead');
-const scrollIndicator = document.getElementById('scrollIndicator');
-const sceneLabel = document.getElementById('sceneLabel');
-const sceneSmall = document.getElementById('sceneSmall');
-const sceneLarge = document.getElementById('sceneLarge');
-const endScene = document.getElementById('endScene');
-const transitionMarker = document.getElementById('transitionMarker');
+const slider = document.getElementById('slider');
 
-const pathLength = progressPath.getTotalLength();
-progressPath.style.strokeDasharray = pathLength;
-progressPath.style.strokeDashoffset = pathLength;
-
-const nodes = document.querySelectorAll('.path-node');
-const labels = document.querySelectorAll('.node-label-text');
-
-const totalSteps = experiences.length;
-
-function updateScroll() {
-    const scrollTop = window.scrollY;
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = Math.max(0, Math.min(1, scrollTop / maxScroll));
-
-    if (scrollTop > 50) {
-        scrollIndicator.style.opacity = '0';
-    } else {
-        scrollIndicator.style.opacity = '1';
-    }
-
-    const drawLength = pathLength * (1 - progress);
-    progressPath.style.strokeDashoffset = drawLength;
-
-    const point = progressPath.getPointAtLength(progress * pathLength);
-    glowHead.style.left = `${point.x}%`;
-    glowHead.style.top = `${point.y}%`;
-
-    nodes.forEach((node, index) => {
-        const nodeProgress = index / (nodes.length - 1);
-        if (progress >= nodeProgress - 0.03) {
-            node.classList.add('passed');
-            if (labels[index]) labels[index].classList.add('active-label');
-        } else {
-            node.classList.remove('passed');
-            if (labels[index]) labels[index].classList.remove('active-label');
-        }
+window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    slider.scrollBy({
+        left: e.deltaY > 0 ? -680 : 680,
+        behavior: 'smooth'
     });
+}, { passive: false });
 
-    const activeIndex = Math.min(totalSteps - 1, Math.floor(progress * totalSteps));
-    
-    experiences.forEach((exp, index) => {
-        const distance = Math.abs(progress - (index / totalSteps));
-        
-        if (index === activeIndex && distance < 0.15) {
-            const cardProgress = 1 - Math.min(1, distance / 0.15);
-            exp.classList.add('active');
-            exp.style.opacity = cardProgress;
-            exp.style.transform = `translate(-50%, -50%) scale(${0.9 + (cardProgress * 0.1)})`;
-            exp.style.filter = `blur(${(1 - cardProgress) * 10}px)`;
-        } else {
-            exp.classList.remove('active');
-            exp.style.opacity = 0;
-            exp.style.transform = 'translate(-50%, -50%) scale(0.9)';
-            exp.style.filter = 'blur(10px)';
-        }
+function nextSlide() {
+    slider.scrollBy({
+        left: -680,
+        behavior: 'smooth'
     });
-
-    if (progress > 0.88) {
-        const endProgress = (progress - 0.88) / 0.12;
-        endScene.style.opacity = endProgress;
-        endScene.style.transform = `translate(-50%, -50%) scale(${0.95 + (endProgress * 0.05)})`;
-        if (endProgress > 0.5) {
-            endScene.classList.add('show');
-        } else {
-            endScene.classList.remove('show');
-        }
-    } else {
-        endScene.style.opacity = 0;
-        endScene.classList.remove('show');
-    }
 }
 
-window.addEventListener('scroll', updateScroll);
-window.addEventListener('resize', () => {
-    updateScroll();
+const observerOptions = {
+    root: slider,
+    threshold: 0.6
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const card = entry.target.querySelector('.experience-card, .end-scene');
+        if (card) {
+            if (entry.isIntersecting) {
+                card.classList.add('active-card');
+            } else {
+                card.classList.remove('active-card');
+            }
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
 });
 
-updateScroll();
-
-function openModal(title, text, link = '') {
+function openModal(title, text) {
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalText').innerText = text;
-    
-    const linkContainer = document.getElementById('modalLinkContainer');
-    linkContainer.innerHTML = '';
-    
-    if (link) {
-        const a = document.createElement('a');
-        a.href = link;
-        a.target = '_blank';
-        a.className = 'modal-link-btn';
-        a.innerText = 'مشاهده لینک مرتبط';
-        linkContainer.appendChild(a);
-    }
-    
     document.getElementById('modal').classList.add('show');
 }
 
@@ -1005,6 +663,5 @@ function closeModal() {
     document.getElementById('modal').classList.remove('show');
 }
 </script>
-
 </body>
 </html>
