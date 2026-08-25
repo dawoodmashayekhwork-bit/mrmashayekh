@@ -57,6 +57,14 @@ export default function HeroSection({ lang }: HeroSectionProps) {
           </a>
 
           <span className="text-accent/60">/</span>
+             <a
+            href="/page/c.html"
+            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
+          >
+            {isFa ? 'گواهی نامه ها' : 'Certificates'}
+            
+          </a>
+          <span className="text-accent/60">/</span>
 
           <a
             href="#portfolio"
@@ -64,6 +72,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
           >
             {isFa ? 'پروژه‌ها' : 'Projects'}
           </a>
+        
         </div>
 
       </div>
