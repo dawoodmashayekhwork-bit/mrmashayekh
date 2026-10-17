@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import LoadingScreen from "../components/LoadingScreen";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import PortfolioSection from "../components/PortfolioSection";
@@ -17,7 +16,7 @@ export default function Home() {
       className="bg-background text-foreground min-h-screen relative selection:bg-accent selection:text-background"
       dir={lang === 'fa' ? 'rtl' : 'ltr'}
     >
-      {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
+
       
       <Navbar lang={lang} onToggleLang={() => setLang(prev => prev === 'fa' ? 'en' : 'fa')} />
       
