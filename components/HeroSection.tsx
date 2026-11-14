@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from 'react';
-
 interface HeroSectionProps {
   lang: 'fa' | 'en';
 }
 
 export default function HeroSection({ lang }: HeroSectionProps) {
   const isFa = lang === 'fa';
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <section className="relative w-full h-screen flex flex-col justify-between text-left px-6 md:px-16 py-8 bg-ink text-paper overflow-hidden">
@@ -23,62 +20,12 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-black/50" />
       </div>
 
-      {/* ۱. بخش بالای صفحه: برند و منوی همبرگری موبایل */}
+      {/* ۱. بخش بالای صفحه: فقط برند بدون منوی همبرگری */}
       <div className="relative z-30 flex justify-between items-center w-full max-w-7xl mx-auto">
-        {/* نام برند در بالای صفحه برای موبایل */}
         <a href="/" className="text-paper text-sm font-light tracking-widest hover:text-[#F5C542] transition-colors">
           DAWOOD MASHAYEKH
         </a>
-
-        {/* دکمه منوی همبرگری (فقط در موبایل و تبلت) */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-paper focus:outline-none p-2 z-40"
-          aria-label="Toggle menu"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 8h16M4 16h16" />
-            )}
-          </svg>
-        </button>
       </div>
-
-      {/* منوی کشویی موبایل */}
-      {mobileMenuOpen && (
-        <div className="absolute inset-0 z-35 bg-ink/95 backdrop-blur-md flex flex-col justify-center items-center gap-6 text-lg md:hidden animate-fadeIn" dir={isFa ? 'rtl' : 'ltr'}>
-          <a
-            href="/page/Skills.html"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-paper hover:text-[#F5C542] tracking-wider transition-colors"
-          >
-            {isFa ? 'مهارت‌ها' : 'Skills'}
-          </a>
-          <a
-            href="/page/Experience.html"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-paper hover:text-[#F5C542] tracking-wider transition-colors"
-          >
-            {isFa ? 'تجربیات' : 'Experience'}
-          </a>
-          <a
-            href="/page/c.html"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-paper hover:text-[#F5C542] tracking-wider transition-colors"
-          >
-            {isFa ? 'گواهی‌نامه‌ها' : 'Certificates'}
-          </a>
-          <a
-            href="#portfolio"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-paper hover:text-[#F5C542] tracking-wider transition-colors"
-          >
-            {isFa ? 'پروژه‌ها' : 'Projects'}
-          </a>
-        </div>
-      )}
 
       {/* ۲. بخش مرکزی: نام فارسی و تایپوگرافی بزرگ (MASHAYEKH کوچک‌شده برای موبایل) */}
       <div className="relative z-25 max-w-7xl mx-auto w-full my-auto" dir="ltr">
@@ -150,7 +97,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         {/* توضیح کوتاه درباره تخصص */}
         <div className="max-w-md text-xs md:text-sm text-paper/80 font-light leading-relaxed" dir={isFa ? 'rtl' : 'ltr'}>
           {isFa 
-            ? 'معمار و طراح ارتباطات بصری، کاوشگر نحوه شکل‌گیری فضا، نور و اطلاعات در بهبود زیست، یادگیری و درمان — با تمرکز ویژه بر فضاهای درمانی.'
+            ? 'من داود مشایخ هستم؛ دانش‌آموخته معماری، علاقه‌مند به پرزانته، شیفته یادگیری و مشتاق برای تدریس'
             : 'Architect and visual communication designer exploring how space, light and information shape the way people heal, learn and live — with a particular focus on healthcare environments.'}
         </div>
 
