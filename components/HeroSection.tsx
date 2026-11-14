@@ -8,71 +8,93 @@ export default function HeroSection({ lang }: HeroSectionProps) {
   const isFa = lang === 'fa';
 
   return (
-    <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-6 bg-background overflow-hidden">
-      {/* ویدیو پس‌زمینه با تاریکی ملایم و سینمایی */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover filter brightness-[0.4] z-0"
-      >
-        <source src="/videos/hero-bg.mp4" type="video/mp4" />
-      </video>
+    <section className="relative w-full h-screen flex flex-col justify-between text-left px-6 md:px-16 py-12 bg-ink text-paper overflow-hidden">
+      {/* عکس پس‌زمینه با تاریکی ملایم و سینمایی */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/images/hero.jpg"
+          alt="Dawood Mashayekh — Hero Background"
+          className="w-full h-full object-cover filter brightness-[0.4]"
+        />
+        {/* گرادینت تاریک برای خوانایی بهتر متن‌ها */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-black/50" />
+      </div>
 
-      {/* گرادینت تیره ملایم برای خوانایی بهتر */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/40 z-10 pointer-events-none" />
+      {/* ۱. بخش بالای صفحه */}
+      <div className="relative z-20 flex justify-between items-center w-full max-w-7xl mx-auto"></div>
 
-      {/* محتوا بدون کادر و کاملاً هماهنگ با سبک مینیمال */}
-      <div className="relative z-20 max-w-5xl mx-auto flex flex-col items-center" dir={isFa ? 'rtl' : 'ltr'}>
-        
-        {/* ۱. متن زرد بالای صفحه (به روز شده) */}
-        <span className="text-accent text-xs md:text-sm tracking-[0.35em] uppercase block mb-6 font-light opacity-90">
-          {isFa ? 'وبسایت معرفی' : 'Portfolio Website'}
-        </span>
+      {/* ۲. بخش مرکزی: نام فارسی دقیقاً در بالای DAWOOD و هم‌تراز با لبه چپ */}
+      <div className="relative z-25 max-w-7xl mx-auto w-full my-auto" dir="ltr">
+        <div className="flex flex-col items-start">
+          
+          {/* نام فارسی با رنگ طلایی، دقیقاً بالای DAWOOD و هم‌تراز با لبه چپ */}
+          <div className="mb-2">
+            <span
+              className="text-[#F5C542] text-xl sm:text-2xl md:text-3xl tracking-normal font-normal block"
+              dir="rtl"
+            >
+              داود مشایخ
+            </span>
+          </div>
 
-        {/* ۲. نام بزرگ و سفید (بدون دایره زرد) */}
-        <div className="relative mb-10">
-          <h1 className="text-5xl md:text-8xl font-light tracking-tight text-foreground leading-none drop-shadow-lg">
-            {isFa ? 'داود مشایخ' : 'Dawood Mashayekh'}
+          {/* نام انگلیسی (DAWOOD و MASHAYEKH) */}
+          <h1 className="flex flex-col leading-[0.85] tracking-tighter select-none font-light w-full">
+            <span className="text-6xl sm:text-8xl md:text-9xl text-paper font-normal">
+              DAWOOD
+            </span>
+            <span className="text-6xl sm:text-8xl md:text-9xl text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.7)] hover:text-paper transition-colors duration-500">
+              MASHAYEKH
+            </span>
           </h1>
-        </div>
 
-        {/* ۳. گزینه‌ها با خط زیرین (Underline) */}
-        <div className="flex items-center justify-center gap-3 md:gap-4 text-foreground/80 text-sm md:text-base font-light tracking-wider">
+        </div>
+      </div>
+
+      {/* ۳. بخش پایین صفحه: لینک‌های مهارت‌ها، تجربیات، گواهی‌نامه‌ها و پروژه‌ها همراه با توضیحات */}
+      <div className="relative z-20 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-t border-white/10 pt-6">
+        
+        {/* لینک‌های منو با افکت Underline */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs md:text-sm tracking-wider uppercase font-light">
           <a
             href="/page/Skills.html"
-            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
+            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
             {isFa ? 'مهارت‌ها' : 'Skills'}
           </a>
 
-          <span className="text-accent/60">/</span>
+          <span className="text-[#F5C542]/70">•</span>
 
           <a
             href="/page/Experience.html"
-            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
+            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
             {isFa ? 'تجربیات' : 'Experience'}
           </a>
 
-          <span className="text-accent/60">/</span>
-             <a
+          <span className="text-[#F5C542]/70">•</span>
+
+          <a
             href="/page/c.html"
-            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
+            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
-            {isFa ? 'گواهی نامه ها' : 'Certificates'}
-            
+            {isFa ? 'گواهی‌نامه‌ها' : 'Certificates'}
           </a>
-          <span className="text-accent/60">/</span>
+
+          <span className="text-[#F5C542]/70">•</span>
 
           <a
             href="#portfolio"
-            className="hover:text-accent underline underline-offset-8 decoration-foreground/30 hover:decoration-accent transition-all duration-300"
+            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
             {isFa ? 'پروژه‌ها' : 'Projects'}
           </a>
-        
+        </div>
+
+        {/* توضیح کوتاه درباره تخصص */}
+        <div className="max-w-md text-xs md:text-sm text-paper/80 font-light leading-relaxed" dir={isFa ? 'rtl' : 'ltr'}>
+          {isFa 
+            ? 'معمار و طراح ارتباطات بصری، کاوشگر نحوه شکل‌گیری فضا، نور و اطلاعات در بهبود زیست، یادگیری و درمان — با تمرکز ویژه بر فضاهای درمانی.'
+            : 'Architect and visual communication designer exploring how space, light and information shape the way people heal, learn and live — with a particular focus on healthcare environments.'}
         </div>
 
       </div>
