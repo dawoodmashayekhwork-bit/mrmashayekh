@@ -17,7 +17,7 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsOpen(false); // بستن منو پس از کلیک روی لینک در موبایل
+    setIsOpen(false);
   };
 
   return (
@@ -74,16 +74,30 @@ export default function Navbar({ lang, onToggleLang }: NavbarProps) {
         </button>
       </nav>
 
-      {/* نسخه موبایل: آیکون همبرگری در سمت دیگر */}
+      {/* نسخه موبایل: آیکون همبرگری اصلاح‌شده و تبدیل به ضربدر متقارن */}
       <div className="md:hidden flex items-center">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-foreground/90 focus:outline-none p-1 cursor-pointer flex flex-col justify-between w-6 h-5"
+          className="text-foreground/90 focus:outline-none p-2 cursor-pointer relative w-7 h-7 flex items-center justify-center"
           aria-label="Toggle Menu"
         >
-          <span className={`h-[2px] w-full bg-foreground transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`h-[2px] w-full bg-foreground transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
-          <span className={`h-[2px] w-full bg-foreground transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <div className="relative w-5 h-4 flex flex-col justify-between">
+            <span 
+              className={`absolute top-0 left-0 w-full h-[2px] bg-foreground transition-all duration-300 origin-center ${
+                isOpen ? 'rotate-45 translate-y-[7px]' : ''
+              }`} 
+            />
+            <span 
+              className={`absolute top-[7px] left-0 w-full h-[2px] bg-foreground transition-opacity duration-300 ${
+                isOpen ? 'opacity-0' : ''
+              }`} 
+            />
+            <span 
+              className={`absolute bottom-0 left-0 w-full h-[2px] bg-foreground transition-all duration-300 origin-center ${
+                isOpen ? '-rotate-45 -translate-y-[7px]' : ''
+              }`} 
+            />
+          </div>
         </button>
       </div>
 
