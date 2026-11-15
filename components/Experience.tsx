@@ -8,141 +8,206 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface ExperienceItem {
   id: string;
-  sequence: string;
-  title: string;
-  company: string;
-  date: string;
-  description: string;
-  modalDetails: string;
+  sequence: { fa: string; en: string };
+  title: { fa: string; en: string };
+  company: { fa: string; en: string };
+  date: { fa: string; en: string };
+  description: { fa: string; en: string };
+  modalDetails: { fa: string; en: string };
   image: string;
-  tags: string[];
+  tags: { fa: string[]; en: string[] };
   externalLink?: {
-    text: string;
+    text: { fa: string; en: string };
     url: string;
   };
+}
+
+interface ProfessionalJourneyProps {
+  lang: 'fa' | 'en';
 }
 
 const EXPERIENCES: ExperienceItem[] = [
   {
     id: "miras",
-    sequence: "10 // وزارت میراث فرهنگی",
-    title: "همکار پژوهشی",
-    company: "وزارت میراث فرهنگی، گردشگری و صنایع دستی ایران",
-    date: "آبان 1404 — تاکنون",
-    description: "مشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی، تحلیل‌های فضایی (GIS) و توسعه آرشیو دیجیتال.",
-    modalDetails: "وزارت میراث فرهنگی، گردشگری و صنایع دستی ایران\n\nآبان 1404 — تاکنون | تمام وقت • ترکیبی (تهران)\n\nمشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی. مسئول تحلیل‌های فضایی مبتنی بر سیستم اطلاعات جغرافیایی (GIS)، ساختاردهی متاداده‌ها و توسعه سیستم‌های آرشیو دیجیتال جهت تقویت استراتژی‌های حفاظت داده‌محور و مدیریت میراث.",
+    sequence: { fa: "10 // وزارت میراث فرهنگی", en: "10 // Ministry of Cultural Heritage" },
+    title: { fa: "همکار پژوهشی", en: "Research Collaborator" },
+    company: { fa: "وزارت میراث فرهنگی، گردشگری و صنایع دستی ایران", en: "Ministry of Cultural Heritage, Tourism and Handicrafts" },
+    date: { fa: "آبان 1404 — تاکنون", en: "Nov 2025 — Present" },
+    description: { 
+      fa: "مشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی، تحلیل‌های فضایی (GIS) و توسعه آرشیو دیجیتال.", 
+      en: "Participation in spatial organization projects for nationally registered artifacts, GIS spatial analysis, and digital archive development." 
+    },
+    modalDetails: { 
+      fa: "وزارت میراث فرهنگی، گردشگری و صنایع دستی ایران\n\nآبان 1404 — تاکنون | تمام وقت • ترکیبی (تهران)\n\nمشارکت در پروژه ساماندهی مکانی آثار ثبت‌شده ملی. مسئول تحلیل‌های فضایی مبتنی بر سیستم اطلاعات جغرافیایی (GIS)، ساختاردهی متاداده‌ها و توسعه سیستم‌های آرشیو دیجیتال جهت تقویت استراتژی‌های حفاظت داده‌محور و مدیریت میراث.", 
+      en: "Ministry of Cultural Heritage, Tourism and Handicrafts\n\nNov 2025 — Present | Full-time • Hybrid (Tehran)\n\nContributing to spatial organization of registered national heritage, conducting GIS-based spatial analyses, structuring metadata, and developing digital archive systems." 
+    },
     image: "../images/miras.png",
-    tags: ["GIS", "میراث دیجیتال", "تحلیل فضایی", "حفاظت داده‌محور"]
+    tags: { fa: ["GIS", "میراث دیجیتال", "تحلیل فضایی", "حفاظت داده‌محور"], en: ["GIS", "Digital Heritage", "Spatial Analysis", "Data-Driven Preservation"] }
   },
   {
     id: "faradars",
-    sequence: "09 // فرادرس (FaraDars)",
-    title: "مدرس دوره‌های تخصصی",
-    company: "فرادرس (FaraDars)",
-    date: "اسفند 1403 — تاکنون",
-    description: "تالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری برای مهندسان و دانشجویان.",
-    modalDetails: "فرادرس (FaraDars)\n\nاسفند 1403 — تاکنون | پاره‌وقت • دورکاری\n\nتالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری برای مهندسان و دانشجویان.",
+    sequence: { fa: "09 // فرادرس (FaraDars)", en: "09 // FaraDars" },
+    title: { fa: "مدرس دوره‌های تخصصی", en: "Specialized Course Instructor" },
+    company: { fa: "فرادرس (FaraDars)", en: "FaraDars" },
+    date: { fa: "اسفند 1403 — تاکنون", en: "Feb 2025 — Present" },
+    description: { 
+      fa: "تالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری برای مهندسان و دانشجویان.", 
+      en: "Authoring and teaching specialized educational courses on software and artificial intelligence in architecture." 
+    },
+    modalDetails: { 
+      fa: "فرادرس (FaraDars)\n\nاسفند 1403 — تاکنون | پاره‌وقت • دورکاری\n\nتالیف و تدریس دوره‌های آموزشی تخصصی نرم‌افزارها و هوش مصنوعی در معماری برای مهندسان و دانشجویان.", 
+      en: "FaraDars\n\nFeb 2025 — Present | Part-time • Remote\n\nDeveloping and instructing comprehensive courses on architectural software and AI applications." 
+    },
     image: "../images/faradars.jpg",
-    tags: ["آموزش آنلاین", "هوش مصنوعی در معماری", "افترافکت"],
+    tags: { fa: ["آموزش آنلاین", "هوش مصنوعی در معماری", "افترافکت"], en: ["Online Education", "AI in Architecture", "After Effects"] },
     externalLink: {
-      text: "مشاهده دوره‌ها در فرادرس ↗",
+      text: { fa: "مشاهده دوره‌ها در فرادرس ↗", en: "View Courses on FaraDars ↗" },
       url: "https://faradars.org/instructors/dawood-mashayekh"
     }
   },
   {
     id: "hoz",
-    sequence: "08 // مهندسین مشاور HOZ",
-    title: "طراح فضاهای درمانی",
-    company: "مهندسین مشاور HOZ",
-    date: "مهر 1403 — آبان 1404",
-    description: "طراحی معماری مراکز تخصصی درمانی مطابق استانداردهای بیمارستانی و تولید محتوای تخصصی ارائه‌ها.",
-    modalDetails: "مهندسین مشاور HOZ (hozco)\n\nمهر 1403 — آبان 1404 | تمام‌وقت\n\nطراحی معماری فضاها و مراکز تخصصی درمانی مطابق با استانداردهای روز طراحی بیمارستان، ضوابط فیزیکی و سیرکولاسیون درمانی؛ همچنین تولید محتوای تخصصی، ویدئوهای معرفی پروژه و ارائه‌های بصری جهت مستندسازی فرایند طراحی.",
+    sequence: { fa: "08 // مهندسین مشاور HOZ", en: "08 // HOZ Consultants" },
+    title: { fa: "طراح فضاهای درمانی", en: "Healthcare Space Designer" },
+    company: { fa: "مهندسین مشاور HOZ", en: "HOZ Consulting Engineers" },
+    date: { fa: "مهر 1403 — آبان 1404", en: "Oct 2024 — Nov 2025" },
+    description: { 
+      fa: "طراحی معماری مراکز تخصصی درمانی مطابق استانداردهای بیمارستانی و تولید محتوای تخصصی ارائه‌ها.", 
+      en: "Architectural design of specialized healthcare centers complying with hospital standards and presentation content creation." 
+    },
+    modalDetails: { 
+      fa: "مهندسین مشاور HOZ (hozco)\n\nمهر 1403 — آبان 1404 | تمام‌وقت\n\nطراحی معماری فضاها و مراکز تخصصی درمانی مطابق با استانداردهای روز طراحی بیمارستان، ضوابط فیزیکی و سیرکولاسیون درمانی؛ همچنین تولید محتوای تخصصی، ویدئوهای معرفی پروژه و ارائه‌های بصری جهت مستندسازی فرایند طراحی.", 
+      en: "HOZ Consulting Engineers\n\nOct 2024 — Nov 2025 | Full-time\n\nDesigning architecture for specialized medical facilities according to hospital design standards, physical regulations, and therapeutic circulation." 
+    },
     image: "../images/hoz.jpg",
-    tags: ["AutoCAD", "مدیریت پروژه", "طراحی بیمارستانی", "ارائه پروژه", "تولید محتوای تخصصی", "Motion Design"]
+    tags: { fa: ["AutoCAD", "مدیریت پروژه", "طراحی بیمارستانی", "ارائه پروژه", "تولید محتوای تخصصی", "Motion Design"], en: ["AutoCAD", "Project Management", "Hospital Design", "Presentation", "Specialized Content", "Motion Design"] }
   },
   {
     id: "youtube",
-    sequence: "07 // کانال شخصی یوتیوب",
-    title: "تولیدکننده محتوا و مدرس معماری",
-    company: "کانال شخصی یوتیوب",
-    date: "اردیبهشت 1401 — تاکنون",
-    description: "تولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری و تحلیل تاریخ معماری جهان.",
-    modalDetails: "کانال شخصی یوتیوب\n\nاردیبهشت 1401 — تاکنون | خوداشتغالی • دورکاری\n\nتولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری و تحلیل تاریخ معماری جهان.",
+    sequence: { fa: "07 // کانال شخصی یوتیوب", en: "07 // YouTube Channel" },
+    title: { fa: "تولیدکننده محتوا و مدرس معماری", en: "Content Creator & Architecture Educator" },
+    company: { fa: "کانال شخصی یوتیوب", en: "Personal YouTube Channel" },
+    date: { fa: "اردیبهشت 1401 — تاکنون", en: "May 2022 — Present" },
+    description: { 
+      fa: "تولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری و تحلیل تاریخ معماری جهان.", 
+      en: "Producing practical educational videos on specialized architectural plugins and world architectural history analysis." 
+    },
+    modalDetails: { 
+      fa: "کانال شخصی یوتیوب\n\nاردیبهشت 1401 — تاکنون | خوداشتغالی • دورکاری\n\nتولید ویدیوهای آموزشی کاربردی پیرامون افزونه‌های تخصصی معماری و تحلیل تاریخ معماری جهان.", 
+      en: "Personal YouTube Channel\n\nMay 2022 — Present | Self-employed • Remote\n\nCreating tutorials on architectural plugins and visual essays on architectural history." 
+    },
     image: "../images/youtube.png",
-    tags: ["تدریس", "Adobe After Effects", "تولید محتوا"]
+    tags: { fa: ["تدریس", "Adobe After Effects", "تولید محتوا"], en: ["Teaching", "Adobe After Effects", "Content Creation"] }
   },
   {
     id: "iust-ta",
-    sequence: "06 // دانشگاه علم و صنعت ایران",
-    title: "کمک استاد کارگاه طراحی بیمارستان ۳",
-    company: "دانشگاه علم و صنعت ایران",
-    date: "مهر 1403 — تاکنون",
-    description: "همکاری با استاد در مدیریت کلاس، بازخورد به دانشجویان و هدایت پروژه‌های پیچیده بیمارستانی.",
-    modalDetails: "دانشگاه علم و صنعت ایران\n\nمهر 1403 — تاکنون | دستیار استاد (TA)\n\nهمکاری با استاد در مدیریت کلاس و بازخورد به دانشجویان و هدایت پروژه‌های تخصصی طراحی فضاهای پیچیده بیمارستانی.",
+    sequence: { fa: "06 // دانشگاه علم و صنعت ایران", en: "06 // IUST" },
+    title: { fa: "کمک استاد کارگاه طراحی بیمارستان ۳", en: "Teaching Assistant - Hospital Design Studio III" },
+    company: { fa: "دانشگاه علم و صنعت ایران", en: "Iran University of Science and Technology" },
+    date: { fa: "مهر 1403 — تاکنون", en: "Oct 2024 — Present" },
+    description: { 
+      fa: "همکاری با استاد در مدیریت کلاس، بازخورد به دانشجویان و هدایت پروژه‌های پیچیده بیمارستانی.", 
+      en: "Collaborating with professors in class management, student feedback, and guiding complex hospital design projects." 
+    },
+    modalDetails: { 
+      fa: "دانشگاه علم و صنعت ایران\n\nمهر 1403 — تاکنون | دستیار استاد (TA)\n\nهمکاری با استاد در مدیریت کلاس و بازخورد به دانشجویان و هدایت پروژه‌های تخصصی طراحی فضاهای پیچیده بیمارستانی.", 
+      en: "Iran University of Science and Technology\n\nOct 2024 — Present | Teaching Assistant (TA)\n\nAssisting in studio management, giving student critiques, and leading complex healthcare design projects." 
+    },
     image: "../images/iust.png",
-    tags: ["دستیار استاد", "طراحی بیمارستان", "مدیریت آتلیه"]
+    tags: { fa: ["دستیار استاد", "طراحی بیمارستان", "مدیریت آتلیه"], en: ["Teaching Assistant", "Hospital Design", "Studio Management"] }
   },
   {
     id: "iust-workshop",
-    sequence: "05 // دانشکده معماری علم و صنعت",
-    title: "مدرس کارگاه‌های آموزش پرزانته",
-    company: "دانشگاه علم و صنعت ایران",
-    date: "شهریور 1402 — اردیبهشت 1403",
-    description: "برگزاری کارگاه‌های تخصصی افترافکت و فتوشاپ جهت ارتقای مهارت‌های ارائه کارکنان.",
-    modalDetails: "دانشگاه علم و صنعت ایران\n\nشهریور 1402 — اردیبهشت 1403 | حضوری • دانشکده معماری\n\nبرگزاری دوره‌ها و کارگاه‌های تخصصی آموزش نرم‌افزارهای گرافیکی (افترافکت و فتوشاپ) جهت ارتقای مهارت‌های ارائه و پرزانته برای کارکنان دانشگاه علم وصنعت.",
+    sequence: { fa: "05 // دانشکده معماری علم و صنعت", en: "05 // IUST Faculty of Architecture" },
+    title: { fa: "مدرس کارگاه‌های آموزش پرزانته", en: "Presentation Workshop Instructor" },
+    company: { fa: "دانشگاه علم و صنعت ایران", en: "Iran University of Science and Technology" },
+    date: { fa: "شهریور 1402 — اردیبهشت 1403", en: "Sep 2023 — May 2024" },
+    description: { 
+      fa: "برگزاری کارگاه‌های تخصصی افترافکت و فتوشاپ جهت ارتقای مهارت‌های ارائه کارکنان.", 
+      en: "Holding specialized After Effects and Photoshop workshops to enhance staff presentation skills." 
+    },
+    modalDetails: { 
+      fa: "دانشگاه علم و صنعت ایران\n\nشهریور 1402 — اردیبهشت 1403 | حضوری • دانشکده معماری\n\nبرگزاری دوره‌ها و کارگاه‌های تخصصی آموزش نرم‌افزارهای گرافیکی (افترافکت و فتوشاپ) جهت ارتقای مهارت‌های ارائه و پرزانته برای کارکنان دانشگاه علم وصنعت.", 
+      en: "Iran University of Science and Technology\n\nSep 2023 — May 2024 | In-person • Faculty of Architecture\n\nConducting specialized graphic software workshops (After Effects & Photoshop) for university staff." 
+    },
     image: "../images/iust.png",
-    tags: ["پرزانته معماری", "After Effects", "Photoshop"]
+    tags: { fa: ["پرزانته معماری", "After Effects", "Photoshop"], en: ["Architectural Presentation", "After Effects", "Photoshop"] }
   },
   {
     id: "iust-plus",
-    sequence: "04 // iust_plus",
-    title: "مدرس موشن گرافیک",
-    company: "iust_plus",
-    date: "خرداد 1403 — مهر 1403",
-    description: "طراحی سرفصل و تدریس دوره جامع موشن گرافیک جهت آموزش مهارت‌های گرافیک متحرک.",
-    modalDetails: "iust_plus\n\nخرداد 1403 — مهر 1403 | پاره‌وقت • دورکاری\n\nطراحی سرفصل و تدریس «دوره جامع موشن گرافیک» جهت آموزش مهارت‌های گرافیک متحرک به علاقمندان و دانشجویان.",
+    sequence: { fa: "04 // iust_plus", en: "04 // iust_plus" },
+    title: { fa: "مدرس موشن گرافیک", en: "Motion Graphics Instructor" },
+    company: { fa: "iust_plus", en: "iust_plus" },
+    date: { fa: "خرداد 1403 — مهر 1403", en: "Jun 2024 — Oct 2024" },
+    description: { 
+      fa: "طراحی سرفصل و تدریس دوره جامع موشن گرافیک جهت آموزش مهارت‌های گرافیک متحرک.", 
+      en: "Curriculum design and teaching comprehensive motion graphics courses for enthusiasts and students." 
+    },
+    modalDetails: { 
+      fa: "iust_plus\n\nخرداد 1403 — مهر 1403 | پاره‌وقت • دورکاری\n\nطراحی سرفصل و تدریس «دوره جامع موشن گرافیک» جهت آموزش مهارت‌های گرافیک متحرک به علاقمندان و دانشجویان.", 
+      en: "iust_plus\n\nJun 2024 — Oct 2024 | Part-time • Remote\n\nDesigning syllabus and instructing comprehensive motion graphics courses." 
+    },
     image: "../images/iust_plus.png",
-    tags: ["موشن گرافیک", "آموزش گام‌به‌گام"]
+    tags: { fa: ["موشن گرافیک", "آموزش گام‌به‌گام"], en: ["Motion Graphics", "Step-by-Step Training"] }
   },
   {
     id: "masters",
-    sequence: "03 // دانشگاه علم و صنعت ایران",
-    title: "دانشجوی ارشد طراحی درمانی",
-    company: "دانشگاه علم و صنعت ایران",
-    date: "شهریور 1401 — مهر 1403",
-    description: "تحصیل ارشد معماری با تمرکز بر پژوهش‌های علمی و استانداردهای طراحی محیط‌های درمانی.",
-    modalDetails: "دانشگاه علم و صنعت ایران\n\nشهریور 1401 — مهر 1403 | حضوری • تهران\n\nتحصیل در مقطع کارشناسی ارشد معماری با تمرکز بر پژوهش‌های علمی، تحلیل فضایی و استانداردهای طراحی محیط‌های درمانی و سلامت.",
+    sequence: { fa: "03 // دانشگاه علم و صنعت ایران", en: "03 // IUST Master's Degree" },
+    title: { fa: "دانشجوی ارشد طراحی درمانی", en: "Master's Student in Healthcare Design" },
+    company: { fa: "دانشگاه علم و صنعت ایران", en: "Iran University of Science and Technology" },
+    date: { fa: "شهریور 1401 — مهر 1403", en: "Sep 2022 — Oct 2024" },
+    description: { 
+      fa: "تحصیل ارشد معماری با تمرکز بر پژوهش‌های علمی و استانداردهای طراحی محیط‌های درمانی.", 
+      en: "Master's studies in architecture focusing on scientific research and healthcare environment design standards." 
+    },
+    modalDetails: { 
+      fa: "دانشگاه علم و صنعت ایران\n\nشهریور 1401 — مهر 1403 | حضوری • تهران\n\nتحصیل در مقطع کارشناسی ارشد معماری با تمرکز بر پژوهش‌های علمی، تحلیل فضایی و استانداردهای طراحی محیط‌های درمانی و سلامت.", 
+      en: "Iran University of Science and Technology\n\nSep 2022 — Oct 2024 | In-person • Tehran\n\nMaster of Architecture focusing on scientific research, spatial analysis, and healthcare facility standards." 
+    },
     image: "../images/iust.png",
-    tags: ["طراحی درمانی", "معماری و سلامت", "پژوهش علمی"]
+    tags: { fa: ["طراحی درمانی", "معماری و سلامت", "پژوهش علمی"], en: ["Healthcare Design", "Architecture & Health", "Scientific Research"] }
   },
   {
     id: "construction",
-    sequence: "02 // پروژه ساختمانی نوروزی",
-    title: "کارآموز مدیریت پروژه کارگاه ساختمانی",
-    company: "پروژه ساختمانی نوروزی",
-    date: "خرداد 1400 — خرداد 1401",
-    description: "تجربه اجرایی در پروژه‌های واقعی، نظارت بر بتن‌ریزی سقف‌ها، تیرریزی و اجرای اسکلت سازه.",
-    modalDetails: "پروژه ساختمانی نوروزی\n\nخرداد 1400 — خرداد 1401 | تمام‌وقت • حضوری (تهران)\n\nکسب تجربه اجرایی در پروژه‌های ساختمانی واقعی، نظارت بر عملیات اجرایی شامل بتن‌ریزی‌سقف‌ها، تیرریزی و اجرای اسکلت سازه.",
+    sequence: { fa: "02 // پروژه ساختمانی نوروزی", en: "02 // Nowruzi Construction Project" },
+    title: { fa: "کارآموز مدیریت پروژه کارگاه ساختمانی", en: "Construction Project Management Intern" },
+    company: { fa: "پروژه ساختمانی نوروزی", en: "Nowruzi Construction Project" },
+    date: { fa: "خرداد 1400 — خرداد 1401", en: "Jun 2021 — Jun 2022" },
+    description: { 
+      fa: "تجربه اجرایی در پروژه‌های واقعی، نظارت بر بتن‌ریزی سقف‌ها، تیرریزی و اجرای اسکلت سازه.", 
+      en: "Practical site experience in real construction projects, supervising roof concreting, beam framing, and structural skeleton execution." 
+    },
+    modalDetails: { 
+      fa: "پروژه ساختمانی نوروزی\n\nخرداد 1400 — خرداد 1401 | تمام‌وقت • حضوری (تهران)\n\nکسب تجربه اجرایی در پروژه‌های ساختمانی واقعی، نظارت بر عملیات اجرایی شامل بتن‌ریزی‌سقف‌ها، تیرریزی و اجرای اسکلت سازه.", 
+      en: "Nowruzi Construction Project\n\nJun 2021 — Jun 2022 | Full-time • In-person (Tehran)\n\nGaining field execution experience, supervising concreting operations, framing, and structural skeletal work." 
+    },
     image: "../images/1.png",
-    tags: ["مدیریت پروژه", "بتن‌ریزی", "اجرای سازه", "ساختمان بتنی"]
+    tags: { fa: ["مدیریت پروژه", "بتن‌ریزی", "اجرای سازه", "ساختمان بتنی"], en: ["Project Management", "Concreting", "Structural Execution", "Concrete Building"] }
   },
   {
     id: "zarir",
-    sequence: "01 // رادیو زریر (Radio Zarir)",
-    title: "عضو هیئت تحریریه",
-    company: "رادیو زریر",
-    date: "خرداد 1399 — خرداد 1400",
-    description: "نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته (اپیزود منارۀ هشتم).",
-    modalDetails: "رادیو زریر (Radio Zarir)\n\nخرداد 1399 — خرداد 1400 | پاره‌وقت\n\nمشارکت در نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته (از جمله اپیزود منارۀ هشتم).",
+    sequence: { fa: "01 // رادیو زریر (Radio Zarir)", en: "01 // Radio Zarir" },
+    title: { fa: "عضو هیئت تحریریه", en: "Editorial Board Member" },
+    company: { fa: "رادیو زریر", en: "Radio Zarir" },
+    date: { fa: "خرداد 1399 — خرداد 1400", en: "Jun 2020 — Jun 2021" },
+    description: { 
+      fa: "نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته (اپیزود منارۀ هشتم).", 
+      en: "Writing and producing audio content focused on architectural competitions and analyzing prominent works." 
+    },
+    modalDetails: { 
+      fa: "رادیو زریر (Radio Zarir)\n\nخرداد 1399 — خرداد 1400 | پاره‌وقت\n\nمشارکت در نگارش و تولید محتوای صوتی با محوریت مسابقات معماری و تحلیل آثار برجسته (از جمله اپیزود منارۀ هشتم).", 
+      en: "Radio Zarir\n\nJun 2020 — Jun 2021 | Part-time\n\nContributing to scriptwriting and audio production focusing on architectural competitions and critiques." 
+    },
     image: "../images/zarir.jpg",
-    tags: ["تولید محتوا", "پادکست معماری"]
+    tags: { fa: ["تولید محتوا", "پادکست معماری"], en: ["Content Creation", "Architecture Podcast"] }
   }
 ];
 
-export default function ProfessionalJourney() {
+export default function ProfessionalJourney({ lang }: ProfessionalJourneyProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeModal, setActiveModal] = useState<{ title: string; text: string } | null>(null);
+  const isFa = lang === 'fa';
 
   useEffect(() => {
     cardsRef.current.forEach((card) => {
@@ -165,10 +230,10 @@ export default function ProfessionalJourney() {
     });
 
     ScrollTrigger.refresh();
-  }, []);
+  }, [lang]);
 
   return (
-    <section id="experience" className="relative w-full py-32 px-6 md:px-16 bg-[#0a0a0c] text-[#e5e5e5] font-sans overflow-hidden" dir="rtl">
+    <section id="experience" className="relative w-full py-32 px-6 md:px-16 bg-[#0a0a0c] text-[#e5e5e5] font-sans overflow-hidden" dir={isFa ? 'rtl' : 'ltr'}>
       {/* افکت‌های پس‌زمینه محیطی و شبکه */}
       <div className="absolute inset-0 pointer-events-none z-0" style={{
         background: `
@@ -187,45 +252,56 @@ export default function ProfessionalJourney() {
 
       <div className="relative z-10 max-w-4xl mx-auto">
         {/* تیتر بخش */}
-        <div className="mb-20 text-right">
+        <div className={`mb-20 ${isFa ? 'text-right' : 'text-left'}`}>
           <span className="text-[#d4af37] text-xs tracking-[0.3em] uppercase block mb-3 font-light">
-            مسیر حرفه‌ای
+            {isFa ? 'مسیر حرفه‌ای' : 'Professional Journey'}
           </span>
           <h2 className="text-3xl md:text-5xl font-light tracking-tight text-white">
-            تجربیات و فعالیت‌ها
+            {isFa ? 'تجربیات و فعالیت‌ها' : 'Experience & Activities'}
           </h2>
         </div>
 
-        {/* ساختار خط زمانی (Timeline) عمودی با اسکرول رو به پایین */}
-        <div ref={containerRef} className="relative border-r border-[#d4af37]/20 pr-6 md:pr-10 space-y-16">
+        {/* ساختار خط زمانی (Timeline) عمودی با جابه‌جایی خط سمت راست یا چپ بر اساس زبان */}
+        <div 
+          ref={containerRef} 
+          className={`relative ${
+            isFa 
+              ? 'border-r border-r-[#d4af37]/20 pr-6 md:pr-10' 
+              : 'border-l border-l-[#d4af37]/20 pl-6 md:pl-10'
+          } space-y-16`}
+        >
           {EXPERIENCES.map((item, index) => (
             <div 
               key={item.id} 
               ref={(el) => { cardsRef.current[index] = el; }}
               className="relative group opacity-0"
             >
-              {/* نقطه طلایی روی خط زمان */}
-              <div className="absolute -right-[31px] md:-right-[47px] top-6 w-3.5 h-3.5 bg-[#0a0a0c] border-2 border-[#d4af37] rounded-full shadow-[0_0_10px_#d4af37] group-hover:bg-[#d4af37] transition-colors" />
+              {/* نقطه طلایی روی خط زمان که در حالت انگلیسی به سمت چپ منتقل می‌شود */}
+              <div className={`absolute ${
+                isFa 
+                  ? '-right-[31px] md:-right-[47px]' 
+                  : '-left-[31px] md:-left-[47px]'
+              } top-6 w-3.5 h-3.5 bg-[#0a0a0c] border-2 border-[#d4af37] rounded-full shadow-[0_0_10px_#d4af37] group-hover:bg-[#d4af37] transition-colors`} />
 
               {/* کارت تجربه */}
               <article 
-                onClick={() => setActiveModal({ title: item.title, text: item.modalDetails })}
+                onClick={() => setActiveModal({ title: item.title[lang], text: item.modalDetails[lang] })}
                 className="relative bg-[rgba(18,18,22,0.75)] backdrop-blur-[20px] border border-[rgba(212,175,55,0.15)] p-6 md:p-8 rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer transition-all duration-500 hover:border-[rgba(212,175,55,0.5)] hover:-translate-y-1"
               >
-                {/* لوگو یا آست‌باکس بالا */}
-                <div className="absolute top-6 left-6 w-14 h-14 bg-[#0d0d10] border-[1.5px] border-[#d4af37] flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.7)] rounded-lg overflow-hidden">
-                  <img src={item.image} alt={item.company} className="w-full h-full object-cover" />
+                {/* لوگو یا آست‌باکس بالا که در انگلیسی به سمت راست منتقل می‌شود */}
+                <div className={`absolute top-6 ${isFa ? 'left-6' : 'right-6'} w-14 h-14 bg-[#0d0d10] border-[1.5px] border-[#d4af37] flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.7)] rounded-lg overflow-hidden`}>
+                  <img src={item.image} alt={item.company[lang]} className="w-full h-full object-cover" />
                 </div>
 
-                <div className="mb-3 pl-16 md:pl-20">
+                <div className={`mb-3 ${isFa ? 'pl-16 md:pl-20' : 'pr-16 md:pr-20'}`}>
                   <span className="font-mono text-xs text-[#d4af37] tracking-[2px] uppercase flex items-center gap-2">
-                    {item.sequence}
+                    {item.sequence[lang]}
                   </span>
                 </div>
 
-                <h3 className="m-0 mb-1.5 text-xl md:text-2xl font-normal text-white">{item.title}</h3>
-                <span className="block text-xs text-white/45 mb-4">{item.date}</span>
-                <p className="m-0 text-sm leading-[1.8] text-white/70">{item.description}</p>
+                <h3 className="m-0 mb-1.5 text-xl md:text-2xl font-normal text-white">{item.title[lang]}</h3>
+                <span className="block text-xs text-white/45 mb-4">{item.date[lang]}</span>
+                <p className="m-0 text-sm leading-[1.8] text-white/70">{item.description[lang]}</p>
 
                 {item.externalLink && (
                   <a 
@@ -235,12 +311,12 @@ export default function ProfessionalJourney() {
                     onClick={(e) => e.stopPropagation()} 
                     className="inline-block mt-4 px-4 py-2 text-xs text-[#d4af37] border border-[#d4af37]/40 bg-[#d4af37]/5 rounded transition-all duration-300 hover:bg-[#d4af37] hover:text-[#0a0a0c]"
                   >
-                    {item.externalLink.text}
+                    {item.externalLink.text[lang]}
                   </a>
                 )}
 
                 <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-[rgba(212,175,55,0.15)]">
-                  {item.tags.map((tag, idx) => (
+                  {item.tags[lang].map((tag, idx) => (
                     <span key={idx} className="text-xs bg-[rgba(212,175,55,0.08)] text-[#d4af37] px-3 py-1 rounded border border-[rgba(212,175,55,0.2)]">
                       {tag}
                     </span>
@@ -253,15 +329,15 @@ export default function ProfessionalJourney() {
       </div>
 
       {/* مدال جزئیات */}
-      <div className={`fixed inset-0 bg-[rgba(5,5,7,0.9)] backdrop-blur-[20px] flex items-center justify-center z-[100] transition-opacity duration-400 ${activeModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <div className="bg-[#121216] border border-[rgba(212,175,55,0.3)] p-8 md:p-10 w-[min(90%,540px)] shadow-[0_25px_50px_rgba(0,0,0,0.9)] rounded-xl">
+      <div className={`fixed inset-0 bg-[rgba(5,5,7,0.9)] backdrop-blur-[20px] flex items-center justify-center z-[100] transition-opacity duration-400 ${activeModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} dir={isFa ? 'rtl' : 'ltr'}>
+        <div className={`bg-[#121216] border border-[rgba(212,175,55,0.3)] p-8 md:p-10 w-[min(90%,540px)] shadow-[0_25px_50px_rgba(0,0,0,0.9)] rounded-xl ${isFa ? 'text-right' : 'text-left'}`}>
           <h3 className="mt-0 text-xl text-white font-normal">{activeModal?.title}</h3>
           <p className="text-white/70 text-sm leading-[1.8] mt-4 whitespace-pre-line">{activeModal?.text}</p>
           <button 
             onClick={() => setActiveModal(null)}
             className="mt-6 bg-transparent border border-[#d4af37] text-[#d4af37] px-6 py-2.5 cursor-pointer text-xs transition-all duration-300 hover:bg-[#d4af37] hover:text-[#0a0a0c] rounded"
           >
-            بازگشت
+            {isFa ? 'بازگشت' : 'Close'}
           </button>
         </div>
       </div>

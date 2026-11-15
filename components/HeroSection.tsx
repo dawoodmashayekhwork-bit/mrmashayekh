@@ -62,7 +62,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         >
           {isFa 
             ? 'من داود مشایخ هستم؛ دانش‌آموخته معماری، علاقه‌مند به پرزانته، شیفته یادگیری و مشتاق برای تدریس'
-            : 'Architect and visual communication designer exploring how space, light and information shape the way people heal, learn and live — with a particular focus on healthcare environments.'}
+            : 'Architect and visual communication designer, passionate about architectural representation, continuous learning, and teaching.'}
         </div>
 
         {/* لینک‌های منو برای دسکتاپ */}
