@@ -20,7 +20,7 @@ const PROJECTS = [
       en: "Architectural design of healthcare and wellness spaces grounded in Evidence-Based Design (EBD) principles, optimizing circulation and integrating daylight to enhance patient healing environments."
     },
     posterUrl: "/images/Professional Architecture Projects.png",
-    linkUrl: "/page/Work.html",
+    linkUrl: "/Work", // انطباق دقیق با نام پوشه Work در پوشه app
   },
   {
     id: "academic",
