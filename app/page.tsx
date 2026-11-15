@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import PortfolioSection from "../components/PortfolioSection";
+import Experience from "../components/Experience";
 import AboutSection from "../components/AboutSection";
 import ContactSection from "../components/ContactSection";
 
@@ -22,6 +23,7 @@ export default function Home() {
       
       <HeroSection lang={lang} />
       <PortfolioSection lang={lang} />
+      <Experience lang={lang} />
       <AboutSection lang={lang} />
       <ContactSection lang={lang} />
     </main>

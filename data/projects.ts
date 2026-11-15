@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
       fa: "معماری و طراحی درمانی",
       en: "Healthcare Architecture & Design"
     },
-    year: "۱۴۰۵",
+    year: "1405",
     videoUrl: "/videos/project-1.mp4",
     posterUrl: "/images/1.png",
     description: {

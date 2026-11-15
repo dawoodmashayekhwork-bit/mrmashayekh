@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مهارت‌ها | طراحی الترا های-گرافیک نسخه ۵</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #020617;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      
+      --creative-color: #c084fc;
+      --creative-glow: rgba(192, 132, 252, 0.45);
+      
+      --arch-color: #facc15;
+      --arch-glow: rgba(250, 204, 21, 0.45);
+      
+      --prod-color: #38bdf8;
+      --prod-glow: rgba(56, 189, 248, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(192, 132, 252, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.1) 0%, transparent 60%),
+        radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px;
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: "Vazirmatn", sans-serif;
+      padding: 4rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .skills-page-wrapper {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* Shared Card Base */
+    .base-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 2.5rem 3rem;
+      box-shadow: 
+        0 30px 70px rgba(0, 0, 0, 0.7), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Intro Card Styling */
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--creative-color), var(--arch-color), var(--prod-color), transparent);
+    }
+
+    .intro-text {
+      line-height: 2;
+      color: #cbd5e1;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    /* Info Cards Row (Side by Side) */
+    .info-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Notice Cards Styling (Smaller) */
+    .info-card {
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0;
+      border-radius: 18px;
+    }
+
+    .reload-card {
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.05);
+    }
+
+    .reload-card svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+      animation: spin 12s linear infinite;
+    }
+
+    .hover-hint-card {
+      border-color: rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .hover-hint-card svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .info-card-text {
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(-360deg); }
+    }
+
+    /* Grid Layout */
+    .skills-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .skill-card {
+      padding: 2.2rem;
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.6), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    /* SpotLight Lighting Effect */
+    .skill-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 28px;
+      padding: 2px;
+      background: radial-gradient(500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(255, 255, 255, 0.45), transparent 40%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-card h3 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .card-desc {
+      text-align: justify;
+      line-height: 1.85;
+      font-size: 0.94rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      min-height: 75px;
+    }
+
+    .skill-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .skill-card.creative-card:hover { border-color: rgba(192, 132, 252, 0.4); box-shadow: 0 30px 60px var(--creative-glow); }
+    .skill-card.architecture-card:hover { border-color: rgba(250, 204, 21, 0.4); box-shadow: 0 30px 60px var(--arch-glow); }
+    .skill-card.productivity-card:hover { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 30px 60px var(--prod-glow); }
+
+    /* Assessment Disclaimer Card */
+    .assessment-card {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      padding: 2rem 2.5rem;
+    }
+
+    .assessment-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--creative-color), var(--arch-color), var(--prod-color));
+    }
+
+    .assessment-text {
+      line-height: 2.1;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      font-weight: 300;
+      text-align: justify;
+    }
+
+    .assessment-text p {
+      margin-bottom: 0.8rem;
+    }
+
+    .assessment-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Radar SVG Styles */
+    .skills-radar-wrap {
+      width: 100%;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .skills-radar-wrap svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .skills-radar-wrap svg text {
+      font-family: "Vazirmatn", sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      fill: #94a3b8;
+      transition: fill .3s ease, font-weight .3s ease, filter .3s ease;
+    }
+
+    .radar-fill {
+      transition: all 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center;
+    }
+
+    .radar-dot {
+      cursor: pointer;
+      transition: all .35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .radar-dot:hover, .radar-dot.active {
+      r: 8.5;
+    }
+
+    .radar-label {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .radar-label:hover, .radar-label.active {
+      font-weight: 800;
+      font-size: 13.5px;
+    }
+
+    .skills-radar-wrap.creative {
+      --radar-grid: rgba(255, 255, 255, 0.07);
+      --radar-fill: rgba(192, 132, 252, 0.35);
+      --radar-stroke: #c084fc;
+      --radar-point: #c084fc;
+    }
+
+    .skills-radar-wrap.architecture {
+      --radar-grid: rgba(255, 255, 255, 0.07);
+      --radar-fill: rgba(250, 204, 21, 0.35);
+      --radar-stroke: #facc15;
+      --radar-point: #facc15;
+    }
+
+    .skills-radar-wrap.productivity {
+      --radar-grid: rgba(255, 255, 255, 0.07);
+      --radar-fill: rgba(56, 189, 248, 0.35);
+      --radar-stroke: #38bdf8;
+      --radar-point: #38bdf8;
+    }
+
+    .radar-dot:hover, .radar-dot.active {
+      filter: drop-shadow(0 0 8px var(--radar-stroke));
+    }
+
+    .radar-label:hover, .radar-label.active {
+      fill: var(--radar-stroke);
+    }
+
+    /* Floating Tooltip */
+    .radar-tooltip {
+      position: fixed;
+      padding: 10px 18px;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      color: #fff;
+      font-size: 0.85rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -120%) scale(0.92);
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      text-align: center;
+    }
+
+    .radar-tooltip.show {
+      opacity: 1;
+      transform: translate(-50%, -135%) scale(1);
+    }
+
+    .radar-tooltip .title {
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .radar-tooltip .level {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+    }
+
+    /* Home Button Styling */
+    .home-button-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.9rem 2.2rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      transition: transform 0.3s ease;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      box-shadow: 
+        0 20px 45px rgba(0, 0, 0, 0.7),
+        0 0 25px rgba(56, 189, 248, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .home-btn:hover svg {
+      transform: scale(1.15);
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 2rem 1rem; }
+      .base-card, .intro-card, .assessment-card { padding: 1.8rem; border-radius: 22px; }
+      .skill-card { padding: 1.8rem; border-radius: 22px; }
+    }
+
+    @media (max-width: 640px) {
+      .info-cards-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="skills-page-wrapper">
+
+  <div class="base-card intro-card">
+    <div class="intro-text">
+      <p>
+        در این صفحه، مهارت‌های نرم‌افزاری من در سه دسته‌ی اصلی <strong>Creative</strong> ، <strong>Architecture</strong> و <strong>Productivity</strong> دسته‌بندی شده‌اند. برای نمایش تسلط و توزیع  مهارت‌ها از نمودارهای چندضلعی (Radar Chart) استفاده شده است.
+      </p>
+    </div>
+  </div>
+
+  <div class="info-cards-row">
+    <div class="base-card info-card reload-card">
+      <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+      <div class="info-card-text">
+        اگر نمودارها به درستی ظاهر نشدند، صفحه را یک‌بار بازنشانی (Refresh) کنید.
+      </div>
+    </div>
+
+    <div class="base-card info-card hover-hint-card">
+      <svg viewBox="0 0 24 24"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
+      <div class="info-card-text">
+        برای مشاهده ارزیابی کیفی هر نرم‌افزار، می‌توانید نشانگر موس را روی نقاط نمودار نگه‌دارید.
+      </div>
+    </div>
+  </div>
+
+  <div class="skills-cards-container">
+    
+    <div class="skill-card creative-card">
+      <div>
+        <div class="card-header">
+          <h3>Creative</h3>
+        </div>
+        <p class="card-desc">
+          ابزارهایی برای طراحی، موشن گرافیک، تولید محتوای بصری و روایت ایده‌ها. بخش زیادی از فعالیت حرفه‌ای من در ارائه پروژه‌های معماری بر پایه این مجموعه شکل گرفته است.
+        </p>
+      </div>
+      <div class="skills-radar-wrap creative">
+        <svg id="skillsRadarCreative" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+
+    <div class="skill-card architecture-card">
+      <div>
+        <div class="card-header">
+          <h3>Architecture</h3>
+        </div>
+        <p class="card-desc">
+          نرم‌افزارهای تخصصی معماری جهت طراحی، مدل‌سازی، مستندسازی و بصری‌سازی پروژه‌ها. این مهارت‌ها حاصل تجربه در پروژه‌های واقعی و فضاهای درمانی هستند.
+        </p>
+      </div>
+      <div class="skills-radar-wrap architecture">
+        <svg id="skillsRadar" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+
+    <div class="skill-card productivity-card">
+      <div>
+        <div class="card-header">
+          <h3>Productivity</h3>
+        </div>
+        <p class="card-desc">
+          ابزارهای مدیریت پروژه، پژوهش، تحلیل داده و توسعه دانش شخصی. این بخش بیشتر بیانگر متدولوژی و شیوه کاری من در پیشبرد پروژه‌هاست.
+        </p>
+      </div>
+      <div class="skills-radar-wrap productivity">
+        <svg id="skillsRadarProductivity" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="base-card assessment-card">
+    <div class="assessment-text">
+      <p>
+        درصدهای نمایش داده‌شده، نتیجه‌ی یک <strong>خودارزیابی شخصی</strong> هستند. معیار این ارزیابی، مقایسه‌ی توانایی‌های خود با برجسته‌ترین متخصصان و حرفه‌ای‌های هر حوزه بوده است؛ افرادی که آن‌ها را به‌عنوان استاندارد <strong>۱۰۰٪</strong> در نظر گرفته‌ام. بر همین اساس، تلاش کرده‌ام جایگاه فعلی خود را به‌صورت صادقانه و واقع‌بینانه در بازه‌ی <strong>۰ تا ۱۰۰</strong> مشخص کنم.
+      </p>
+      <p>
+        این نمودارها بیش از آنکه بیانگر یک عدد قطعی باشند، نمایی از تجربه و نقاط قوت من در هر حوزه هستند.
+      </p>
+    </div>
+  </div>
+
+  <div class="home-button-wrapper">
+    <a href="https://mrmashayekh.ir" class="home-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+      <span>صفحه اصلی</span>
+    </a>
+  </div>
+
+  <div id="radarTooltip" class="radar-tooltip">
+    <span class="title"></span>
+    <span class="level"></span>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const tooltip = document.getElementById("radarTooltip");
+      const tooltipTitle = tooltip.querySelector(".title");
+      const tooltipLevel = tooltip.querySelector(".level");
+
+      function getQualitativeLevel(val) {
+        if (val >= 90) return "تسلط کامل و حرفه‌ای";
+        if (val >= 80) return "تسلط بسیار بالا و پیشرفته";
+        if (val >= 70) return "تسلط خوب و کاربردی";
+        if (val >= 50) return "آشنایی متوسط و رو به رشد";
+        return "آشنایی مقدماتی";
+      }
+
+      function createRadarChart(svgId, skills) {
+        const svg = document.getElementById(svgId);
+        if (!svg) return;
+
+        const parentWrap = svg.closest(".skills-radar-wrap");
+        const style = parentWrap ? getComputedStyle(parentWrap) : getComputedStyle(document.body);
+
+        const GRID = style.getPropertyValue("--radar-grid").trim() || "rgba(255,255,255,0.07)";
+        const FILL = style.getPropertyValue("--radar-fill").trim() || "rgba(255,255,255,0.35)";
+        const STROKE = style.getPropertyValue("--radar-stroke").trim() || "#fff";
+        const POINT = style.getPropertyValue("--radar-point").trim() || "#fff";
+
+        const cx = 200;
+        const cy = 190;
+        const maxR = 120;
+        const levels = 4; 
+        const n = skills.length;
+        const angleStep = (Math.PI * 2) / n;
+
+        function pointFor(index, radius) {
+          const angle = -Math.PI / 2 + index * angleStep;
+          return {
+            x: cx + radius * Math.cos(angle),
+            y: cy + radius * Math.sin(angle)
+          };
+        }
+
+        function polygonPath(radius) {
+          let d = "";
+          for (let i = 0; i < n; i++) {
+            const p = pointFor(i, radius);
+            d += (i === 0 ? "M" : "L") + p.x.toFixed(2) + "," + p.y.toFixed(2) + " ";
+          }
+          return d + "Z";
+        }
+
+        let svgContent = "";
+
+        // شبکه پس‌زمینه
+        for (let l = 1; l <= levels; l++) {
+          const r = (maxR / levels) * l;
+          svgContent += `<path d="${polygonPath(r)}" fill="none" stroke="${GRID}" stroke-width="${l === levels ? '1.5' : '0.8'}"/>`;
+        }
+
+        // خطوط شعاعی
+        for (let i = 0; i < n; i++) {
+          const p = pointFor(i, maxR);
+          svgContent += `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="${GRID}" stroke-dasharray="4,4" stroke-width="0.9"/>`;
+        }
+
+        // مسیر اولیه انیمیشن
+        let zeroPath = "";
+        let dataPath = "";
+        skills.forEach((s, i) => {
+          const pZero = pointFor(i, 0);
+          const p = pointFor(i, maxR * s.value / 100);
+          zeroPath += (i === 0 ? "M" : "L") + pZero.x + "," + pZero.y + " ";
+          dataPath += (i === 0 ? "M" : "L") + p.x + "," + p.y + " ";
+        });
+        zeroPath += "Z";
+        dataPath += "Z";
+
+        // ناحیه رنگی خالص چندضلعی
+        svgContent += `<path class="radar-fill" d="${zeroPath}" data-path="${dataPath}" fill="${FILL}" stroke="${STROKE}" stroke-width="2.5"/>`;
+
+        // نقاط (Dots)
+        skills.forEach((s, i) => {
+          const p = pointFor(i, maxR * s.value / 100);
+          svgContent += `<circle class="radar-dot" data-index="${i}" data-label="${s.label}" data-level="${getQualitativeLevel(s.value)}" cx="${cx}" cy="${cy}" data-cx="${p.x}" data-cy="${p.y}" r="5" fill="${POINT}" stroke="#020617" stroke-width="2.5"/>`;
+        });
+
+        // متون نرم‌افزارها (به‌روزرسانی شده جهت فاصله مناسب)
+        skills.forEach((s, i) => {
+          let anchor = "middle";
+          let offsetX = 0;
+          let offsetY = 0;
+
+          const p = pointFor(i, maxR + 18);
+
+          if (p.x > cx + 15) {
+            anchor = "start";
+            offsetX = 8;
+          } else if (p.x < cx - 15) {
+            anchor = "end";
+            offsetX = -8;
+          } else {
+            anchor = "middle";
+            offsetY = p.y < cy ? -6 : 8;
+          }
+
+          svgContent += `<text class="radar-label" data-index="${i}" data-label="${s.label}" data-level="${getQualitativeLevel(s.value)}" x="${(p.x + offsetX).toFixed(2)}" y="${(p.y + offsetY).toFixed(2)}" text-anchor="${anchor}" dominant-baseline="middle">${s.label}</text>`;
+        });
+
+        svg.innerHTML = svgContent;
+
+        const dots = svg.querySelectorAll(".radar-dot");
+        const labels = svg.querySelectorAll(".radar-label");
+
+        const setActive = (elem, active, e) => {
+          const index = elem.dataset.index;
+          const action = active ? 'add' : 'remove';
+          svg.querySelector(`.radar-dot[data-index="${index}"]`)?.classList[action]("active");
+          svg.querySelector(`.radar-label[data-index="${index}"]`)?.classList[action]("active");
+
+          if (active && e) {
+            tooltipTitle.textContent = elem.dataset.label;
+            tooltipLevel.textContent = elem.dataset.level;
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = e.clientY + 'px';
+            tooltip.classList.add("show");
+          } else {
+            tooltip.classList.remove("show");
+          }
+        };
+
+        [...dots, ...labels].forEach(item => {
+          item.addEventListener("mouseenter", (e) => setActive(item, true, e));
+          item.addEventListener("mousemove", (e) => {
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = e.clientY + 'px';
+          });
+          item.addEventListener("mouseleave", () => setActive(item, false));
+        });
+      }
+
+      function animateChart(card) {
+        const fill = card.querySelector(".radar-fill");
+        if (fill && fill.dataset.path) {
+          fill.setAttribute("d", fill.dataset.path);
+        }
+
+        const dots = card.querySelectorAll(".radar-dot");
+        dots.forEach(dot => {
+          dot.setAttribute("cx", dot.dataset.cx);
+          dot.setAttribute("cy", dot.dataset.cy);
+        });
+      }
+
+      // افکت تعقیب نور موس روی لبه‌ها (Spotlight Effect)
+      function initSpotlight() {
+        document.querySelectorAll(".skill-card").forEach(card => {
+          card.addEventListener("mousemove", e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty("--mouse-x", `${x}px`);
+            card.style.setProperty("--mouse-y", `${y}px`);
+          });
+        });
+      }
+
+      function initSkills() {
+        createRadarChart("skillsRadarCreative", [
+          { label: "After Effects", value: 95 },
+          { label: "Photoshop", value: 95 },
+          { label: "InDesign", value: 85 },
+          { label: "Illustrator", value: 70 },
+          { label: "Audition", value: 70 }
+        ]);
+
+        createRadarChart("skillsRadar", [
+          { label: "AutoCAD", value: 85 },
+          { label: "SketchUp", value: 88 },
+          { label: "Lumion", value: 89 },
+          { label: "Revit", value: 60 },
+          { label: "3ds Max", value: 40 },
+          { label: "Corona", value: 60 },
+          { label: "Enscape", value: 85 },
+          { label: "ArcGIS", value: 80 }
+        ]);
+
+        createRadarChart("skillsRadarProductivity", [
+          { label: "Office", value: 90 },
+          { label: "EndNote", value: 90 },
+          { label: "SPSS", value: 80 },
+          { label: "MS Project", value: 70 },
+          { label: "Obsidian", value: 75 },
+          { label: "VS Code", value: 50 }
+        ]);
+
+        initSpotlight();
+
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              animateChart(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll(".skill-card").forEach(card => observer.observe(card));
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSkills);
+      } else {
+        initSkills();
+      }
+    })();
+  </script>
+</div>
+
+</body>
+</html>

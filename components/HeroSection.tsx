@@ -20,14 +20,12 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-black/50" />
       </div>
 
-      {/* ۱. بخش بالای صفحه: فقط برند بدون منوی همبرگری */}
-      <div className="relative z-30 flex justify-between items-center w-full max-w-7xl mx-auto">
-        <a href="/" className="text-paper text-sm font-light tracking-widest hover:text-[#F5C542] transition-colors">
-          DAWOOD MASHAYEKH
-        </a>
+      {/* ۱. بخش بالای صفحه: خالی‌شده از برند بالایی */}
+      <div className="relative z-30 flex justify-between items-center w-full max-w-7xl mx-auto h-6">
+        {/* برند بالا حذف شد */}
       </div>
 
-      {/* ۲. بخش مرکزی: نام فارسی و تایپوگرافی بزرگ (MASHAYEKH کوچک‌شده برای موبایل) */}
+      {/* ۲. بخش مرکزی: نام فارسی و تایپوگرافی بزرگ */}
       <div className="relative z-25 max-w-7xl mx-auto w-full my-auto" dir="ltr">
         <div className="flex flex-col items-start">
           
@@ -41,7 +39,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
             </span>
           </div>
 
-          {/* نام انگلیسی (DAWOOD و MASHAYEKH با اندازه ریسپانسیو شده) */}
+          {/* نام انگلیسی */}
           <h1 className="flex flex-col leading-[0.85] tracking-tighter select-none font-light w-full">
             <span className="text-5xl sm:text-7xl md:text-9xl text-paper font-normal">
               DAWOOD
@@ -54,14 +52,24 @@ export default function HeroSection({ lang }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* ۳. بخش پایین صفحه: لینک‌ها برای دسکتاپ و متن تخصص */}
+      {/* ۳. بخش پایین صفحه: متن تخصص (راست‌چین) و لینک‌های منو */}
       <div className="relative z-20 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-t border-white/10 pt-6">
         
-        {/* لینک‌های منو (فقط در دسکتاپ نمایش داده می‌شوند) */}
+        {/* توضیح کوتاه درباره تخصص */}
+        <div 
+          className={`max-w-md text-xs md:text-sm text-paper/80 font-light leading-relaxed ${isFa ? 'text-right' : 'text-left'}`} 
+          dir={isFa ? 'rtl' : 'ltr'}
+        >
+          {isFa 
+            ? 'من داود مشایخ هستم؛ دانش‌آموخته معماری، علاقه‌مند به پرزانته، شیفته یادگیری و مشتاق برای تدریس'
+            : 'Architect and visual communication designer exploring how space, light and information shape the way people heal, learn and live — with a particular focus on healthcare environments.'}
+        </div>
+
+        {/* لینک‌های منو برای دسکتاپ */}
         <div className="hidden md:flex flex-wrap items-center gap-x-4 gap-y-2 text-xs md:text-sm tracking-wider uppercase font-light">
           <a
             href="/page/Skills.html"
-            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
+            className="text-foreground/85 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
             {isFa ? 'مهارت‌ها' : 'Skills'}
           </a>
@@ -69,8 +77,8 @@ export default function HeroSection({ lang }: HeroSectionProps) {
           <span className="text-[#F5C542]/70">•</span>
 
           <a
-            href="/page/Experience.html"
-            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
+            href="#experience"
+            className="text-foreground/85 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
             {isFa ? 'تجربیات' : 'Experience'}
           </a>
@@ -79,7 +87,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
           <a
             href="/page/c.html"
-            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
+            className="text-foreground/85 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
             {isFa ? 'گواهی‌نامه‌ها' : 'Certificates'}
           </a>
@@ -88,17 +96,10 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
           <a
             href="#portfolio"
-            className="text-foreground/80 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
+            className="text-foreground/85 hover:text-[#F5C542] underline underline-offset-8 decoration-foreground/30 hover:decoration-[#F5C542] transition-all duration-300"
           >
             {isFa ? 'پروژه‌ها' : 'Projects'}
           </a>
-        </div>
-
-        {/* توضیح کوتاه درباره تخصص */}
-        <div className="max-w-md text-xs md:text-sm text-paper/80 font-light leading-relaxed" dir={isFa ? 'rtl' : 'ltr'}>
-          {isFa 
-            ? 'من داود مشایخ هستم؛ دانش‌آموخته معماری، علاقه‌مند به پرزانته، شیفته یادگیری و مشتاق برای تدریس'
-            : 'Architect and visual communication designer exploring how space, light and information shape the way people heal, learn and live — with a particular focus on healthcare environments.'}
         </div>
 
       </div>
