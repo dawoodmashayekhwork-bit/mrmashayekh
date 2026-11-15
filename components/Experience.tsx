@@ -233,19 +233,12 @@ export default function ProfessionalJourney({ lang }: ProfessionalJourneyProps) 
   }, [lang]);
 
   return (
-    <section id="experience" className="relative w-full py-32 px-6 md:px-16 bg-[#0a0a0c] text-[#e5e5e5] font-sans overflow-hidden" dir={isFa ? 'rtl' : 'ltr'}>
-      {/* افکت‌های پس‌زمینه محیطی و شبکه */}
-      <div className="absolute inset-0 pointer-events-none z-0" style={{
-        background: `
-          radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(180, 130, 40, 0.03) 0%, transparent 40%),
-          #0a0a0c
-        `
-      }} />
+    <section id="experience" className="relative w-full py-32 px-6 md:px-16 bg-ink text-paper overflow-hidden" dir={isFa ? 'rtl' : 'ltr'}>
+      {/* خطوط گرید ظریف روی پس‌زمینه اصلی سایت (bg-ink) */}
       <div className="absolute inset-0 pointer-events-none z-[1]" style={{
         backgroundImage: `
-          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
         `,
         backgroundSize: "80px 80px"
       }} />
@@ -253,21 +246,21 @@ export default function ProfessionalJourney({ lang }: ProfessionalJourneyProps) 
       <div className="relative z-10 max-w-4xl mx-auto">
         {/* تیتر بخش */}
         <div className={`mb-20 ${isFa ? 'text-right' : 'text-left'}`}>
-          <span className="text-[#d4af37] text-xs tracking-[0.3em] uppercase block mb-3 font-light">
+          <span className="text-[#F5C542] text-xs tracking-[0.3em] uppercase block mb-3 font-light">
             {isFa ? 'مسیر حرفه‌ای' : 'Professional Journey'}
           </span>
-          <h2 className="text-3xl md:text-5xl font-light tracking-tight text-white">
+          <h2 className="text-3xl md:text-5xl font-light tracking-tight text-paper">
             {isFa ? 'تجربیات و فعالیت‌ها' : 'Experience & Activities'}
           </h2>
         </div>
 
-        {/* ساختار خط زمانی (Timeline) عمودی با جابه‌جایی خط سمت راست یا چپ بر اساس زبان */}
+        {/* خط زمانی عمودی */}
         <div 
           ref={containerRef} 
           className={`relative ${
             isFa 
-              ? 'border-r border-r-[#d4af37]/20 pr-6 md:pr-10' 
-              : 'border-l border-l-[#d4af37]/20 pl-6 md:pl-10'
+              ? 'border-r border-r-[#F5C542]/25 pr-6 md:pr-10' 
+              : 'border-l border-l-[#F5C542]/25 pl-6 md:pl-10'
           } space-y-16`}
         >
           {EXPERIENCES.map((item, index) => (
@@ -276,32 +269,32 @@ export default function ProfessionalJourney({ lang }: ProfessionalJourneyProps) 
               ref={(el) => { cardsRef.current[index] = el; }}
               className="relative group opacity-0"
             >
-              {/* نقطه طلایی روی خط زمان که در حالت انگلیسی به سمت چپ منتقل می‌شود */}
+              {/* نقطه طلایی روی خط زمان */}
               <div className={`absolute ${
                 isFa 
                   ? '-right-[31px] md:-right-[47px]' 
                   : '-left-[31px] md:-left-[47px]'
-              } top-6 w-3.5 h-3.5 bg-[#0a0a0c] border-2 border-[#d4af37] rounded-full shadow-[0_0_10px_#d4af37] group-hover:bg-[#d4af37] transition-colors`} />
+              } top-6 w-3.5 h-3.5 bg-ink border-2 border-[#F5C542] rounded-full shadow-[0_0_10px_#F5C542] group-hover:bg-[#F5C542] transition-colors`} />
 
               {/* کارت تجربه */}
               <article 
                 onClick={() => setActiveModal({ title: item.title[lang], text: item.modalDetails[lang] })}
-                className="relative bg-[rgba(18,18,22,0.75)] backdrop-blur-[20px] border border-[rgba(212,175,55,0.15)] p-6 md:p-8 rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer transition-all duration-500 hover:border-[rgba(212,175,55,0.5)] hover:-translate-y-1"
+                className="relative bg-ink2/80 backdrop-blur-[20px] border border-white/10 p-6 md:p-8 rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer transition-all duration-500 hover:border-[#F5C542]/50 hover:-translate-y-1"
               >
-                {/* لوگو یا آست‌باکس بالا که در انگلیسی به سمت راست منتقل می‌شود */}
-                <div className={`absolute top-6 ${isFa ? 'left-6' : 'right-6'} w-14 h-14 bg-[#0d0d10] border-[1.5px] border-[#d4af37] flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.7)] rounded-lg overflow-hidden`}>
+                {/* لوگو بالای کارت */}
+                <div className={`absolute top-6 ${isFa ? 'left-6' : 'right-6'} w-14 h-14 bg-ink border-[1.5px] border-[#F5C542]/40 flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.7)] rounded-lg overflow-hidden`}>
                   <img src={item.image} alt={item.company[lang]} className="w-full h-full object-cover" />
                 </div>
 
                 <div className={`mb-3 ${isFa ? 'pl-16 md:pl-20' : 'pr-16 md:pr-20'}`}>
-                  <span className="font-mono text-xs text-[#d4af37] tracking-[2px] uppercase flex items-center gap-2">
+                  <span className="font-mono text-xs text-[#F5C542] tracking-[2px] uppercase flex items-center gap-2">
                     {item.sequence[lang]}
                   </span>
                 </div>
 
-                <h3 className="m-0 mb-1.5 text-xl md:text-2xl font-normal text-white">{item.title[lang]}</h3>
-                <span className="block text-xs text-white/45 mb-4">{item.date[lang]}</span>
-                <p className="m-0 text-sm leading-[1.8] text-white/70">{item.description[lang]}</p>
+                <h3 className="m-0 mb-1.5 text-xl md:text-2xl font-normal text-paper">{item.title[lang]}</h3>
+                <span className="block text-xs text-paper/45 mb-4">{item.date[lang]}</span>
+                <p className="m-0 text-sm leading-[1.8] text-paper/70">{item.description[lang]}</p>
 
                 {item.externalLink && (
                   <a 
@@ -309,15 +302,15 @@ export default function ProfessionalJourney({ lang }: ProfessionalJourneyProps) 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={(e) => e.stopPropagation()} 
-                    className="inline-block mt-4 px-4 py-2 text-xs text-[#d4af37] border border-[#d4af37]/40 bg-[#d4af37]/5 rounded transition-all duration-300 hover:bg-[#d4af37] hover:text-[#0a0a0c]"
+                    className="inline-block mt-4 px-4 py-2 text-xs text-[#F5C542] border border-[#F5C542]/40 bg-[#F5C542]/5 rounded transition-all duration-300 hover:bg-[#F5C542] hover:text-ink"
                   >
                     {item.externalLink.text[lang]}
                   </a>
                 )}
 
-                <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-[rgba(212,175,55,0.15)]">
+                <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-white/10">
                   {item.tags[lang].map((tag, idx) => (
-                    <span key={idx} className="text-xs bg-[rgba(212,175,55,0.08)] text-[#d4af37] px-3 py-1 rounded border border-[rgba(212,175,55,0.2)]">
+                    <span key={idx} className="text-xs bg-[#F5C542]/10 text-[#F5C542] px-3 py-1 rounded border border-[#F5C542]/20">
                       {tag}
                     </span>
                   ))}
@@ -329,13 +322,13 @@ export default function ProfessionalJourney({ lang }: ProfessionalJourneyProps) 
       </div>
 
       {/* مدال جزئیات */}
-      <div className={`fixed inset-0 bg-[rgba(5,5,7,0.9)] backdrop-blur-[20px] flex items-center justify-center z-[100] transition-opacity duration-400 ${activeModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} dir={isFa ? 'rtl' : 'ltr'}>
-        <div className={`bg-[#121216] border border-[rgba(212,175,55,0.3)] p-8 md:p-10 w-[min(90%,540px)] shadow-[0_25px_50px_rgba(0,0,0,0.9)] rounded-xl ${isFa ? 'text-right' : 'text-left'}`}>
-          <h3 className="mt-0 text-xl text-white font-normal">{activeModal?.title}</h3>
-          <p className="text-white/70 text-sm leading-[1.8] mt-4 whitespace-pre-line">{activeModal?.text}</p>
+      <div className={`fixed inset-0 bg-ink/90 backdrop-blur-[20px] flex items-center justify-center z-[100] transition-opacity duration-400 ${activeModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} dir={isFa ? 'rtl' : 'ltr'}>
+        <div className={`bg-ink2 border border-[#F5C542]/30 p-8 md:p-10 w-[min(90%,540px)] shadow-[0_25px_50px_rgba(0,0,0,0.9)] rounded-xl ${isFa ? 'text-right' : 'text-left'}`}>
+          <h3 className="mt-0 text-xl text-paper font-normal">{activeModal?.title}</h3>
+          <p className="text-paper/75 text-sm leading-[1.8] mt-4 whitespace-pre-line">{activeModal?.text}</p>
           <button 
             onClick={() => setActiveModal(null)}
-            className="mt-6 bg-transparent border border-[#d4af37] text-[#d4af37] px-6 py-2.5 cursor-pointer text-xs transition-all duration-300 hover:bg-[#d4af37] hover:text-[#0a0a0c] rounded"
+            className="mt-6 bg-transparent border border-[#F5C542] text-[#F5C542] px-6 py-2.5 cursor-pointer text-xs transition-all duration-300 hover:bg-[#F5C542] hover:text-ink rounded"
           >
             {isFa ? 'بازگشت' : 'Close'}
           </button>
