@@ -16,8 +16,8 @@ const PROFESSIONAL_PROJECTS = [
     videoUrl: "/videos/shariati.mp4",
     posterUrl: "/images/Shariati.png",
     tags: { 
-      fa: ["طراحی بیمارستانی", "معماری مبتنی بر شواهد (EBD)", "نور طبیعی"], 
-      en: ["Hospital Design", "Evidence-Based Design", "Daylight Integration"] 
+      fa: [" تهران", "800 تخت خوابی", "130 هزار متر "], 
+      en: [" Tehran", "800 bed", " 130 000 sqm"] 
     }
   },
   {
@@ -30,8 +30,8 @@ const PROFESSIONAL_PROJECTS = [
     videoUrl: "/videos/Salam.mp4",
     posterUrl: "/images/Salam.png",
     tags: { 
-      fa: ["استانداردهای بیمارستانی", "سیرکولاسیون درمانی"], 
-      en: ["Hospital Standards", "Therapeutic Circulation"] 
+       fa: [" تهران", "200 تخت خوابی", "40 هزار متر "], 
+      en: [" Tehran", "200 bed", " 40 000 sqm"] 
     }
   },
   {
@@ -44,8 +44,8 @@ const PROFESSIONAL_PROJECTS = [
     videoUrl: "/videos/ardakan.mp4",
     posterUrl: "/images/Ardakan.png",
     tags: { 
-      fa: ["بیمارستان عمومی", "طراحی اقلیمی", "راهنمای فیزیکی"], 
-      en: ["General Hospital", "Climate-Responsive Design", "Facility Guidelines"] 
+      fa: [" یزد", "46 هزار متر "], 
+      en: [" Yazd",   " 46 000 sqm"] 
     }
   },
   {
@@ -58,8 +58,8 @@ const PROFESSIONAL_PROJECTS = [
     videoUrl: "/videos/cancer.mp4",
     posterUrl: "/images/Cancer.png",
     tags: { 
-      fa: ["انکولوژی", "استانداردهای بیمارستانی", "سیرکولاسیون درمانی"], 
-      en: ["Oncology", "Hospital Standards", "Therapeutic Circulation"] 
+       fa: [" تهران", "500 تخت خوابی", "5 هزار متر "], 
+      en: [" Tehran", "500 bed", " 5 000 sqm"] 
     }
   },
 ];
@@ -200,16 +200,11 @@ export default function WorkPage() {
       <section className="pt-40 pb-20 px-6 md:px-16 max-w-7xl mx-auto relative z-10">
         <div className={`mb-16 ${isFa ? 'text-right' : 'text-left'}`}>
           <span className="text-[#F5C542] text-xs tracking-[0.3em] uppercase block mb-3 font-light">
-            {isFa ? 'معماری فضاهای درمانی و سلامت' : 'Healthcare & Wellness Architecture'}
+            {isFa ? 'همکاری با دفتر همکاران  عمران زرگون' : 'Cooperation with hoz company'}
           </span>
           <h1 className="text-4xl md:text-6xl font-light tracking-tight text-paper mb-6">
             {isFa ? 'پروژه‌های حرفه‌ای' : 'Professional Projects'}
           </h1>
-          <p className="max-w-2xl text-paper/70 text-sm md:text-base font-light leading-relaxed">
-            {isFa 
-              ? 'مجموعه‌ای از طراحی‌های تخصصی بیمارستانی و مراکز درمانی، توسعه‌یافته بر اساس اصول طراحی مبتنی بر شواهد (EBD) و ضوابط استاندارد فضایی.'
-              : 'A portfolio of specialized healthcare and hospital architectural designs, developed based on Evidence-Based Design (EBD) principles and rigorous spatial standards.'}
-          </p>
         </div>
 
         {/* لیست پروژه‌ها */}

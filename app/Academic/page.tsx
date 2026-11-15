@@ -5,17 +5,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import AboutSection from "@/components/AboutSection";
 
-// لیست پروژه‌ها یا پژوهش‌های آکادمیک شما
+// تعریف ساختار پروژه‌های آکادمیک به همراه ویدئو، تصاویر، نقشه‌ها و لینک‌های اختصاصی
 const ACADEMIC_PROJECTS = [
   {
     id: "hospital-standards",
-    title: { fa: "پژوهش استانداردهای فضایی بیمارستان‌ها", en: "Hospital Spatial Standards Research" },
-    subtitle: { fa: "تحلیل مقایسه‌ای ضوابط طراحی و راهنماهای فیزیکی", en: "Comparative Analysis of Design Guidelines" },
+    title: { fa: "انعطاف پذیر نمودن بخش بستری بیمارستان بوعلی", en: "Making the inpatient section of Bu-Ali Hospital flexible" },
+    subtitle: { fa: "پایان نامه ارشد در رشته طراحی فضاهای درمانی", en: "Comparative Analysis of Design Guidelines" },
     description: {
-      fa: "پژوهش تخصصی پیرامون ارزیابی انطباق فضاهای درمانی با آخرین راهمزای‌های فیزیکی وزارت بهداشت و استانداردهای بین‌المللی با تمرکز بر ارتقای عملکرد بالینی.",
-      en: "Specialized research on evaluating the compliance of healthcare spaces with the latest physical guidelines and international standards focusing on clinical performance enhancement."
+      fa: "پژوهش تخصصی پیرامون ارزیابی انطباق فضاهای درمانی با آخرین راهنماهای فیزیکی وزارت بهداشت و استانداردهای بین‌المللی با تمرکز بر ارتقای عملکرد بالینی و کاهش خطاهای انسانی.",
+      en: "Specialized research on evaluating the compliance of healthcare spaces with the latest physical guidelines and international standards focusing on clinical performance."
     },
-    posterUrl: "/images/Academic Projects.png",
+    coverImage: "/images/Academic Projects.png", 
+    videoUrl: "", 
+    linkUrl: "",
+    drawingsAndImages: [
+      { title: { fa: "پلان استراتژیک طبقه همکف", en: "Ground Floor Strategic Plan" }, url: "/images/Academic Projects.png" },
+      { title: { fa: "دیاگرام سیرکولاسیون و دسترسی‌ها", en: "Circulation & Access Diagram" }, url: "/images/pr.png" }
+    ],
     tags: { 
       fa: ["پژوهش معماری", "استاندارد‌های بیمارستانی", "ضوابط فضایی"], 
       en: ["Architectural Research", "Hospital Standards", "Spatial Regulations"] 
@@ -23,16 +29,42 @@ const ACADEMIC_PROJECTS = [
   },
   {
     id: "representation-courses",
-    title: { fa: "توسعه کورس‌های آموزشی پرزانته", en: "Architectural Representation Courses" },
-    subtitle: { fa: "طراحی و تدوین سرفصل‌های پرزانته و رندرینگ", en: "Curriculum Design for Presentation & Rendering" },
+    title: { fa: "بیمارستانی در رامسر", en: "Ramsar Hospital" },
+    subtitle: { fa: "مطالعه‌ای در حوزه درمانی", en: "A Study in the healthcare design" },
     description: {
       fa: "توسعه دوره‌ها و مطالب آموزشی پیشرفته در زمینه پرزانته معماری، بازنمایی دیجیتال و تبدیل مدل‌های سه‌بعدی به انیمیشن‌های تحلیلی با رویکرد هوش مصنوعی.",
       en: "Development of advanced educational courses in architectural presentation, digital representation, and converting 3D models into analytical AI-driven animations."
     },
-    posterUrl: "/images/pr.png",
+    coverImage: "/images/pr.png",
+    videoUrl: "",
+    linkUrl: "",
+    drawingsAndImages: [
+      { title: { fa: "نمونه شیت‌بندی و پرزانته", en: "Presentation Sheet Sample" }, url: "/images/pr.png" },
+      { title: { fa: "روند مدلسازی و هوش مصنوعی", en: "AI & Modeling Workflow" }, url: "/images/Academic Projects.png" }
+    ],
     tags: { 
       fa: ["آموزش معماری", "پرزانته دیجیتال", "رندرینگ"], 
       en: ["Architectural Education", "Digital Presentation", "Rendering"] 
+    }
+  },
+  {
+    id: "healing-architecture",
+    title: { fa: "تدریس تاریخ معماری", en: "Teaching Architectural History" },
+    subtitle: { fa: "بررسی سیر تطور تعامل انسان با محیط", en: "An Examination of the Evolution of Human Interaction with the Environment" },
+    description: {
+      fa: "آموزش تاریخ معماری پیش از اسلام – بررسی تمدن‌ها و بناهای تاریخی",
+      en: "Instruction in Pre-Islamic Architectural History – An Examination of Civilizations and Historical Monuments"
+    },
+    coverImage: "/images/Academic Projects.png",
+    videoUrl: "",
+    linkUrl: "https://faradars.org/courses/pre-islamic-architecture-history-fvarch401",
+    drawingsAndImages: [
+      { title: { fa: "عنوان دوره", en: "Course Title" }, url: "/images/f2.PNG" },
+      { title: { fa: "کاور دوره", en: "Course Cover" }, url: "/images/History-faradars.PNG" }
+    ],
+    tags: { 
+      fa: ["تاریخ معماری پیش از اسلام", "فرادرس", "بناهای تاریخی"], 
+      en: ["Pre-Islamic Architectural History", "Faradars", "Historical Buildings"] 
     }
   }
 ];
@@ -40,6 +72,8 @@ const ACADEMIC_PROJECTS = [
 export default function AcademicPage() {
   const [lang, setLang] = useState<'fa' | 'en'>('fa');
   const [isOpen, setIsOpen] = useState(false);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  
   const router = useRouter();
 
   useEffect(() => {
@@ -60,6 +94,10 @@ export default function AcademicPage() {
   const navigateToSection = (sectionId: string) => {
     router.push(`/#${sectionId}`);
     setIsOpen(false);
+  };
+
+  const toggleAccordion = (id: string) => {
+    setExpandedId(expandedId === id ? null : id);
   };
 
   return (
@@ -170,8 +208,8 @@ export default function AcademicPage() {
       </motion.header>
 
       {/* هدر صفحه پروژه‌های آکادمیک */}
-      <section className="pt-40 pb-20 px-6 md:px-16 max-w-7xl mx-auto relative z-10">
-        <div className={`mb-16 ${isFa ? 'text-right' : 'text-left'}`}>
+      <section className="pt-40 pb-16 px-6 md:px-16 max-w-5xl mx-auto relative z-10">
+        <div className={`mb-12 ${isFa ? 'text-right' : 'text-left'}`}>
           <span className="text-[#F5C542] text-xs tracking-[0.3em] uppercase block mb-3 font-light">
             {isFa ? 'پژوهش و مطالعات تخصصی' : 'Research & Academic Studies'}
           </span>
@@ -180,55 +218,145 @@ export default function AcademicPage() {
           </h1>
           <p className="max-w-2xl text-paper/70 text-sm md:text-base font-light leading-relaxed">
             {isFa 
-              ? 'پژوهش‌های تخصصی در مقیاس کلان و خرد پیرامون استانداردهای فضایی بیمارستان‌ها، تحلیل‌های موردی، توسعه کورس‌های آموزشی پرزانته و بازخوانی نظریه‌های نوین.'
-              : 'Specialized academic research on hospital spatial standards, case studies, development of architectural representation courses, and modern spatial theories.'}
+              ? 'برای مشاهده جزئیات کامل، تصاویر، ویدیوها و نقشه‌های هر پژوهش، روی عنوان پروژه کلیک کنید.'
+              : 'Click on each project to expand and explore detailed research data, imagery, videos, and architectural drawings.'}
           </p>
         </div>
 
-        {/* لیست پروژه‌ها و مقالات آکادمیک */}
-        <div className="flex flex-col gap-32">
-          {ACADEMIC_PROJECTS.map((project, index) => (
-            <div 
-              key={project.id}
-              className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-16 ${
-                index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              }`}
-            >
-              {/* تصویر یا پوستر پروژه آکادمیک */}
-              <div className="w-full lg:w-7/12 relative aspect-[16/10] overflow-hidden bg-ink2 rounded-sm border border-white/10 shadow-2xl group flex items-center justify-center">
-                <img
-                  src={project.posterUrl}
-                  alt={project.title[lang]}
-                  className="w-full h-full object-cover filter brightness-95 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700"
-                />
-              </div>
-
-              <div className="w-full lg:w-5/12 flex flex-col justify-center">
-                <span className="font-mono text-xs text-[#F5C542] tracking-[2px] uppercase mb-2">
-                  {project.subtitle[lang]}
-                </span>
-                
-                <h2 className={`text-2xl md:text-4xl text-[#F5C542] tracking-wide mb-4 ${isFa ? 'font-medium not-italic' : 'font-serif italic'}`}>
-                  {project.title[lang]}
-                </h2>
-
-                <p className="text-sm text-paper/75 font-light leading-relaxed mb-6">
-                  {project.description[lang]}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tags?.[lang]?.map((tag, idx) => (
-                    <span 
-                      key={idx} 
-                      className="text-xs bg-[#F5C542]/10 text-[#F5C542] px-3 py-1 rounded border border-[#F5C542]/20"
-                    >
-                      {tag}
+        {/* لیست کشویی (Accordion) پروژه‌های آکادمیک */}
+        <div className="flex flex-col gap-6">
+          {ACADEMIC_PROJECTS.map((project, index) => {
+            const isExpanded = expandedId === project.id;
+            return (
+              <div 
+                key={project.id}
+                className="border border-white/10 bg-ink2/50 backdrop-blur-md rounded-sm transition-all overflow-hidden"
+              >
+                {/* هدر آیتم کشویی (قابل کلیک) */}
+                <button
+                  onClick={() => toggleAccordion(project.id)}
+                  className={`w-full p-6 md:p-8 flex justify-between items-center cursor-pointer hover:bg-white/[0.02] transition-colors ${isFa ? 'text-right' : 'text-left'}`}
+                >
+                  <div className="flex flex-col gap-1">
+                    <span className="font-mono text-xs text-[#F5C542] tracking-[2px] uppercase">
+                      0{index + 1} // {project.subtitle[lang]}
                     </span>
-                  ))}
-                </div>
+                    <h2 className={`text-xl md:text-2xl text-paper font-medium tracking-wide ${isFa ? '' : 'font-serif italic'}`}>
+                      {project.title[lang]}
+                    </h2>
+                  </div>
+                  
+                  {/* آیکون فلش باز و بسته شدن */}
+                  <div className={`w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-[#F5C542] transition-transform duration-300 shrink-0 ${isExpanded ? 'rotate-180 bg-[#F5C542]/10' : ''}`}>
+                    ↓
+                  </div>
+                </button>
+
+                {/* محتوای داخلی کشویی (بازشونده) */}
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="border-t border-white/10 px-6 md:px-8 py-8 flex flex-col gap-8 bg-background/40"
+                    >
+                      {/* توضیحات کامل پروژه */}
+                      <p className="text-sm md:text-base text-paper/80 font-light leading-relaxed">
+                        {project.description[lang]}
+                      </p>
+
+                      {/* تگ‌های پروژه */}
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags[lang].map((tag, idx) => (
+                          <span 
+                            key={idx} 
+                            className="text-xs bg-[#F5C542]/10 text-[#F5C542] px-3 py-1 rounded border border-[#F5C542]/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* بخش ویدیو (در صورت وجود) */}
+                      {project.videoUrl && (
+                        <div className="w-full aspect-video rounded-sm overflow-hidden border border-white/10 bg-black">
+                          <video 
+                            src={project.videoUrl} 
+                            controls 
+                            muted 
+                            playsInline
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      )}
+
+                      {/* بخش مدارک و تصاویر تکمیلی */}
+                      <div className="flex flex-col gap-4 mt-4">
+                        <h3 className="text-xs font-mono uppercase tracking-[2px] text-[#F5C542]">
+                          {isFa ? 'مدارک' : 'Documents'}
+                        </h3>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {project.drawingsAndImages.map((img, imgIdx) => (
+                            <div key={imgIdx} className="flex flex-col gap-2 group">
+                              {project.linkUrl ? (
+                                <a
+                                  href={project.linkUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="aspect-[16/10] overflow-hidden rounded-sm border border-white/10 bg-ink block relative cursor-pointer"
+                                >
+                                  <img 
+                                    src={img.url} 
+                                    alt={img.title[lang]} 
+                                    className="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-all duration-500"
+                                  />
+                                  <div className="absolute inset-0 bg-ink/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span className="bg-ink/90 text-[#F5C542] text-xs px-3 py-1.5 rounded border border-[#F5C542]/40 font-mono">
+                                      {isFa ? 'مشاهده  ↗' : 'View  ↗'}
+                                    </span>
+                                  </div>
+                                </a>
+                              ) : (
+                                <div className="aspect-[16/10] overflow-hidden rounded-sm border border-white/10 bg-ink">
+                                  <img 
+                                    src={img.url} 
+                                    alt={img.title[lang]} 
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  />
+                                </div>
+                              )}
+                              <span className="text-xs text-paper/60 font-light">
+                                {img.title[lang]}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* دکمه شیشه‌ای تمام‌عرض که با هاور رنگی می‌شود */}
+                      {project.linkUrl && (
+                        <div className="pt-2 w-full">
+                          <a
+                            href={project.linkUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-4 px-6 bg-white/5 backdrop-blur-md border border-white/15 text-paper font-medium text-xs tracking-[0.2em] uppercase rounded-sm hover:bg-[#F5C542] hover:text-ink hover:border-[#F5C542] transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer shadow-xl"
+                          >
+                            <span>{isFa ? 'مشاهده   ' : 'View Course on Faradars'}</span>
+                            <span>↗</span>
+                          </a>
+                        </div>
+                      )}
+
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
