@@ -30,7 +30,7 @@ const PROJECTS = [
       en: "Specialized academic research on hospital spatial standards, case studies, development of architectural representation courses, and the intersection of architecture and human well-being."
     },
     posterUrl: "/images/Academic Projects.png",
-    linkUrl: "/page/Academic.html",
+    linkUrl: "/Academic",
   },
   {
     id: "personal",

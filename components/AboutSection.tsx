@@ -33,7 +33,7 @@ export default function AboutSection({ lang }: AboutSectionProps) {
           dir={isFa ? 'rtl' : 'ltr'}
         >
           {isFa 
-            ? ' به‌منظور رعایت تعهدات حرفه‌ای و محرمانگی پروژه‌ها، برخی از موشن‌گرافی‌ها و ویدئوها به‌دلیل عدم دریافت مجوز انتشار از کارفرما یا کارفرمایان، در این پلتفرم قابل نمایش نیستند.' 
+            ? ' به‌منظور رعایت تعهدات حرفه‌ای و محرمانگی پروژه‌ها، برخی از مدارک، موشن‌گرافی‌ها و ویدئوها به‌دلیل عدم دریافت مجوز انتشار از کارفرما یا کارفرمایان، در این پلتفرم قابل نمایش نیستند.' 
             : 'To respect professional obligations and project confidentiality, some motion graphics and videos are not available on this platform, as permission for public release has not been granted by the client(s).'}
         </motion.h2>
 
