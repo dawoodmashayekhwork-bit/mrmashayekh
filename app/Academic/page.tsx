@@ -43,7 +43,7 @@ const ACADEMIC_PROJECTS: AcademicProject[] = [
       { title: { fa: "کاور دوره", en: "Course Cover" }, url: "/images/History-faradars.PNG" }
     ],
     tags: { 
-      fa: ["تاریخ معماری پیش از اسلام", "فرادرس", "بناهای تاریخی"], 
+      fa: ["تاریخ معماری پیش از اسلام ایران ", "فرادرس", "بناهای تاریخی"], 
       en: ["Pre-Islamic Architectural History", "Faradars", "Historical Buildings"] 
     }
   },
@@ -250,7 +250,7 @@ export default function AcademicPage() {
             {isFa ? 'پژوهش و مطالعات تخصصی' : 'Research & Academic Studies'}
           </span>
           <h1 className="text-4xl md:text-6xl font-light tracking-tight text-paper mb-6">
-            {isFa ? 'پروژه‌های آکادمیک' : 'Academic Projects'}
+            {isFa ? 'پروژه‌های  آکادمیک' : 'Academic Projects'}
           </h1>
           <p className="max-w-2xl text-paper/70 text-sm md:text-base font-light leading-relaxed">
             {isFa 
