@@ -64,7 +64,7 @@ const PERSONAL_ITEMS: PersonalLinkItem[] = [
     badgeType: "youtube",
     sourceUrl: "https://www.youtube.com/@dawoodbm",
     domainBadge: "youtube.com/@dawoodbm",
-    category: { fa: "ویدیو و گپ‌وگفت", en: "Videos" },
+    category: { fa: "ویدیو های تحلیلی و گپ‌وگفت", en: "Videos" },
     title: {
       fa: "کانال یوتیوب تاریخ معماری",
       en: "Architectural History on YouTube",
@@ -84,7 +84,7 @@ const PERSONAL_ITEMS: PersonalLinkItem[] = [
     sourceUrl:
       "https://fidibo.com/episode/50004512-%D9%85%D9%86%D8%A7%D8%B1-%D9%87%D8%B4%D8%AA%D9%85-%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA",
     domainBadge: "fidibo.com",
-    category: { fa: "اپیزود مهمان", en: "Guest Episode" },
+    category: { fa: "هیئت تحریریه  ", en: "Guest Episode" },
     title: {
       fa: "«منارۀ هشتم: مسابقات» در رادیو ظریر",
       en: "“Eighth Minaret: Competitions” on Radio Zarir",
