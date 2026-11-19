@@ -53,15 +53,23 @@ const ACADEMIC_PROJECTS: AcademicProject[] = [
     title: { fa: "بیمارستانی در رامسر", en: "Ramsar Hospital" },
     subtitle: { fa: "مطالعه‌ای در حوزه درمانی", en: "A Study in the healthcare design" },
     description: {
-      fa: "توسعه دوره‌ها و مطالب آموزشی پیشرفته در زمینه پرزانته معماری، بازنمایی دیجیتال و تبدیل مدل‌های سه‌بعدی به انیمیشن‌های تحلیلی با رویکرد هوش مصنوعی.",
-      en: "Development of advanced educational courses in architectural presentation, digital representation, and converting 3D models into analytical AI-driven animations."
+      fa: "در این پروژه، با بازاندیشی در الگوی ستون‌گذاری و رویکرد متداول به طراحی سازه بیمارستان، تلاش شده است تا نگاهی متفاوت به تعامل میان نظام سازه‌ای و عملکرد درمانی شکل گیرد. هدف، فراتر رفتن از راه‌حل‌های مرسوم و دستیابی به ساختاری است که ضمن پاسخ‌گویی به الزامات فنی و سازه‌ای، بتواند زمینه‌ساز انعطاف‌پذیری بیشتر در سازماندهی فضاها و عملکردهای درمانی باشد. در همین راستا، راهبردی برای بازتعریف رابطه میان سازه، معماری و عملکرد بیمارستان ارائه شده است؛ رویکردی که امکان سازگاری فضاها با نیازهای متغیر درمانی و تحولات آتی بیمارستان را فراهم می‌کند. شرح تفصیلی این راهبرد و چگونگی مواجهه با چالش‌های طراحی و سازه‌ای، در قالب مقاله‌ای علمی ارائه خواهد شد که پس از انتشار، در همین بخش در دسترس قرار می‌گیرد.",
+      en: "In this project, the conventional approach to hospital structural design has been reconsidered through a rethinking of the column layout and the overall structural system, aiming to establish a different perspective on the relationship between structure, architecture, and healthcare functions. Beyond conventional solutions, the proposed approach seeks to achieve a more flexible structural framework that can accommodate evolving clinical requirements, support the adaptability of hospital spaces, and respond to future changes in healthcare delivery. The underlying design strategy and the process of addressing these structural and architectural challenges will be presented in a dedicated research paper, which will be made available here upon publication."
     },
     coverImage: "/images/pr.png",
     videoUrl: "",
     linkUrl: "",
     drawingsAndImages: [
-      { title: { fa: "نمونه شیت‌بندی و پرزانته", en: "Presentation Sheet Sample" }, url: "/images/pr.png" },
-      { title: { fa: "روند مدلسازی و هوش مصنوعی", en: "AI & Modeling Workflow" }, url: "/images/Academic Projects.png" }
+     { 
+        title: { fa: "معرفی پروژه", en: "introduction" },  
+        videoUrl: "/videos/Ram01.mp4",
+        posterUrl: "/images/Ram01.png" // تصویر کاور این ویدئو
+      },
+       { 
+        title: { fa: " معرفی خطی پروژه", en: "Linear introduction of the project" },  
+        videoUrl: "/videos/Ram02.mp4",
+        posterUrl: "/images/Ram02.png" // تصویر کاور این ویدئو
+      },
     ],
     tags: { 
       fa: ["آموزش معماری", "پرزانته دیجیتال", "رندرینگ"], 

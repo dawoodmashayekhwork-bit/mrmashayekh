@@ -17,18 +17,23 @@ interface VideoItem {
 }
 
 const VIDEOS: readonly VideoItem[] = [
-  { id: "v1", src: "/videos/cancer.mp4" },
-  { id: "v2", src: "/videos/L2.mp4" },
-  { id: "v3", src: "/videos/L3.mp4" },
-  { id: "v4", src: "/videos/P1.mp4" },
-  { id: "v5", src: "/videos/P2.mp4" },
-  { id: "v6", src: "/videos/P3.mp4" },
-  { id: "v7", src: "/videos/project-1.mp4" },
-  { id: "v8", src: "/videos/project-2-cv.mp4" },
-  { id: "v9", src: "/videos/project-2-dim.mp4" },
-  { id: "v10", src: "/videos/project-2-shahyad.mp4" },
-  { id: "v11", src: "/videos/project-3.mp4" },
-  { id: "v12", src: "/videos/shariati.mp4" },
+  { id: "v1", src: "/videos/Abu.mp4" },
+  { id: "v2", src: "/videos/cancer.mp4" },
+  { id: "v3", src: "/videos/L2.mp4" },
+  { id: "v4", src: "/videos/L3.mp4" },
+  { id: "v5", src: "/videos/P1.mp4" },
+  { id: "v6", src: "/videos/P2.mp4" },
+  { id: "v7", src: "/videos/P3.mp4" },
+  { id: "v8", src: "/videos/project-1.mp4" },
+  { id: "v9", src: "/videos/project-2-cv.mp4" },
+  { id: "v10", src: "/videos/project-2-dim.mp4" },
+  { id: "v11", src: "/videos/project-2-shahyad.mp4" },
+  { id: "v12", src: "/videos/project-3.mp4" },
+  { id: "v13", src: "/videos/Ram01.mp4" },
+  { id: "v14", src: "/videos/Ram02.mp4" },
+  { id: "v15", src: "/videos/shariati.mp4" },
+  { id: "v16", src: "/videos/St2.mp4" },
+  { id: "v17", src: "/videos/xx.mp4" },
 ];
 
 /** جهت حرکت خودکار: "right" یعنی ویدیوها به سمت راست حرکت می‌کنند */
