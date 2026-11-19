@@ -32,7 +32,8 @@ const PROFESSIONAL_PROJECTS = [
     tags: { 
        fa: [" تهران", "200 تخت خوابی", "40 هزار متر "], 
       en: [" Tehran", "200 bed", " 40 000 sqm"] 
-    }
+    },
+    confidential: true
   },
   {
     id: "ardakan-hospital",
@@ -46,7 +47,8 @@ const PROFESSIONAL_PROJECTS = [
     tags: { 
       fa: [" یزد", "46 هزار متر "], 
       en: [" Yazd",   " 46 000 sqm"] 
-    }
+    },
+    confidential: true
   },
   {
     id: "cancer-institute",
@@ -216,7 +218,6 @@ export default function WorkPage() {
                 index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
               }`}
             >
-              {/* بازگردانی کادر به حالت استاندارد افقی (16/9) برای نمایش کامل ویدیوهای لنداسکیپ */}
               <div className="w-full lg:w-7/12 relative aspect-video overflow-hidden bg-ink2 rounded-sm border border-white/10 shadow-2xl group">
                 <video
                   src={project.videoUrl}
@@ -240,7 +241,14 @@ export default function WorkPage() {
                   {project.description[lang]}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 items-center">
+                  {/* تگ محرمانگی برای پروژه‌های خاص */}
+                  {project.confidential && (
+                    <span className="text-xs bg-red-500/10 text-red-400 px-3 py-1 rounded border border-red-500/20 font-medium">
+                      {isFa ? 'محتوا به دلیل محرمانگی پروژه برداشته شده' : 'Content removed due to project confidentiality'}
+                    </span>
+                  )}
+
                   {project.tags?.[lang]?.map((tag, idx) => (
                     <span 
                       key={idx} 
@@ -260,6 +268,22 @@ export default function WorkPage() {
       <div className="relative z-10 border-t border-white/10 mt-20">
         <AboutSection lang={lang} />
       </div>
+
+            {/* کامپوننت About در انتهای صفحه */}
+            <div className="relative z-10 border-t border-white/10 mt-20">
+              <AboutSection lang={lang} />
+            </div>
+      
+            {/* دکمه بازگشت به صفحه اصلی در انتهای صفحه */}
+            <div className="relative z-10 py-14 px-6 flex justify-center border-t border-white/10">
+              <a
+                href="https://mrmashayekh.ir/"
+                className="px-8 py-4 bg-white/5 backdrop-blur-md border border-white/15 text-paper font-medium text-xs tracking-[0.2em] uppercase rounded-sm hover:bg-[#F5C542] hover:text-ink hover:border-[#F5C542] transition-all duration-300 inline-flex items-center justify-center gap-3 cursor-pointer shadow-xl"
+              >
+                <span>{isFa ? '→' : '←'}</span>
+                <span>{isFa ? 'بازگشت به صفحه اصلی' : 'Back to Home'}</span>
+              </a>
+            </div>
     </main>
   );
 }

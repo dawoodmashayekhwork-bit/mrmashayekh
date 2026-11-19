@@ -5,28 +5,49 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import AboutSection from "@/components/AboutSection";
 
+// تعریف نوع داده برای آیتم‌های بخش مدارک (پشتیبانی از عکس و ویدئو با کاور)
+type MediaItem = {
+  title: { fa: string; en: string };
+  url?: string;       // مسیر تصویر (در صورت تصویر بودن)
+  videoUrl?: string;  // مسیر ویدئو (در صورت ویدئو بودن)
+  posterUrl?: string; // مسیر تصویر کاور ویدئو
+};
+
+type AcademicProject = {
+  id: string;
+  title: { fa: string; en: string };
+  subtitle: { fa: string; en: string };
+  description: { fa: string; en: string };
+  coverImage: string;
+  videoUrl: string;
+  linkUrl: string;
+  drawingsAndImages: MediaItem[];
+  tags: { fa: string[]; en: string[] };
+};
+
 // تعریف ساختار پروژه‌های آکادمیک به همراه ویدئو، تصاویر، نقشه‌ها و لینک‌های اختصاصی
-const ACADEMIC_PROJECTS = [
-  {
-    id: "hospital-standards",
-    title: { fa: "انعطاف پذیر نمودن بخش بستری بیمارستان بوعلی", en: "Making the inpatient section of Bu-Ali Hospital flexible" },
-    subtitle: { fa: "پایان نامه ارشد در رشته طراحی فضاهای درمانی", en: "Comparative Analysis of Design Guidelines" },
+const ACADEMIC_PROJECTS: AcademicProject[] = [
+   {
+    id: "healing-architecture",
+    title: { fa: "تدریس تاریخ معماری", en: "Teaching Architectural History" },
+    subtitle: { fa: "بررسی سیر تطور تعامل انسان با محیط", en: "An Examination of the Evolution of Human Interaction with the Environment" },
     description: {
-      fa: "پژوهش تخصصی پیرامون ارزیابی انطباق فضاهای درمانی با آخرین راهنماهای فیزیکی وزارت بهداشت و استانداردهای بین‌المللی با تمرکز بر ارتقای عملکرد بالینی و کاهش خطاهای انسانی.",
-      en: "Specialized research on evaluating the compliance of healthcare spaces with the latest physical guidelines and international standards focusing on clinical performance."
+      fa: "آموزش تاریخ معماری پیش از اسلام – بررسی تمدن‌ها و بناهای تاریخی",
+      en: "Instruction in Pre-Islamic Architectural History – An Examination of Civilizations and Historical Monuments"
     },
-    coverImage: "/images/Academic Projects.png", 
-    videoUrl: "", 
-    linkUrl: "",
+    coverImage: "/images/Academic Projects.png",
+    videoUrl: "",
+    linkUrl: "https://faradars.org/courses/pre-islamic-architecture-history-fvarch401",
     drawingsAndImages: [
-      { title: { fa: "پلان استراتژیک طبقه همکف", en: "Ground Floor Strategic Plan" }, url: "/images/Academic Projects.png" },
-      { title: { fa: "دیاگرام سیرکولاسیون و دسترسی‌ها", en: "Circulation & Access Diagram" }, url: "/images/pr.png" }
+      { title: { fa: "عنوان دوره", en: "Course Title" }, url: "/images/f2.PNG" },
+      { title: { fa: "کاور دوره", en: "Course Cover" }, url: "/images/History-faradars.PNG" }
     ],
     tags: { 
-      fa: ["پژوهش معماری", "استاندارد‌های بیمارستانی", "ضوابط فضایی"], 
-      en: ["Architectural Research", "Hospital Standards", "Spatial Regulations"] 
+      fa: ["تاریخ معماری پیش از اسلام", "فرادرس", "بناهای تاریخی"], 
+      en: ["Pre-Islamic Architectural History", "Faradars", "Historical Buildings"] 
     }
   },
+
   {
     id: "representation-courses",
     title: { fa: "بیمارستانی در رامسر", en: "Ramsar Hospital" },
@@ -47,24 +68,39 @@ const ACADEMIC_PROJECTS = [
       en: ["Architectural Education", "Digital Presentation", "Rendering"] 
     }
   },
-  {
-    id: "healing-architecture",
-    title: { fa: "تدریس تاریخ معماری", en: "Teaching Architectural History" },
-    subtitle: { fa: "بررسی سیر تطور تعامل انسان با محیط", en: "An Examination of the Evolution of Human Interaction with the Environment" },
-    description: {
-      fa: "آموزش تاریخ معماری پیش از اسلام – بررسی تمدن‌ها و بناهای تاریخی",
-      en: "Instruction in Pre-Islamic Architectural History – An Examination of Civilizations and Historical Monuments"
+ 
+   {
+    id: "hospital-standards",
+    title: { 
+      fa: "انعطاف‌پذیری فضاهای درمانی؛ نمونه موردی بخش بستری بیمارستان بوعلی", 
+      en: "Flexibility of Healthcare Spaces: Case Study of Bouali Hospital Inpatient Ward" 
     },
-    coverImage: "/images/Academic Projects.png",
-    videoUrl: "",
-    linkUrl: "https://faradars.org/courses/pre-islamic-architecture-history-fvarch401",
+    subtitle: { 
+      fa: "پایان‌نامه کارشناسی ارشد مهندسی معماری (گرایش بهداشتی - درمانی) | دانشگاه علم و صنعت ایران", 
+      en: "M.Sc. Thesis in Healthcare Architecture | Iran University of Science and Technology (IUST)" 
+    },
+    description: {
+      fa: "این پژوهش به امکان‌سنجی و تدوین راهکارهای انعطاف‌پذیری در بخش بستری بیمارستان بوعلی تهران می‌پردازد. مطالعه با رویکرد ترکیبی «تفسیر تاریخی» (سیر تطور فضای مراقبت از یونان باستان تا قرن ۲۱) و «مرور سیستماتیک» (بر پایه پروتکل PRISMA) انجام شده و مولفه‌های انعطاف‌پذیری را در ۵ حوزه کالبدی، مدیریتی، انسانی، فناوری (AI و IoT) و تأسیسات دسته‌بندی می‌کند. در طرح نهایی، با بهره‌گیری از ساختار مدولار، قطعات پیش‌ساخته و سیستم سازه‌ای «دیوار باربر بتن مسلح ویژه»، دو بخش ۲۴ تخت‌خوابی طراحی شده که در شرایط بحران و همه‌گیری‌ها با تجمیع فردی و گروهی یونیت‌ها، ظرفیت پذیرش تا ۱۲ تخت اضافی در هر بخش را بدون توقف عملکرد بیمارستان فراهم می‌آورد.",
+      en: "This research investigates the feasibility and design strategies of flexibility in the inpatient ward of Bouali Hospital in Tehran. Utilizing a hybrid methodology combining Historical-Interpretative analysis (from Ancient Greece to the 21st century) and a PRISMA-guided Systematic Review, the study categorizes flexibility factors across five domains: physical, managerial, human, technology (AI & IoT), and MEP facilities. The final architectural proposal employs modular prefabrication and a 'Special Reinforced Concrete Bearing Wall' structural system across two 24-bed units, enabling individual and group spatial reconfiguration to accommodate 12 additional surge beds per unit during emergencies and pandemics without disrupting ongoing hospital operations."
+    },
+    coverImage: "/images/Abu.png", 
+    videoUrl: "/videos/Abu.mp4", 
+    linkUrl: "",
     drawingsAndImages: [
-      { title: { fa: "عنوان دوره", en: "Course Title" }, url: "/images/f2.PNG" },
-      { title: { fa: "کاور دوره", en: "Course Cover" }, url: "/images/History-faradars.PNG" }
+      { 
+        title: { fa: "اورژانس بیمارستان", en: "4-Phase Development Process & Site Zoning Diagram" },  
+        videoUrl: "/videos/xx.mp4",
+        posterUrl: "/images/Em.png" // تصویر کاور این ویدئو
+      },
+       { 
+        title: { fa: "سازه بیمارستان", en: "4-Phase Development Process & Site Zoning Diagram" },  
+        videoUrl: "/videos/St.mp4",
+        posterUrl: "/images/St.png" // تصویر کاور این ویدئو
+      }
     ],
     tags: { 
-      fa: ["تاریخ معماری پیش از اسلام", "فرادرس", "بناهای تاریخی"], 
-      en: ["Pre-Islamic Architectural History", "Faradars", "Historical Buildings"] 
+      fa: ["انعطاف‌پذیری فضاهای درمانی", "بخش بستری", "طراحی مدولار و پیش‌ساخته", "مرور سیستماتیک (PRISMA)", "بیمارستان بوعلی"], 
+      en: ["Healthcare Flexibility", "Inpatient Ward", "Modular & Prefabricated Design", "Systematic Review (PRISMA)", "Bouali Hospital"] 
     }
   }
 ];
@@ -279,11 +315,12 @@ export default function AcademicPage() {
                         ))}
                       </div>
 
-                      {/* بخش ویدیو (در صورت وجود) */}
+                      {/* بخش ویدیو اصلی (در صورت وجود به همراه تصویر کاور) */}
                       {project.videoUrl && (
                         <div className="w-full aspect-video rounded-sm overflow-hidden border border-white/10 bg-black">
                           <video 
-                            src={project.videoUrl} 
+                            src={project.videoUrl}
+                            poster={project.coverImage}
                             controls 
                             muted 
                             playsInline
@@ -292,16 +329,29 @@ export default function AcademicPage() {
                         </div>
                       )}
 
-                      {/* بخش مدارک و تصاویر تکمیلی */}
+                      {/* بخش مدارک، تصاویر و ویدئوهای تکمیلی */}
                       <div className="flex flex-col gap-4 mt-4">
                         <h3 className="text-xs font-mono uppercase tracking-[2px] text-[#F5C542]">
                           {isFa ? 'مدارک' : 'Documents'}
                         </h3>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {project.drawingsAndImages.map((img, imgIdx) => (
+                          {project.drawingsAndImages.map((item, imgIdx) => (
                             <div key={imgIdx} className="flex flex-col gap-2 group">
-                              {project.linkUrl ? (
+                              {item.videoUrl ? (
+                                /* رندر ویدئو به همراه تصویر کاور در بخش مدارک */
+                                <div className="aspect-[16/10] overflow-hidden rounded-sm border border-white/10 bg-black">
+                                  <video
+                                    src={item.videoUrl}
+                                    poster={item.posterUrl || project.coverImage}
+                                    controls
+                                    muted
+                                    playsInline
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                              ) : project.linkUrl ? (
+                                /* رندر تصویر لینک‌دار */
                                 <a
                                   href={project.linkUrl}
                                   target="_blank"
@@ -309,8 +359,8 @@ export default function AcademicPage() {
                                   className="aspect-[16/10] overflow-hidden rounded-sm border border-white/10 bg-ink block relative cursor-pointer"
                                 >
                                   <img 
-                                    src={img.url} 
-                                    alt={img.title[lang]} 
+                                    src={item.url} 
+                                    alt={item.title[lang]} 
                                     className="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-all duration-500"
                                   />
                                   <div className="absolute inset-0 bg-ink/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -320,16 +370,17 @@ export default function AcademicPage() {
                                   </div>
                                 </a>
                               ) : (
+                                /* رندر تصویر معمولی */
                                 <div className="aspect-[16/10] overflow-hidden rounded-sm border border-white/10 bg-ink">
                                   <img 
-                                    src={img.url} 
-                                    alt={img.title[lang]} 
+                                    src={item.url} 
+                                    alt={item.title[lang]} 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                   />
                                 </div>
                               )}
                               <span className="text-xs text-paper/60 font-light">
-                                {img.title[lang]}
+                                {item.title[lang]}
                               </span>
                             </div>
                           ))}
@@ -363,6 +414,17 @@ export default function AcademicPage() {
       {/* کامپوننت About در انتهای صفحه */}
       <div className="relative z-10 border-t border-white/10 mt-20">
         <AboutSection lang={lang} />
+      </div>
+
+      {/* دکمه بازگشت به صفحه اصلی در انتهای صفحه */}
+      <div className="relative z-10 py-14 px-6 flex justify-center border-t border-white/10">
+        <a
+          href="https://mrmashayekh.ir/"
+          className="px-8 py-4 bg-white/5 backdrop-blur-md border border-white/15 text-paper font-medium text-xs tracking-[0.2em] uppercase rounded-sm hover:bg-[#F5C542] hover:text-ink hover:border-[#F5C542] transition-all duration-300 inline-flex items-center justify-center gap-3 cursor-pointer shadow-xl"
+        >
+          <span>{isFa ? '→' : '←'}</span>
+          <span>{isFa ? 'بازگشت به صفحه اصلی' : 'Back to Home'}</span>
+        </a>
       </div>
     </main>
   );

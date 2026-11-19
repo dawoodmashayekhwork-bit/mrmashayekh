@@ -40,7 +40,7 @@ const PROJECTS = [
       en: "Independent creative and media endeavors, including the podcast 'Architecture and the Secret of Immortality' exploring Christopher Alexander's theories, alongside architectural history video essays."
     },
     posterUrl: "/images/pr.png",
-    linkUrl: "/page/Personal.html",
+    linkUrl: "/Personal",
   },
 ];
 
