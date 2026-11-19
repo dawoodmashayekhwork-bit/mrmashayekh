@@ -94,7 +94,7 @@ const ACADEMIC_PROJECTS: AcademicProject[] = [
       },
        { 
         title: { fa: "سازه بیمارستان", en: "4-Phase Development Process & Site Zoning Diagram" },  
-        videoUrl: "/videos/St.mp4",
+        videoUrl: "/videos/St2.mp4",
         posterUrl: "/images/St.png" // تصویر کاور این ویدئو
       }
     ],
